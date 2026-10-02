@@ -90,3 +90,9 @@ npm run start
 ```
 
 Akses website secara lokal di browser melalui: `http://localhost:3000`
+
+---
+
+## 🏘️ Template Website Dusun / Kelurahan
+
+Proyek ini juga disediakan sebagai contoh template website profil dusun atau kelurahan. Konten Sukomangun yang ada saat ini dapat dijadikan referensi dan disesuaikan dengan identitas, informasi, potensi, fasilitas, serta foto dusun atau kelurahan yang akan menggunakan template ini. Sebagian besar konten dapat diperbarui melalui `src/data/content.ts`.
