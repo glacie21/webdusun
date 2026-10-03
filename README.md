@@ -1,6 +1,6 @@
 # Cerita Sukomangun — Profil & Potensi Dusun Sukomangun
 
-Website profil dusun yang modern, bersih, responsif, dan menyajikan storytelling kehidupan pedesaan Indonesia yang hangat. Dibuat khusus untuk memperkenalkan **Dusun Sukomangun, Desa Genito, Kecamatan Windusari, Kabupaten Magelang, Jawa Tengah**.
+Website profil dusun yang modern, bersih, responsif, dan menyajikan storytelling kehidupan pedesaan Sukomangun. Dibuat khusus untuk memperkenalkan **Dusun Sukomangun, Desa Genito, Kecamatan Windusari, Kabupaten Magelang, Jawa Tengah**.
 
 > **"Mengenal Sukomangun, Menjaga Cerita, Mengembangkan Potensi."**
 
