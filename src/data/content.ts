@@ -337,6 +337,7 @@ export const villageData = {
     },
   ] as CommunityLifeItem[],
 
+  // Untuk mengganti foto fasilitas, ubah nilai imageUrl dan sesuaikan imageAlt pada setiap item.
   facilities: [
     {
       id: "fac-1",

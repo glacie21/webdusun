@@ -33,6 +33,7 @@ export default function Facilities() {
             >
               {/* Image Container */}
               <div className="relative h-52 w-full overflow-hidden">
+                {/* Ganti gambar melalui imageUrl pada daftar facilities di src/data/content.ts. */}
                 <Image
                   src={fac.imageUrl}
                   alt={fac.imageAlt}
