@@ -76,7 +76,7 @@ Pengurus dusun atau pengembang dapat dengan mudah memperbarui konten hanya denga
 
 ---
 
-## 🚀 Menjalankan Project
+## Menjalankan Project
 
 ```bash
 # Menjalankan development server
