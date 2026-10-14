@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { ArrowUp, MapPin, Heart } from "lucide-react";
+import { ArrowUp, MapPin } from "lucide-react";
 import { villageData } from "@/data/content";
 
 export default function Footer() {

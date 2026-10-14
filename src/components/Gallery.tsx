@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { Camera, ChevronLeft, ChevronRight, X, Maximize2 } from "lucide-react";
-import { villageData, GalleryPhoto } from "@/data/content";
+import { villageData } from "@/data/content";
 
 export default function Gallery() {
   const [activeFilter, setActiveFilter] = useState<string>("Semua");

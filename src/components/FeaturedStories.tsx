@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
-import { BookOpen, Calendar, Clock, ArrowRight, X } from "lucide-react";
+import { BookOpen, Clock, ArrowRight, X } from "lucide-react";
 import { villageData, EditorialStory } from "@/data/content";
 
 export default function FeaturedStories() {

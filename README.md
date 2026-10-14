@@ -67,7 +67,7 @@ Website profil dusun yang modern, bersih, responsif, dan menyajikan storytelling
 
 ---
 
-## 📁 Struktur Data Terpisah
+## Struktur Data Terpisah
 
 Seluruh data teks, foto, cerita, komoditas, fasilitas, dan narasi dipisahkan secara rapi di file:
 `src/data/content.ts`
@@ -93,6 +93,6 @@ Akses website secara lokal di browser melalui: `http://localhost:3000`
 
 ---
 
-## 🏘️ Template Website Dusun / Kelurahan
+## Template Website Dusun / Kelurahan
 
 Proyek ini juga disediakan sebagai contoh template website profil dusun atau kelurahan. Konten Sukomangun yang ada saat ini dapat dijadikan referensi dan disesuaikan dengan identitas, informasi, potensi, fasilitas, serta foto dusun atau kelurahan yang akan menggunakan template ini.

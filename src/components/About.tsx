@@ -3,7 +3,6 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { ArrowRight, Leaf, HeartHandshake, ShieldCheck, X } from "lucide-react";
-import { villageData } from "@/data/content";
 
 export default function About() {
   const [isModalOpen, setIsModalOpen] = useState(false);
