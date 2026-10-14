@@ -6,7 +6,7 @@ Website profil dusun yang modern, bersih, responsif, dan menyajikan storytelling
 
 ---
 
-## 🌾 Fitur Utama & Struktur Halaman
+## Fitur Utama & Struktur Halaman
 
 1. **Sticky Adaptive Navbar**:
    - Transparan dengan efek kontras lembut pada hero section, berubah menjadi latar cream dengan blur halus saat digulir (*scroll*).
@@ -56,7 +56,7 @@ Website profil dusun yang modern, bersih, responsif, dan menyajikan storytelling
 
 ---
 
-## 🎨 Palet Warna & Desain
+## Palet Warna & Desain
 
 - **Primary**: Deep Forest Green (`#2F5D50`)
 - **Secondary**: Sage Green (`#7A9B84`)
