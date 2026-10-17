@@ -32,7 +32,7 @@ export default function Navbar({ onExploreClick }: NavbarProps) {
     { name: "Kehidupan", href: "#kehidupan" },
     { name: "Fasilitas", href: "#fasilitas" },
     { name: "Galeri", href: "#galeri" },
-    { name: "Kontak", href: "#lokasi" },
+    { name: "Lokasi", href: "#lokasi" },
   ];
 
   const handleScrollTo = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
