@@ -21,7 +21,7 @@ Website profil dusun yang modern, bersih, responsif, dan menyajikan storytelling
    - Tata letak 2-kolom dengan potret kehidupan warga dan kartu interaktif modal *"Selengkapnya tentang Sukomangun"*.
 
 4. **Informasi Ringkas (Quick Stats)**:
-   - Penampilan minimalis data otentik: *01 Dusun Sukomangun, 02 RT dalam wilayah, 03 Potensi pertanian masyarakat, ∞ Cerita masyarakat yang terus berkembang*.
+   - Penampilan minimalis data otentik: *01 Dusun Sukomangun, 02 RT dalam wilayah, 05 Potensi unggulan dusun, ∞ Cerita masyarakat yang terus berkembang*.
 
 5. **Jejak Sejarah (Timeline)**:
    - Garis waktu horizontal (desktop) dan vertikal (mobile) yang mendokumentasikan fase perjalanan dusun dengan catatan arsip jujur tanpa mengarang data fiktif.

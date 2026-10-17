@@ -116,9 +116,9 @@ export const villageData = {
       description: "Rukun Tetangga yang menjaga kerukunan dan kebersamaan warga",
     },
     {
-      number: "03",
-      label: "Potensi Pertanian",
-      description: "Komoditas utama ketela, cabai, dan hasil bumi tanah subur",
+      number: "05",
+      label: "Potensi Unggulan",
+      description: "Pertanian, cabai, ketela, peternakan, hingga UMKM dan warung warga",
     },
     {
       number: "∞",

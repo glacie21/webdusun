@@ -25,7 +25,7 @@ export default function CtaSection() {
       <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/15 text-xs font-semibold tracking-wider uppercase mb-6 text-[#F7F5EF]">
           <Sparkles className="w-3.5 h-3.5 text-[#B8895A]" />
-          <span>SUKASARI & SUKOMANGUN</span>
+          <span>DUSUN SUKOMANGUN</span>
         </div>
 
         <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6 max-w-3xl mx-auto leading-tight">
