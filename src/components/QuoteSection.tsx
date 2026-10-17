@@ -11,8 +11,8 @@ export default function QuoteSection() {
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <Image
-          src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1920&q=80"
-          alt="Lanskap perbukitan hijau Dusun Sukomangun Magelang"
+          src={villageData.quote.imageUrl}
+          alt={villageData.quote.imageAlt}
           fill
           sizes="100vw"
           className="object-cover object-center filter saturate-90"
@@ -33,7 +33,7 @@ export default function QuoteSection() {
 
         <div className="inline-block border-t border-white/30 pt-4">
           <p className="text-xs sm:text-sm uppercase tracking-widest text-[#B8895A] font-medium">
-            Cerita Sukomangun · Windusari, Magelang
+            {villageData.quote.source} · {villageData.quote.location}
           </p>
         </div>
       </div>

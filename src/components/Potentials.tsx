@@ -15,15 +15,13 @@ export default function Potentials() {
         <div className="max-w-3xl mx-auto text-center mb-16">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#EBF2ED] text-[#2F5D50] text-xs font-semibold tracking-wider uppercase mb-3">
             <Sparkles className="w-3.5 h-3.5 text-[#B8895A]" />
-            <span>KEMAKMURAN DESA</span>
+            <span>{villageData.sections.potentials.badge}</span>
           </div>
           <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-[#252525] tracking-tight mb-5">
-            Potensi yang Tumbuh dari Tanah Sukomangun
+            {villageData.sections.potentials.title}
           </h2>
           <p className="text-base sm:text-lg text-[#595959] font-light leading-relaxed">
-            Tanah, masyarakat, dan aktivitas sehari-hari menjadi bagian dari potensi yang dimiliki
-            Sukomangun. Berbagai hasil pertanian dan usaha masyarakat menjadi sumber kehidupan
-            sekaligus peluang yang dapat terus dikembangkan.
+            {villageData.sections.potentials.description}
           </p>
         </div>
 
@@ -73,7 +71,7 @@ export default function Potentials() {
                 {/* Button Selengkapnya */}
                 <div className="pt-4 border-t border-[#E3DDD0]/70 flex items-center justify-between">
                   <span className="text-xs text-[#7A9B84] font-medium">
-                    Dusun Sukomangun
+                    {villageData.identity.name}
                   </span>
                   <button
                     type="button"

@@ -15,14 +15,13 @@ export default function FeaturedStories() {
         <div className="max-w-3xl mx-auto text-center mb-16">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#EBF2ED] text-[#2F5D50] text-xs font-semibold tracking-wider uppercase mb-3">
             <BookOpen className="w-3.5 h-3.5 text-[#7A9B84]" />
-            <span>EDITORIAL DUSUN</span>
+            <span>{villageData.sections.stories.badge}</span>
           </div>
           <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-[#252525] tracking-tight mb-4">
-            Cerita dari Sukomangun
+            {villageData.sections.stories.title}
           </h2>
           <p className="text-base sm:text-lg text-[#595959] font-light leading-relaxed">
-            Menyimak lebih dalam kisah keseharian, nilai kebersamaan, dan asa masyarakat yang
-            menghidupkan dusun di lereng Windusari.
+            {villageData.sections.stories.description}
           </p>
         </div>
 

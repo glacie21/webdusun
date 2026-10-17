@@ -7,15 +7,12 @@ import { villageData } from "@/data/content";
 
 export default function Community() {
   const [activeCategory, setActiveCategory] = useState<string>("Semua");
+  const { community } = villageData.sections;
 
+  // Kategori filter mengikuti kategori yang benar-benar ada di data.
   const categories = [
     "Semua",
-    "Pertanian",
-    "Gotong Royong",
-    "Kegiatan Pemuda",
-    "Pendidikan",
-    "Keagamaan",
-    "Kegiatan Sosial",
+    ...new Set(villageData.communityLife.map((item) => item.category)),
   ];
 
   const filteredItems =
@@ -30,15 +27,13 @@ export default function Community() {
         <div className="max-w-3xl mx-auto text-center mb-12">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#EBF2ED] text-[#2F5D50] text-xs font-semibold tracking-wider uppercase mb-3">
             <Users className="w-3.5 h-3.5 text-[#7A9B84]" />
-            <span>MASYARAKAT & BUDAYA</span>
+            <span>{community.badge}</span>
           </div>
           <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-[#252525] tracking-tight mb-5">
-            Kehidupan yang Tumbuh Bersama
+            {community.title}
           </h2>
           <p className="text-base sm:text-lg text-[#595959] font-light leading-relaxed">
-            Kehidupan di Sukomangun tidak hanya tentang aktivitas ekonomi. Gotong royong, kegiatan
-            pemuda, pendidikan, keagamaan, dan berbagai aktivitas sosial menjadi bagian yang
-            menjaga hubungan antarwarga tetap dekat.
+            {community.description}
           </p>
         </div>
 
@@ -60,16 +55,13 @@ export default function Community() {
           ))}
         </div>
 
-        {/* Asymmetric / Masonry Grid */}
+        {/* Community Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredItems.map((item, index) => {
-            const isFeatured = index === 0 || index === 4;
+          {filteredItems.map((item) => {
             return (
               <div
                 key={item.id}
-                className={`group relative rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 border border-[#E3DDD0] bg-white flex flex-col ${
-                  isFeatured ? "md:row-span-1 lg:row-span-1" : ""
-                }`}
+                className="group relative rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 border border-[#E3DDD0] bg-white flex flex-col"
               >
                 {/* Photo */}
                 <div className="relative h-64 sm:h-72 w-full overflow-hidden">
@@ -111,7 +103,7 @@ export default function Community() {
         {/* Social Harmony Note */}
         <div className="mt-12 text-center flex items-center justify-center gap-2 text-xs sm:text-sm text-[#7A9B84]">
           <Heart className="w-4 h-4 text-[#B8895A]" />
-          <span>Keakraban warga Dusun Sukomangun terawat dalam setiap perjumpaan harian.</span>
+          <span>{community.closingNote}</span>
         </div>
       </div>
     </section>
