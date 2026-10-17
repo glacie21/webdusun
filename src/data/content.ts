@@ -5,9 +5,12 @@ export interface VillageIdentity {
   district: string;
   regency: string;
   province: string;
+  logoInitial: string;
+  areaLabel: string;
+  exploreLabel: string;
   tagline: string;
   shortDescription: string;
-  longDescription: string;
+  longDescription: string[];
   subLocationText: string;
 }
 
@@ -52,7 +55,6 @@ export interface CommunityLifeItem {
   description: string;
   imageUrl: string;
   imageAlt: string;
-  aspect: "tall" | "wide" | "square";
 }
 
 export interface FacilityItem {
@@ -96,12 +98,131 @@ export const villageData = {
     district: "Kecamatan Windusari",
     regency: "Kabupaten Magelang",
     province: "Jawa Tengah",
+    logoInitial: "S",
+    areaLabel: "Windusari · Magelang",
+    exploreLabel: "Jelajahi Sukomangun",
     tagline: "Mengenal Sukomangun, Menjaga Cerita, Mengembangkan Potensi.",
     shortDescription:
       "Di balik perbukitan Magelang, ada cerita yang terus hidup. Sukomangun bukan sekadar sebuah dusun, melainkan rajutan kehangatan, tradisi pertanian, dan gotong royong warga.",
-    longDescription:
-      "Dusun Sukomangun merupakan salah satu bagian dari Desa Genito, Kecamatan Windusari, Kabupaten Magelang. Kehidupan masyarakatnya tumbuh berdampingan dengan alam, aktivitas pertanian, gotong royong, serta berbagai kegiatan sosial yang menjadi bagian dari keseharian warga. Di balik aktivitas sehari-hari tersebut, Sukomangun memiliki potensi yang layak dikenal lebih luas, mulai dari hasil pertanian, kehidupan masyarakat, fasilitas pendidikan dan sosial, hingga cerita para warga yang menjadi bagian dari perjalanan dusun.",
+    longDescription: [
+      "Dusun Sukomangun merupakan salah satu bagian dari Desa Genito, Kecamatan Windusari, Kabupaten Magelang. Kehidupan masyarakatnya tumbuh berdampingan dengan alam, aktivitas pertanian, gotong royong, serta berbagai kegiatan sosial yang menjadi bagian dari keseharian warga.",
+      "Di balik aktivitas sehari-hari tersebut, Sukomangun memiliki potensi yang layak dikenal lebih luas, mulai dari hasil pertanian, kehidupan masyarakat, fasilitas pendidikan dan sosial, hingga cerita para warga yang menjadi bagian dari perjalanan dusun.",
+    ],
     subLocationText: "Desa Genito · Kecamatan Windusari · Kabupaten Magelang",
+  },
+
+  // Judul, narasi, dan foto latar untuk setiap bagian halaman.
+  sections: {
+    hero: {
+      badge: "DUSUN SUKOMANGUN",
+      title: "Di balik perbukitan Magelang, ada cerita yang terus hidup.",
+      imageUrl:
+        "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=2000&q=85",
+      imageAlt: "Lanskap perbukitan hijau Dusun Sukomangun Windusari Magelang",
+    },
+    about: {
+      badge: "TENTANG SUKOMANGUN",
+      title: "Sebuah dusun dengan cerita yang sederhana, tetapi berarti.",
+      imageUrl:
+        "https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=1200&q=80",
+      imageAlt: "Kehangatan masyarakat dan lanskap alam Dusun Sukomangun",
+      imageBadge: "Harmoni Alam & Warga",
+      imageCaption: "Aktivitas harian masyarakat yang bersahaja di kaki perbukitan Windusari.",
+      floatingLabel: "Semangat Guyub",
+      floatingTitle: "Gotong Royong & Keramahan Warga",
+      highlights: ["Lingkungan Asri & Sejuk", "Kearifan Lokal Terjaga"],
+      moreLabel: "Selengkapnya tentang Sukomangun",
+      modal: {
+        label: "Profil Lengkap",
+        title: "Mengenal Dusun Sukomangun",
+        paragraphs: [
+          "Dusun Sukomangun terletak di wilayah Desa Genito, Kecamatan Windusari, Kabupaten Magelang, Jawa Tengah. Dikelilingi panorama perbukitan yang menyejukkan mata, wilayah ini memiliki kontur tanah berbukit yang dimanfaatkan warga untuk lahan pertanian produktif.",
+          "Masyarakat di Dusun Sukomangun dikenal menjunjung tinggi tradisi kerukunan hidup bertetangga. Semangat guyub rukun terwujud dalam berbagai aspek kehidupan, mulai dari kerja bakti rutin, saling membantu saat panen komoditas ketela dan cabai, hingga pendampingan anak-anak dalam menuntut ilmu agama di TPQ setempat.",
+        ],
+        valuesTitle: "Nilai & Komitmen Dusun",
+        valuesText:
+          "Menjaga kelestarian alam perbukitan, mempererat kebersamaan masyarakat, serta membuka akses informasi agar potensi lokal Dusun Sukomangun berdaya saing dan bermanfaat bagi kesejahteraan warga bersama.",
+      },
+    },
+    statistics: {
+      badge: "SEKILAS IDENTITAS",
+      title: "Mengenal Sukomangun dalam Angka & Makna",
+    },
+    history: {
+      badge: "SEJARAH & PERJALANAN",
+      title: "Jejak yang Membentuk Sukomangun",
+      description:
+        "Setiap tempat memiliki cerita. Sukomangun tumbuh melalui perjalanan masyarakat yang tinggal, bekerja, dan membangun kehidupan bersama dari generasi ke generasi.",
+      notice:
+        "Cerita sejarah Sukomangun sedang dihimpun bersama para sesepuh dan masyarakat setempat.",
+      statusLabels: {
+        verified: "Terverifikasi",
+        compiling: "Sedang Dihimpun",
+      },
+      closingTitle: "Merekam Warisan Lisan Dusun",
+      closingText:
+        "Proses pengumpulan naskah dan memori para sesepuh Dusun Sukomangun terus berjalan sebagai arsip berharga bagi generasi mendatang.",
+    },
+    potentials: {
+      badge: "KEMAKMURAN DESA",
+      title: "Potensi yang Tumbuh dari Tanah Sukomangun",
+      description:
+        "Tanah, masyarakat, dan aktivitas sehari-hari menjadi bagian dari potensi yang dimiliki Sukomangun. Berbagai hasil pertanian dan usaha masyarakat menjadi sumber kehidupan sekaligus peluang yang dapat terus dikembangkan.",
+    },
+    commodityFlow: {
+      badge: "CERITA KOMODITAS",
+      title: "Dari Kebun hingga Perjalanan ke Kota",
+      description:
+        "Perjalanan komoditas ketela Sukomangun merajut kerja keras petani, tenaga pembersih, hingga terdistribusi ke sentra pengolahan pangan di kota-kota besar.",
+      closingQuote:
+        "Setiap singkong yang dipanen membawa harapan dan berkah bagi keluarga petani di Sukomangun, sekaligus menyuplai gizi dan bahan baku kuliner tradisional di Jawa Tengah dan D.I. Yogyakarta.",
+      closingCaption: "Rantai Nilai Pertanian Rakyat Sukomangun",
+    },
+    community: {
+      badge: "MASYARAKAT & BUDAYA",
+      title: "Kehidupan yang Tumbuh Bersama",
+      description:
+        "Kehidupan di Sukomangun tidak hanya tentang aktivitas ekonomi. Gotong royong, kegiatan pemuda, pendidikan, keagamaan, dan berbagai aktivitas sosial menjadi bagian yang menjaga hubungan antarwarga tetap dekat.",
+      closingNote: "Keakraban warga Dusun Sukomangun terawat dalam setiap perjumpaan harian.",
+    },
+    facilities: {
+      badge: "SARANA & PRASARANA",
+      title: "Fasilitas Penunjang Dusun",
+      description:
+        "Sarana pendidikan agama, kesehatan, dan ruang kebersamaan yang dirawat secara berkala untuk menunjang kenyamanan dan kesejahteraan warga Sukomangun.",
+    },
+    gallery: {
+      badge: "DOKUMENTASI VISUAL",
+      title: "Potret Sukomangun",
+      subtitle: "Merekam momen, menyimpan cerita.",
+    },
+    stories: {
+      badge: "EDITORIAL DUSUN",
+      title: "Cerita dari Sukomangun",
+      description:
+        "Menyimak lebih dalam kisah keseharian, nilai kebersamaan, dan asa masyarakat yang menghidupkan dusun di lereng Windusari.",
+    },
+    map: {
+      badge: "LOKASI WILAYAH",
+      title: "Temukan Sukomangun",
+      description:
+        "Dusun Sukomangun terletak di kawasan asri pegunungan Windusari, Kabupaten Magelang, berdekatan dengan pesona lereng Gunung Sumbing.",
+      addressNote: "Kawasan perbukitan agraris berhawa sejuk di Jawa Tengah",
+    },
+    cta: {
+      badge: "DUSUN SUKOMANGUN",
+      title: "Mari mengenal lebih dekat Sukomangun.",
+      description:
+        "Setiap sudut memiliki cerita, setiap warga memiliki kisah, dan setiap potensi memiliki kesempatan untuk berkembang.",
+      buttonLabel: "Jelajahi Potensi Sukomangun",
+    },
+    footer: {
+      tagline: "Mengenal Sukomangun melalui cerita, masyarakat, dan potensinya.",
+      description:
+        "Website profil komunitas & etalase digital untuk mendokumentasikan kehidupan serta mengembangkan potensi Dusun Sukomangun.",
+      copyright:
+        "© 2026 Cerita Sukomangun. Dibuat untuk mengenalkan dan mendokumentasikan potensi Dusun Sukomangun.",
+    },
   },
 
   quickStats: [
@@ -156,7 +277,7 @@ export const villageData = {
         "Kini Sukomangun bergerak maju membuka jendela informasi digital agar potensi komoditas dan keramahan warganya dikenal luas tanpa meninggalkan akar budaya pedesaan.",
       status: "verified",
     },
-  ],
+  ] as HistoryMilestone[],
 
   potentials: [
     {
@@ -283,7 +404,6 @@ export const villageData = {
       imageUrl:
         "https://images.unsplash.com/photo-1577495508048-b635879837f1?auto=format&fit=crop&w=800&q=80",
       imageAlt: "Warga pedesaan bersama-sama bergotong royong",
-      aspect: "wide",
     },
     {
       id: "comm-2",
@@ -293,7 +413,6 @@ export const villageData = {
       imageUrl:
         "https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=800&q=80",
       imageAlt: "Petani pedesaan di sawah pada pagi hari",
-      aspect: "tall",
     },
     {
       id: "comm-3",
@@ -303,7 +422,6 @@ export const villageData = {
       imageUrl:
         "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=800&q=80",
       imageAlt: "Anak-anak belajar dan menimba ilmu di lingkungan asri",
-      aspect: "square",
     },
     {
       id: "comm-4",
@@ -313,7 +431,6 @@ export const villageData = {
       imageUrl:
         "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=800&q=80",
       imageAlt: "Pemuda-pemudi berkumpul berdiskusi dan berkegiatan",
-      aspect: "square",
     },
     {
       id: "comm-5",
@@ -323,7 +440,6 @@ export const villageData = {
       imageUrl:
         "https://images.unsplash.com/photo-1519817650390-64a93db51149?auto=format&fit=crop&w=800&q=80",
       imageAlt: "Aktivitas silaturahmi keagamaan warga di masjid dusun",
-      aspect: "wide",
     },
     {
       id: "comm-6",
@@ -333,7 +449,6 @@ export const villageData = {
       imageUrl:
         "https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=800&q=80",
       imageAlt: "Ibu-ibu warga berkumpul dalam kegiatan sosial kemasyarakatan",
-      aspect: "tall",
     },
   ] as CommunityLifeItem[],
 
@@ -538,6 +653,9 @@ export const villageData = {
     text: "Sebuah dusun bukan hanya tentang tempat tinggal, tetapi tentang orang-orang dan cerita yang membuatnya terasa seperti rumah.",
     source: "Kearifan Masyarakat Dusun Sukomangun",
     location: "Windusari, Magelang",
+    imageUrl:
+      "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1920&q=80",
+    imageAlt: "Lanskap perbukitan hijau Dusun Sukomangun Magelang",
   },
 
   location: {
@@ -548,12 +666,9 @@ export const villageData = {
     provinsi: "Jawa Tengah",
     mapsSearchUrl:
       "https://www.google.com/maps/search/?api=1&query=Dusun+Sukomangun+Genito+Windusari+Magelang",
+    mapsEmbedUrl:
+      "https://maps.google.com/maps?q=Genito,+Windusari,+Magelang,+Central+Java&t=&z=14&ie=UTF8&iwloc=&output=embed",
     embedPlaceholderNote:
       "Area peta Dusun Sukomangun, Desa Genito, Kec. Windusari, Kab. Magelang, Jawa Tengah. Koordinat presisi dapat disematkan sesuai titik GPS resmi pemerintahan desa.",
-    approxCoordinates: {
-      label: "Kawasan Windusari, Magelang",
-      latText: "-7.43 (Kawasan Windusari)",
-      longText: "110.15 (Kawasan Magelang)",
-    },
   },
 };

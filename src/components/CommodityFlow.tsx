@@ -5,6 +5,8 @@ import { Sprout, Warehouse, Droplets, Truck, Building2, ArrowRight, ArrowDown } 
 import { villageData } from "@/data/content";
 
 export default function CommodityFlow() {
+  const { commodityFlow } = villageData.sections;
+
   const getIcon = (name: string) => {
     switch (name) {
       case "Sprout":
@@ -28,14 +30,13 @@ export default function CommodityFlow() {
         {/* Section Header */}
         <div className="max-w-3xl mx-auto text-center mb-16">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#EBF2ED] text-[#2F5D50] text-xs font-semibold tracking-wider uppercase mb-3">
-            <span>CERITA KOMODITAS</span>
+            <span>{commodityFlow.badge}</span>
           </div>
           <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-[#252525] tracking-tight mb-5">
-            Dari Kebun hingga Perjalanan ke Kota
+            {commodityFlow.title}
           </h2>
           <p className="text-base sm:text-lg text-[#595959] font-light leading-relaxed">
-            Perjalanan komoditas ketela Sukomangun merajut kerja keras petani, tenaga pembersih,
-            hingga terdistribusi ke sentra pengolahan pangan di kota-kota besar.
+            {commodityFlow.description}
           </p>
         </div>
 
@@ -90,11 +91,10 @@ export default function CommodityFlow() {
         {/* Storytelling Narrative Footer */}
         <div className="mt-14 max-w-4xl mx-auto bg-white p-6 sm:p-8 rounded-3xl border border-[#E3DDD0] text-center shadow-xs">
           <p className="font-serif italic text-base sm:text-lg text-[#252525] leading-relaxed">
-            &ldquo;Setiap singkong yang dipanen membawa harapan dan berkah bagi keluarga petani di Sukomangun,
-            sekaligus menyuplai gizi dan bahan baku kuliner tradisional di Jawa Tengah dan D.I. Yogyakarta.&rdquo;
+            &ldquo;{commodityFlow.closingQuote}&rdquo;
           </p>
           <div className="mt-3 text-xs uppercase tracking-widest text-[#7A9B84] font-semibold">
-            Rantai Nilai Pertanian Rakyat Sukomangun
+            {commodityFlow.closingCaption}
           </div>
         </div>
       </div>

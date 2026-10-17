@@ -9,10 +9,10 @@ export default function Statistics() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-2xl mx-auto mb-12">
           <span className="text-xs uppercase tracking-widest text-[#7A9B84] font-semibold">
-            SEKILAS IDENTITAS
+            {villageData.sections.statistics.badge}
           </span>
           <h3 className="font-serif text-2xl sm:text-3xl font-bold text-[#252525] mt-1">
-            Mengenal Sukomangun dalam Angka & Makna
+            {villageData.sections.statistics.title}
           </h3>
         </div>
 

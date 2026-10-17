@@ -9,13 +9,12 @@ export default function Gallery() {
   const [activeFilter, setActiveFilter] = useState<string>("Semua");
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
+  const { gallery } = villageData.sections;
+
+  // Kategori filter mengikuti kategori yang benar-benar ada di data.
   const filterCategories = [
     "Semua",
-    "Masyarakat",
-    "Alam",
-    "Pertanian",
-    "Kegiatan",
-    "Fasilitas",
+    ...new Set(villageData.gallery.map((photo) => photo.category)),
   ];
 
   const filteredPhotos =
@@ -52,13 +51,13 @@ export default function Gallery() {
         <div className="max-w-3xl mx-auto text-center mb-12">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#EBF2ED] text-[#2F5D50] text-xs font-semibold tracking-wider uppercase mb-3">
             <Camera className="w-3.5 h-3.5 text-[#7A9B84]" />
-            <span>DOKUMENTASI VISUAL</span>
+            <span>{gallery.badge}</span>
           </div>
           <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-[#252525] tracking-tight mb-3">
-            Potret Sukomangun
+            {gallery.title}
           </h2>
           <p className="font-serif italic text-lg sm:text-xl text-[#B8895A]">
-            Merekam momen, menyimpan cerita.
+            {gallery.subtitle}
           </p>
         </div>
 

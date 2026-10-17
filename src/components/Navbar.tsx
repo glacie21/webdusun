@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { Menu, X, ArrowUpRight, Compass } from "lucide-react";
+import { villageData } from "@/data/content";
 
 interface NavbarProps {
   onExploreClick?: () => void;
@@ -72,7 +73,7 @@ export default function Navbar({ onExploreClick }: NavbarProps) {
                   : "bg-white/20 backdrop-blur-md text-white border border-white/30 group-hover:bg-white/30"
               }`}
             >
-              S
+              {villageData.identity.logoInitial}
             </div>
             <div className="flex flex-col">
               <span
@@ -80,14 +81,14 @@ export default function Navbar({ onExploreClick }: NavbarProps) {
                   isScrolled ? "text-[#252525]" : "text-white"
                 }`}
               >
-                Cerita Sukomangun
+                {villageData.identity.shortName}
               </span>
               <span
                 className={`text-[10px] tracking-widest uppercase font-medium transition-colors ${
                   isScrolled ? "text-[#7A9B84]" : "text-white/80"
                 }`}
               >
-                Windusari · Magelang
+                {villageData.identity.areaLabel}
               </span>
             </div>
           </a>
@@ -128,7 +129,7 @@ export default function Navbar({ onExploreClick }: NavbarProps) {
               }`}
             >
               <Compass className="w-4 h-4" />
-              <span>Jelajahi Sukomangun</span>
+              <span>{villageData.identity.exploreLabel}</span>
             </a>
           </div>
 
@@ -170,7 +171,7 @@ export default function Navbar({ onExploreClick }: NavbarProps) {
                 className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-[#2F5D50] text-white font-medium text-sm shadow-sm"
               >
                 <Compass className="w-4 h-4" />
-                <span>Jelajahi Sukomangun</span>
+                <span>{villageData.identity.exploreLabel}</span>
                 <ArrowUpRight className="w-4 h-4 ml-1" />
               </a>
             </div>

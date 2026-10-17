@@ -45,18 +45,17 @@ export default function Footer() {
           <div className="lg:col-span-5 space-y-4">
             <div className="flex items-center gap-2.5">
               <div className="w-9 h-9 rounded-xl bg-[#2F5D50] border border-white/20 text-[#FAF8F2] flex items-center justify-center font-serif text-lg font-bold">
-                S
+                {villageData.identity.logoInitial}
               </div>
               <span className="font-serif text-2xl font-bold tracking-tight">
-                Cerita Sukomangun
+                {villageData.identity.shortName}
               </span>
             </div>
             <p className="text-sm text-white/80 font-light leading-relaxed max-w-sm">
-              &ldquo;Mengenal Sukomangun melalui cerita, masyarakat, dan potensinya.&rdquo;
+              &ldquo;{villageData.sections.footer.tagline}&rdquo;
             </p>
             <p className="text-xs text-white/60 font-light">
-              Website profil komunitas & etalase digital untuk mendokumentasikan kehidupan serta
-              mengembangkan potensi Dusun Sukomangun.
+              {villageData.sections.footer.description}
             </p>
           </div>
 
@@ -101,7 +100,7 @@ export default function Footer() {
         {/* Bottom Bar */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/60 font-light">
           <p className="text-center sm:text-left">
-            © 2026 Cerita Sukomangun. Dibuat untuk mengenalkan dan mendokumentasikan potensi Dusun Sukomangun.
+            {villageData.sections.footer.copyright}
           </p>
 
           <button

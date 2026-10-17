@@ -5,6 +5,9 @@ import { MapPin, Navigation, ExternalLink, Info, Compass } from "lucide-react";
 import { villageData } from "@/data/content";
 
 export default function MapSection() {
+  const { map } = villageData.sections;
+  const { location } = villageData;
+
   return (
     <section id="lokasi" className="py-20 md:py-28 bg-[#F7F5EF] relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -13,16 +16,15 @@ export default function MapSection() {
           <div className="lg:col-span-5 space-y-6">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#EBF2ED] text-[#2F5D50] text-xs font-semibold tracking-wider uppercase">
               <Navigation className="w-3.5 h-3.5 text-[#7A9B84]" />
-              <span>LOKASI WILAYAH</span>
+              <span>{map.badge}</span>
             </div>
 
             <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-[#252525] tracking-tight">
-              Temukan Sukomangun
+              {map.title}
             </h2>
 
             <p className="text-base sm:text-lg text-[#595959] font-light leading-relaxed">
-              Dusun Sukomangun terletak di kawasan asri pegunungan Windusari, Kabupaten Magelang,
-              berdekatan dengan pesona lereng Gunung Sumbing.
+              {map.description}
             </p>
 
             {/* Address Card */}
@@ -33,26 +35,26 @@ export default function MapSection() {
                 </div>
                 <div>
                   <h3 className="font-serif text-xl font-bold text-[#252525]">
-                    {villageData.location.dusun}
+                    {location.dusun}
                   </h3>
                   <p className="text-sm text-[#595959] mt-1 font-light leading-relaxed">
-                    {villageData.location.desa}, {villageData.location.kecamatan}
+                    {location.desa}, {location.kecamatan}
                     <br />
-                    {villageData.location.kabupaten}, {villageData.location.provinsi}
+                    {location.kabupaten}, {location.provinsi}
                   </p>
                 </div>
               </div>
 
               <div className="pt-3 border-t border-[#E3DDD0] flex items-center gap-2 text-xs text-[#7A9B84]">
                 <Info className="w-4 h-4 shrink-0" />
-                <span>Kawasan perbukitan agraris berhawa sejuk di Jawa Tengah</span>
+                <span>{map.addressNote}</span>
               </div>
             </div>
 
             {/* Direct Google Maps Button */}
             <div>
               <a
-                href={villageData.location.mapsSearchUrl}
+                href={location.mapsSearchUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full bg-[#2F5D50] hover:bg-[#1E3D34] text-white font-medium text-sm sm:text-base tracking-wide transition-all shadow-md hover:shadow-lg active:scale-98"
@@ -71,8 +73,8 @@ export default function MapSection() {
               <div className="relative flex-1 w-full bg-[#EBF2ED] overflow-hidden">
                 {/* Embed iframe query for Windusari, Magelang */}
                 <iframe
-                  title="Peta Dusun Sukomangun Genito Windusari Magelang"
-                  src="https://maps.google.com/maps?q=Genito,+Windusari,+Magelang,+Central+Java&t=&z=14&ie=UTF8&iwloc=&output=embed"
+                  title={`Peta ${location.dusun}, ${location.desa}, ${location.kecamatan}`}
+                  src={location.mapsEmbedUrl}
                   className="w-full h-full min-h-[360px] border-0 filter saturate-95"
                   loading="lazy"
                   allowFullScreen
@@ -82,17 +84,17 @@ export default function MapSection() {
                 <div className="absolute top-4 left-4 right-4 sm:right-auto sm:max-w-xs bg-white/95 backdrop-blur-md p-4 rounded-2xl shadow-lg border border-[#E3DDD0]">
                   <div className="flex items-center gap-2 text-xs font-semibold text-[#2F5D50] mb-1">
                     <MapPin className="w-3.5 h-3.5 text-[#B8895A]" />
-                    <span>Dusun Sukomangun, Genito</span>
+                    <span>{location.dusun}, {location.desa}</span>
                   </div>
                   <p className="text-[11px] text-[#595959] leading-tight font-light">
-                    Kecamatan Windusari, Kabupaten Magelang, Jawa Tengah
+                    {location.kecamatan}, {location.kabupaten}, {location.provinsi}
                   </p>
                 </div>
               </div>
 
               {/* Note bar */}
               <div className="p-4 bg-white border-t border-[#E3DDD0] text-xs text-[#595959] flex items-center justify-between">
-                <span>{villageData.location.embedPlaceholderNote}</span>
+                <span>{location.embedPlaceholderNote}</span>
               </div>
             </div>
           </div>

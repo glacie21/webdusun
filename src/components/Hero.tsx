@@ -6,6 +6,8 @@ import { ArrowDown, MapPin, Sparkles, ChevronRight } from "lucide-react";
 import { villageData } from "@/data/content";
 
 export default function Hero() {
+  const { hero } = villageData.sections;
+
   const scrollToSection = (id: string) => {
     const el = document.getElementById(id);
     if (el) {
@@ -26,8 +28,8 @@ export default function Hero() {
       {/* Background Image with optimized Next.js Image */}
       <div className="absolute inset-0 z-0">
         <Image
-          src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=2000&q=85"
-          alt="Lanskap perbukitan hijau Dusun Sukomangun Windusari Magelang"
+          src={hero.imageUrl}
+          alt={hero.imageAlt}
           fill
           priority
           sizes="100vw"
@@ -44,12 +46,12 @@ export default function Hero() {
         {/* Small badge */}
         <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/15 backdrop-blur-md border border-white/20 text-xs sm:text-sm font-medium tracking-widest uppercase mb-6 sm:mb-8 text-[#FAF8F2] shadow-sm animate-fade-in">
           <Sparkles className="w-3.5 h-3.5 text-[#B8895A]" />
-          <span>DUSUN SUKOMANGUN</span>
+          <span>{hero.badge}</span>
         </div>
 
         {/* Main Heading */}
         <h1 className="font-serif text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.15] max-w-4xl mx-auto mb-6 text-balance drop-shadow-sm">
-          Di balik perbukitan Magelang, ada cerita yang terus hidup.
+          {hero.title}
         </h1>
 
         {/* Narrative Description */}
@@ -64,7 +66,7 @@ export default function Hero() {
             onClick={() => scrollToSection("tentang")}
             className="w-full sm:w-auto px-8 py-3.5 rounded-full bg-[#FAF8F2] text-[#2F5D50] hover:bg-white font-medium text-sm md:text-base tracking-wide transition-all shadow-lg hover:shadow-xl hover:scale-[1.02] active:scale-98 flex items-center justify-center gap-2 group"
           >
-            <span>Jelajahi Sukomangun</span>
+            <span>{villageData.identity.exploreLabel}</span>
             <ChevronRight className="w-4 h-4 text-[#B8895A] group-hover:translate-x-1 transition-transform" />
           </button>
 
