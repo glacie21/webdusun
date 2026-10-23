@@ -130,7 +130,7 @@ export default function Gallery() {
       {/* Lightbox Modal */}
       {lightboxIndex !== null && filteredPhotos[lightboxIndex] && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-md p-4 sm:p-8 animate-in fade-in duration-200"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-md p-4 sm:p-8 animate-fade-in"
           onClick={closeLightbox}
         >
           {/* Close Button */}

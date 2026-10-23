@@ -103,7 +103,7 @@ export const villageData = {
     exploreLabel: "Jelajahi Sukomangun",
     tagline: "Mengenal Sukomangun, Menjaga Cerita, Mengembangkan Potensi.",
     shortDescription:
-      "Di balik perbukitan Magelang, ada cerita yang terus hidup. Sukomangun bukan sekadar sebuah dusun, melainkan rajutan kehangatan, tradisi pertanian, dan gotong royong warga.",
+      "Sukomangun bukan sekadar sebuah dusun, melainkan rajutan kehangatan, tradisi pertanian, dan gotong royong warga.",
     longDescription: [
       "Dusun Sukomangun merupakan salah satu bagian dari Desa Genito, Kecamatan Windusari, Kabupaten Magelang. Kehidupan masyarakatnya tumbuh berdampingan dengan alam, aktivitas pertanian, gotong royong, serta berbagai kegiatan sosial yang menjadi bagian dari keseharian warga.",
       "Di balik aktivitas sehari-hari tersebut, Sukomangun memiliki potensi yang layak dikenal lebih luas, mulai dari hasil pertanian, kehidupan masyarakat, fasilitas pendidikan dan sosial, hingga cerita para warga yang menjadi bagian dari perjalanan dusun.",

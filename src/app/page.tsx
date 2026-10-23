@@ -18,22 +18,10 @@ import CtaSection from "@/components/CtaSection";
 import Footer from "@/components/Footer";
 
 export default function Home() {
-  const handleExplore = () => {
-    const el = document.getElementById("potensi");
-    if (el) {
-      const navHeight = 76;
-      const elementPosition = el.getBoundingClientRect().top + window.scrollY;
-      window.scrollTo({
-        top: elementPosition - navHeight,
-        behavior: "smooth",
-      });
-    }
-  };
-
   return (
     <div className="min-h-screen flex flex-col bg-[#F7F5EF] text-[#252525]">
       {/* Sticky Navigation */}
-      <Navbar onExploreClick={handleExplore} />
+      <Navbar />
 
       <main className="flex-grow">
         {/* 1. Hero Section */}

@@ -90,7 +90,7 @@ export default function Potentials() {
 
       {/* Modal Detail Potensi */}
       {selectedPotential && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-200">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-fade-in">
           <div className="bg-[#FAF8F2] max-w-xl w-full rounded-3xl overflow-hidden shadow-2xl border border-[#E3DDD0] max-h-[90vh] flex flex-col">
             <div className="relative h-60 w-full shrink-0">
               <Image
