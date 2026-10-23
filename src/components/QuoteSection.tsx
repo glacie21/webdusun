@@ -1,6 +1,3 @@
-"use client";
-
-import React from "react";
 import Image from "next/image";
 import { Quote } from "lucide-react";
 import { villageData } from "@/data/content";
@@ -18,13 +15,13 @@ export default function QuoteSection() {
           className="object-cover object-center filter saturate-90"
         />
         {/* Deep Forest Green Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#1E3D34]/95 via-[#2F5D50]/90 to-[#1E3D34]/95" />
+        <div className="absolute inset-0 bg-gradient-to-r from-forest-dark/95 via-forest/90 to-forest-dark/95" />
       </div>
 
       {/* Content */}
       <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
         <div className="w-16 h-16 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center mx-auto mb-8 border border-white/20">
-          <Quote className="w-8 h-8 text-[#B8895A]" />
+          <Quote className="w-8 h-8 text-earth" />
         </div>
 
         <blockquote className="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-medium leading-snug tracking-tight mb-8 text-balance">
@@ -32,7 +29,7 @@ export default function QuoteSection() {
         </blockquote>
 
         <div className="inline-block border-t border-white/30 pt-4">
-          <p className="text-xs sm:text-sm uppercase tracking-widest text-[#B8895A] font-medium">
+          <p className="text-xs sm:text-sm uppercase tracking-widest text-earth-bright font-medium">
             {villageData.quote.source} · {villageData.quote.location}
           </p>
         </div>

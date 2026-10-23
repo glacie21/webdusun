@@ -5,20 +5,18 @@
   --color-forest-dark: #1E3D34;
   --color-forest-light: #3F7565;
   --color-sage: #7A9B84;
+  --color-sage-dark: #55755F;
   --color-sage-light: #EBF2ED;
   --color-sage-soft: #D9E5DC;
   --color-earth: #B8895A;
-  --color-earth-dark: #966E45;
+  --color-earth-dark: #8A6440;
+  --color-earth-bright: #E3C49F;
   --color-earth-light: #F9F3EA;
   --color-cream: #F7F5EF;
   --color-cream-soft: #FAF8F2;
-  --color-cream-card: #FFFFFF;
   --color-charcoal: #252525;
   --color-charcoal-muted: #595959;
   --color-sand: #E3DDD0;
-
-  --font-serif: var(--font-serif), Georgia, serif;
-  --font-sans: var(--font-sans), Inter, system-ui, sans-serif;
 
   /* Animasi muncul untuk modal, lightbox, badge Hero, dan menu mobile */
   --animate-fade-in: fade-in 0.25s ease-out;
@@ -45,24 +43,43 @@
   }
 }
 
-:root {
-  --background: #F7F5EF;
-  --foreground: #252525;
+/*
+ * Font dari next/font (lihat layout.tsx). Memakai "inline" supaya class
+ * font-serif dan font-sans langsung merujuk ke variabel next/font.
+ */
+@theme inline {
+  --font-serif: var(--font-playfair), Georgia, serif;
+  --font-sans: var(--font-inter), system-ui, sans-serif;
 }
+
+/*
+ * Panduan kontras warna teks (WCAG minimal 4.5:1):
+ * - sage dan earth hanya untuk ikon, garis, dan dekorasi.
+ * - Teks di latar terang memakai sage-dark atau earth-dark.
+ * - Teks coklat di latar hijau tua memakai earth-bright.
+ */
 
 html {
   scroll-behavior: smooth;
   color-scheme: light;
 }
 
+/* Jarak agar judul bagian tidak tertutup navbar saat melompat ke #id */
+section[id] {
+  scroll-margin-top: 76px;
+}
+
 body {
-  background-color: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-sans);
   line-height: 1.7;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+}
+
+/* Penanda fokus untuk pengguna keyboard */
+:focus-visible {
+  outline: 2px solid var(--color-earth);
+  outline-offset: 3px;
 }
 
 /* Custom scrollbar */
@@ -70,26 +87,27 @@ body {
   width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #F7F5EF;
+  background: var(--color-cream);
 }
 ::-webkit-scrollbar-thumb {
-  background: #7A9B84;
+  background: var(--color-sage);
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #2F5D50;
+  background: var(--color-forest);
 }
 
-/* Typography helper */
-.font-serif {
-  font-family: var(--font-serif);
-}
+/* Matikan animasi bagi pengunjung yang mengaktifkan "kurangi gerakan" */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 
-.font-sans {
-  font-family: var(--font-sans);
-}
-
-/* Subtle transitions */
-.transition-smooth {
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

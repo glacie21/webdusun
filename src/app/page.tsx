@@ -1,6 +1,3 @@
-"use client";
-
-import React from "react";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
@@ -19,7 +16,7 @@ import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
-    <div className="min-h-screen flex flex-col bg-[#F7F5EF] text-[#252525]">
+    <div className="min-h-screen flex flex-col bg-cream text-charcoal">
       {/* Sticky Navigation */}
       <Navbar />
 
