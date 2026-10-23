@@ -1,6 +1,3 @@
-"use client";
-
-import React from "react";
 import { Sprout, Warehouse, Droplets, Truck, Building2, ArrowRight, ArrowDown } from "lucide-react";
 import { villageData } from "@/data/content";
 
@@ -25,17 +22,17 @@ export default function CommodityFlow() {
   };
 
   return (
-    <section id="komoditas" className="py-20 md:py-28 bg-[#FAF8F2] relative border-t border-[#E3DDD0]/80">
+    <section id="komoditas" className="py-20 md:py-28 bg-cream-soft relative border-t border-sand/80">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="max-w-3xl mx-auto text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#EBF2ED] text-[#2F5D50] text-xs font-semibold tracking-wider uppercase mb-3">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sage-light text-forest text-xs font-semibold tracking-wider uppercase mb-3">
             <span>{commodityFlow.badge}</span>
           </div>
-          <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-[#252525] tracking-tight mb-5">
+          <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-charcoal tracking-tight mb-5">
             {commodityFlow.title}
           </h2>
-          <p className="text-base sm:text-lg text-[#595959] font-light leading-relaxed">
+          <p className="text-base sm:text-lg text-charcoal-muted font-light leading-relaxed">
             {commodityFlow.description}
           </p>
         </div>
@@ -45,42 +42,42 @@ export default function CommodityFlow() {
           {villageData.commodityFlow.map((step, idx) => (
             <div key={step.step} className="flex flex-col lg:flex-row items-center">
               {/* Card Container */}
-              <div className="w-full bg-white rounded-3xl p-6 border border-[#E3DDD0] shadow-sm hover:shadow-lg transition-all duration-300 flex-1 flex flex-col justify-between group">
+              <div className="w-full bg-white rounded-3xl p-6 border border-sand shadow-sm hover:shadow-lg transition-all duration-300 flex-1 flex flex-col justify-between group">
                 <div>
                   {/* Step Badge & Icon */}
                   <div className="flex items-center justify-between mb-5">
-                    <span className="w-8 h-8 rounded-full bg-[#EBF2ED] text-[#2F5D50] font-serif font-bold text-sm flex items-center justify-center">
+                    <span className="w-8 h-8 rounded-full bg-sage-light text-forest font-serif font-bold text-sm flex items-center justify-center">
                       0{step.step}
                     </span>
-                    <div className="w-11 h-11 rounded-2xl bg-[#F7F5EF] text-[#2F5D50] group-hover:bg-[#2F5D50] group-hover:text-white transition-colors flex items-center justify-center">
+                    <div className="w-11 h-11 rounded-2xl bg-cream text-forest group-hover:bg-forest group-hover:text-white transition-colors flex items-center justify-center">
                       {getIcon(step.iconName)}
                     </div>
                   </div>
 
-                  <span className="text-[11px] font-semibold uppercase tracking-wider text-[#B8895A] block mb-1">
+                  <span className="text-[11px] font-semibold uppercase tracking-wider text-earth-dark block mb-1">
                     {step.actor}
                   </span>
-                  <h3 className="font-serif text-lg sm:text-xl font-bold text-[#252525] mb-2 leading-snug">
+                  <h3 className="font-serif text-lg sm:text-xl font-bold text-charcoal mb-2 leading-snug">
                     {step.title}
                   </h3>
-                  <p className="text-xs sm:text-sm text-[#595959] font-light leading-relaxed mb-4">
+                  <p className="text-xs sm:text-sm text-charcoal-muted font-light leading-relaxed mb-4">
                     {step.description}
                   </p>
                 </div>
 
-                <div className="pt-3 border-t border-[#E3DDD0]/70 text-[11px] text-[#7A9B84] font-medium leading-normal">
+                <div className="pt-3 border-t border-sand/70 text-[11px] text-sage-dark font-medium leading-normal">
                   {step.detail}
                 </div>
               </div>
 
               {/* Arrow Connector */}
               {idx < villageData.commodityFlow.length - 1 && (
-                <div className="my-3 lg:my-0 lg:mx-2 text-[#7A9B84] flex items-center justify-center">
+                <div className="my-3 lg:my-0 lg:mx-2 text-sage-dark flex items-center justify-center">
                   <div className="lg:hidden">
-                    <ArrowDown className="w-5 h-5 animate-pulse text-[#B8895A]" />
+                    <ArrowDown className="w-5 h-5 animate-pulse text-earth" />
                   </div>
                   <div className="hidden lg:block">
-                    <ArrowRight className="w-5 h-5 text-[#B8895A]" />
+                    <ArrowRight className="w-5 h-5 text-earth" />
                   </div>
                 </div>
               )}
@@ -89,11 +86,11 @@ export default function CommodityFlow() {
         </div>
 
         {/* Storytelling Narrative Footer */}
-        <div className="mt-14 max-w-4xl mx-auto bg-white p-6 sm:p-8 rounded-3xl border border-[#E3DDD0] text-center shadow-xs">
-          <p className="font-serif italic text-base sm:text-lg text-[#252525] leading-relaxed">
+        <div className="mt-14 max-w-4xl mx-auto bg-white p-6 sm:p-8 rounded-3xl border border-sand text-center shadow-xs">
+          <p className="font-serif italic text-base sm:text-lg text-charcoal leading-relaxed">
             &ldquo;{commodityFlow.closingQuote}&rdquo;
           </p>
-          <div className="mt-3 text-xs uppercase tracking-widest text-[#7A9B84] font-semibold">
+          <div className="mt-3 text-xs uppercase tracking-widest text-sage-dark font-semibold">
             {commodityFlow.closingCaption}
           </div>
         </div>

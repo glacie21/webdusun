@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import { Users, Heart } from "lucide-react";
 import { villageData } from "@/data/content";
@@ -21,18 +21,18 @@ export default function Community() {
       : villageData.communityLife.filter((item) => item.category === activeCategory);
 
   return (
-    <section id="kehidupan" className="py-20 md:py-28 bg-[#F7F5EF] relative">
+    <section id="kehidupan" className="py-20 md:py-28 bg-cream relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="max-w-3xl mx-auto text-center mb-12">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#EBF2ED] text-[#2F5D50] text-xs font-semibold tracking-wider uppercase mb-3">
-            <Users className="w-3.5 h-3.5 text-[#7A9B84]" />
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sage-light text-forest text-xs font-semibold tracking-wider uppercase mb-3">
+            <Users className="w-3.5 h-3.5 text-sage" />
             <span>{community.badge}</span>
           </div>
-          <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-[#252525] tracking-tight mb-5">
+          <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-charcoal tracking-tight mb-5">
             {community.title}
           </h2>
-          <p className="text-base sm:text-lg text-[#595959] font-light leading-relaxed">
+          <p className="text-base sm:text-lg text-charcoal-muted font-light leading-relaxed">
             {community.description}
           </p>
         </div>
@@ -46,8 +46,8 @@ export default function Community() {
               onClick={() => setActiveCategory(cat)}
               className={`px-4 py-2 rounded-full text-xs sm:text-sm font-medium transition-all duration-200 ${
                 activeCategory === cat
-                  ? "bg-[#2F5D50] text-white shadow-sm"
-                  : "bg-white text-[#595959] hover:text-[#252525] hover:bg-[#EBF2ED] border border-[#E3DDD0]"
+                  ? "bg-forest text-white shadow-sm"
+                  : "bg-white text-charcoal-muted hover:text-charcoal hover:bg-sage-light border border-sand"
               }`}
             >
               {cat}
@@ -61,7 +61,7 @@ export default function Community() {
             return (
               <div
                 key={item.id}
-                className="group relative rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 border border-[#E3DDD0] bg-white flex flex-col"
+                className="group relative rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 border border-sand bg-white flex flex-col"
               >
                 {/* Photo */}
                 <div className="relative h-64 sm:h-72 w-full overflow-hidden">
@@ -76,7 +76,7 @@ export default function Community() {
 
                   {/* Category Pill */}
                   <div className="absolute top-4 left-4">
-                    <span className="px-3 py-1 rounded-full bg-white/90 backdrop-blur-sm text-[11px] font-semibold text-[#2F5D50] uppercase tracking-wider">
+                    <span className="px-3 py-1 rounded-full bg-white/90 backdrop-blur-sm text-[11px] font-semibold text-forest uppercase tracking-wider">
                       {item.category}
                     </span>
                   </div>
@@ -91,7 +91,7 @@ export default function Community() {
 
                 {/* Description under photo */}
                 <div className="p-5 flex-1 flex items-center">
-                  <p className="text-xs sm:text-sm text-[#595959] font-light leading-relaxed">
+                  <p className="text-xs sm:text-sm text-charcoal-muted font-light leading-relaxed">
                     {item.description}
                   </p>
                 </div>
@@ -101,8 +101,8 @@ export default function Community() {
         </div>
 
         {/* Social Harmony Note */}
-        <div className="mt-12 text-center flex items-center justify-center gap-2 text-xs sm:text-sm text-[#7A9B84]">
-          <Heart className="w-4 h-4 text-[#B8895A]" />
+        <div className="mt-12 text-center flex items-center justify-center gap-2 text-xs sm:text-sm text-sage-dark">
+          <Heart className="w-4 h-4 text-earth" />
           <span>{community.closingNote}</span>
         </div>
       </div>

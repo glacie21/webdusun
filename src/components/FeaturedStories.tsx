@@ -1,26 +1,27 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import { BookOpen, Clock, ArrowRight, X } from "lucide-react";
 import { villageData, EditorialStory } from "@/data/content";
+import Modal from "@/components/Modal";
 
 export default function FeaturedStories() {
   const [selectedStory, setSelectedStory] = useState<EditorialStory | null>(null);
 
   return (
-    <section className="py-20 md:py-28 bg-[#FAF8F2] relative border-t border-[#E3DDD0]/80">
+    <section className="py-20 md:py-28 bg-cream-soft relative border-t border-sand/80">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="max-w-3xl mx-auto text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#EBF2ED] text-[#2F5D50] text-xs font-semibold tracking-wider uppercase mb-3">
-            <BookOpen className="w-3.5 h-3.5 text-[#7A9B84]" />
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sage-light text-forest text-xs font-semibold tracking-wider uppercase mb-3">
+            <BookOpen className="w-3.5 h-3.5 text-sage" />
             <span>{villageData.sections.stories.badge}</span>
           </div>
-          <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-[#252525] tracking-tight mb-4">
+          <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-charcoal tracking-tight mb-4">
             {villageData.sections.stories.title}
           </h2>
-          <p className="text-base sm:text-lg text-[#595959] font-light leading-relaxed">
+          <p className="text-base sm:text-lg text-charcoal-muted font-light leading-relaxed">
             {villageData.sections.stories.description}
           </p>
         </div>
@@ -30,7 +31,7 @@ export default function FeaturedStories() {
           {villageData.editorialStories.map((story) => (
             <article
               key={story.id}
-              className="bg-white rounded-3xl overflow-hidden border border-[#E3DDD0] shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col group"
+              className="bg-white rounded-3xl overflow-hidden border border-sand shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col group"
             >
               {/* Image Frame */}
               <div className="relative h-60 w-full overflow-hidden">
@@ -43,7 +44,7 @@ export default function FeaturedStories() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                 <div className="absolute top-4 left-4 flex items-center gap-2">
-                  <span className="px-3 py-1 rounded-full bg-white/90 backdrop-blur-sm text-[11px] font-semibold text-[#2F5D50] uppercase tracking-wider">
+                  <span className="px-3 py-1 rounded-full bg-white/90 backdrop-blur-sm text-[11px] font-semibold text-forest uppercase tracking-wider">
                     {story.date}
                   </span>
                 </div>
@@ -52,7 +53,7 @@ export default function FeaturedStories() {
               {/* Story Content */}
               <div className="p-6 sm:p-7 flex-1 flex flex-col justify-between">
                 <div>
-                  <div className="flex items-center gap-4 text-xs text-[#7A9B84] mb-3">
+                  <div className="flex items-center gap-4 text-xs text-sage-dark mb-3">
                     <span className="flex items-center gap-1">
                       <Clock className="w-3.5 h-3.5" />
                       {story.readTime}
@@ -61,27 +62,27 @@ export default function FeaturedStories() {
                     <span>{story.author}</span>
                   </div>
 
-                  <h3 className="font-serif text-2xl font-bold text-[#252525] mb-2 leading-snug group-hover:text-[#2F5D50] transition-colors">
+                  <h3 className="font-serif text-2xl font-bold text-charcoal mb-2 leading-snug group-hover:text-forest transition-colors">
                     {story.title}
                   </h3>
 
-                  <p className="text-xs uppercase tracking-wider font-semibold text-[#B8895A] mb-3">
+                  <p className="text-xs uppercase tracking-wider font-semibold text-earth-dark mb-3">
                     {story.subtitle}
                   </p>
 
-                  <p className="text-sm text-[#595959] font-light leading-relaxed mb-6">
+                  <p className="text-sm text-charcoal-muted font-light leading-relaxed mb-6">
                     {story.excerpt}
                   </p>
                 </div>
 
-                <div className="pt-4 border-t border-[#E3DDD0]/70">
+                <div className="pt-4 border-t border-sand/70">
                   <button
                     type="button"
                     onClick={() => setSelectedStory(story)}
-                    className="inline-flex items-center gap-2 text-sm font-semibold text-[#2F5D50] hover:text-[#1E3D34] group/link"
+                    className="inline-flex items-center gap-2 text-sm font-semibold text-forest hover:text-forest-dark group/link"
                   >
                     <span>Baca Cerita Selengkapnya</span>
-                    <ArrowRight className="w-4 h-4 text-[#B8895A] group-hover/link:translate-x-1.5 transition-transform" />
+                    <ArrowRight className="w-4 h-4 text-earth group-hover/link:translate-x-1.5 transition-transform" />
                   </button>
                 </div>
               </div>
@@ -92,8 +93,12 @@ export default function FeaturedStories() {
 
       {/* Modal Baca Artikel Lengkap */}
       {selectedStory && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm animate-fade-in">
-          <div className="bg-[#FAF8F2] max-w-2xl w-full rounded-3xl overflow-hidden shadow-2xl border border-[#E3DDD0] max-h-[90vh] flex flex-col">
+        <Modal
+          onClose={() => setSelectedStory(null)}
+          labelledBy="story-modal-title"
+          className="p-4 bg-black/70 backdrop-blur-sm"
+        >
+          <div className="bg-cream-soft max-w-2xl w-full rounded-3xl overflow-hidden shadow-2xl border border-sand max-h-[90vh] flex flex-col">
             <div className="relative h-64 w-full shrink-0">
               <Image
                 src={selectedStory.imageUrl}
@@ -113,10 +118,10 @@ export default function FeaturedStories() {
               </button>
 
               <div className="absolute bottom-5 left-6 right-6 text-white">
-                <span className="text-xs font-semibold uppercase tracking-wider text-[#B8895A] bg-white/20 px-2.5 py-0.5 rounded-full inline-block mb-1">
+                <span className="text-xs font-semibold uppercase tracking-wider text-earth-bright bg-white/20 px-2.5 py-0.5 rounded-full inline-block mb-1">
                   {selectedStory.subtitle}
                 </span>
-                <h3 className="font-serif text-2xl sm:text-3xl font-bold">
+                <h3 id="story-modal-title" className="font-serif text-2xl sm:text-3xl font-bold">
                   {selectedStory.title}
                 </h3>
                 <div className="flex items-center gap-3 text-xs text-white/80 mt-1">
@@ -129,23 +134,23 @@ export default function FeaturedStories() {
 
             <div className="p-6 sm:p-8 overflow-y-auto space-y-4">
               {selectedStory.content.map((p, idx) => (
-                <p key={idx} className="text-sm sm:text-base text-[#252525] font-light leading-relaxed">
+                <p key={idx} className="text-sm sm:text-base text-charcoal font-light leading-relaxed">
                   {p}
                 </p>
               ))}
             </div>
 
-            <div className="p-4 sm:p-5 bg-white border-t border-[#E3DDD0] flex justify-end">
+            <div className="p-4 sm:p-5 bg-white border-t border-sand flex justify-end">
               <button
                 type="button"
                 onClick={() => setSelectedStory(null)}
-                className="px-6 py-2.5 rounded-xl bg-[#2F5D50] text-white text-sm font-medium hover:bg-[#1E3D34] transition-colors"
+                className="px-6 py-2.5 rounded-xl bg-forest text-white text-sm font-medium hover:bg-forest-dark transition-colors"
               >
                 Tutup Cerita
               </button>
             </div>
           </div>
-        </div>
+        </Modal>
       )}
     </section>
   );

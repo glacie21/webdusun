@@ -1,24 +1,9 @@
-"use client";
-
-import React from "react";
 import Image from "next/image";
 import { ArrowDown, MapPin, Sparkles, ChevronRight } from "lucide-react";
 import { villageData } from "@/data/content";
 
 export default function Hero() {
   const { hero } = villageData.sections;
-
-  const scrollToSection = (id: string) => {
-    const el = document.getElementById(id);
-    if (el) {
-      const navHeight = 76;
-      const elementPosition = el.getBoundingClientRect().top + window.scrollY;
-      window.scrollTo({
-        top: elementPosition - navHeight,
-        behavior: "smooth",
-      });
-    }
-  };
 
   return (
     <section
@@ -36,15 +21,15 @@ export default function Hero() {
           className="object-cover object-center scale-105"
         />
         {/* Cinematic Multi-layered Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#1E3D34]/95 via-[#2F5D50]/60 to-black/40" />
+        <div className="absolute inset-0 bg-gradient-to-t from-forest-dark/95 via-forest/60 to-black/40" />
         <div className="absolute inset-0 bg-radial from-transparent via-black/20 to-black/60" />
       </div>
 
       {/* Hero Content Container */}
       <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white mt-12 md:mt-6">
         {/* Small badge */}
-        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/15 backdrop-blur-md border border-white/20 text-xs sm:text-sm font-medium tracking-widest uppercase mb-6 sm:mb-8 text-[#FAF8F2] shadow-sm animate-fade-in">
-          <Sparkles className="w-3.5 h-3.5 text-[#B8895A]" />
+        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/15 backdrop-blur-md border border-white/20 text-xs sm:text-sm font-medium tracking-widest uppercase mb-6 sm:mb-8 text-cream-soft shadow-sm animate-fade-in">
+          <Sparkles className="w-3.5 h-3.5 text-earth" />
           <span>{hero.badge}</span>
         </div>
 
@@ -60,41 +45,38 @@ export default function Hero() {
 
         {/* Action Buttons */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5 sm:gap-4 mb-14">
-          <button
-            type="button"
-            onClick={() => scrollToSection("tentang")}
-            className="w-full sm:w-auto px-8 py-3.5 rounded-full bg-[#FAF8F2] text-[#2F5D50] hover:bg-white font-medium text-sm md:text-base tracking-wide transition-all shadow-lg hover:shadow-xl hover:scale-[1.02] active:scale-98 flex items-center justify-center gap-2 group"
+          <a
+            href="#tentang"
+            className="w-full sm:w-auto px-8 py-3.5 rounded-full bg-cream-soft text-forest hover:bg-white font-medium text-sm md:text-base tracking-wide transition-all shadow-lg hover:shadow-xl hover:scale-[1.02] active:scale-98 flex items-center justify-center gap-2 group"
           >
             <span>{villageData.identity.exploreLabel}</span>
-            <ChevronRight className="w-4 h-4 text-[#B8895A] group-hover:translate-x-1 transition-transform" />
-          </button>
+            <ChevronRight className="w-4 h-4 text-earth group-hover:translate-x-1 transition-transform" />
+          </a>
 
-          <button
-            type="button"
-            onClick={() => scrollToSection("potensi")}
+          <a
+            href="#potensi"
             className="w-full sm:w-auto px-7 py-3.5 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/30 text-white font-medium text-sm md:text-base tracking-wide transition-all hover:scale-[1.02] active:scale-98 flex items-center justify-center gap-2"
           >
             <span>Kenali Potensinya</span>
-          </button>
+          </a>
         </div>
 
         {/* Bottom Geographical Badge */}
         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-black/30 backdrop-blur-md border border-white/15 text-xs sm:text-sm text-white/80 font-normal">
-          <MapPin className="w-3.5 h-3.5 text-[#B8895A]" />
+          <MapPin className="w-3.5 h-3.5 text-earth" />
           <span>{villageData.identity.subLocationText}</span>
         </div>
       </div>
 
       {/* Subtle Scroll Indicator */}
-      <button
-        type="button"
-        onClick={() => scrollToSection("tentang")}
-        className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 text-white/70 hover:text-white transition-colors flex flex-col items-center gap-1.5 focus:outline-none"
-        aria-label="Scroll ke bagian tentang"
+      <a
+        href="#tentang"
+        className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 text-white/70 hover:text-white transition-colors flex flex-col items-center gap-1.5"
+        aria-label="Gulir ke bagian Tentang"
       >
         <span className="text-[11px] uppercase tracking-wider font-light">Gulir ke Bawah</span>
         <ArrowDown className="w-4 h-4 animate-bounce" />
-      </button>
+      </a>
     </section>
   );
 }

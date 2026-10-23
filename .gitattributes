@@ -1,0 +1,11 @@
+# Simpan file teks dengan akhir baris LF di semua sistem operasi,
+# supaya tidak muncul peringatan "LF will be replaced by CRLF".
+* text=auto eol=lf
+
+# File biner, jangan diubah akhir barisnya
+*.ico binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.webp binary
+*.gif binary

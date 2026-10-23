@@ -91,6 +91,44 @@ export interface EditorialStory {
 }
 
 export const villageData = {
+  // Data untuk Google, pratinjau tautan WhatsApp/media sosial, robots.txt, dan sitemap.xml.
+  site: {
+    // Ganti dengan domain asli setelah website dipasang (deploy).
+    url: "https://sukomangun.desa.id",
+    title: "Cerita Sukomangun — Profil dan Potensi Dusun Sukomangun",
+    description:
+      "Mengenal Dusun Sukomangun, Desa Genito, Kecamatan Windusari, Kabupaten Magelang melalui sejarah, kehidupan masyarakat, potensi, fasilitas, dan cerita warga.",
+    keywords: [
+      "Dusun Sukomangun",
+      "Cerita Sukomangun",
+      "Desa Genito",
+      "Windusari",
+      "Magelang",
+      "Jawa Tengah",
+      "Profil Dusun",
+      "Potensi Dusun",
+      "Pertanian Sukomangun",
+      "Komoditas Ketela",
+    ],
+    author: "Masyarakat Dusun Sukomangun",
+    ogImageUrl:
+      "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&h=630&q=80",
+    ogImageAlt: "Lanskap perbukitan hijau Dusun Sukomangun Windusari Magelang",
+  },
+
+  // Menu navigasi, dipakai bersama oleh Navbar dan Footer.
+  navLinks: [
+    { name: "Beranda", href: "#hero" },
+    { name: "Tentang", href: "#tentang" },
+    { name: "Sejarah", href: "#sejarah" },
+    { name: "Potensi", href: "#potensi" },
+    { name: "Alur Ketela", href: "#komoditas" },
+    { name: "Kehidupan", href: "#kehidupan" },
+    { name: "Fasilitas", href: "#fasilitas" },
+    { name: "Galeri", href: "#galeri" },
+    { name: "Lokasi", href: "#lokasi" },
+  ],
+
   identity: {
     name: "Dusun Sukomangun",
     shortName: "Cerita Sukomangun",
@@ -195,6 +233,8 @@ export const villageData = {
       badge: "DOKUMENTASI VISUAL",
       title: "Potret Sukomangun",
       subtitle: "Merekam momen, menyimpan cerita.",
+      // Hapus atau ubah catatan ini setelah semua foto diganti dengan dokumentasi asli.
+      photoNote: "Foto di halaman ini masih ilustrasi dan akan diganti dengan dokumentasi asli warga Sukomangun.",
     },
     stories: {
       badge: "EDITORIAL DUSUN",

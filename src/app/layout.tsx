@@ -1,18 +1,21 @@
 import type { Metadata, Viewport } from "next";
 import { Playfair_Display, Inter } from "next/font/google";
+import { villageData } from "@/data/content";
 import "./globals.css";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
-  variable: "--font-serif",
+  variable: "--font-playfair",
   display: "swap",
 });
 
 const inter = Inter({
   subsets: ["latin"],
-  variable: "--font-sans",
+  variable: "--font-inter",
   display: "swap",
 });
+
+const { site } = villageData;
 
 export const viewport: Viewport = {
   themeColor: "#2F5D50",
@@ -20,51 +23,38 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
+// Teks dan gambar di bawah ini diatur dari villageData.site di src/data/content.ts.
+// Ikon tab browser diambil otomatis dari src/app/icon.svg.
 export const metadata: Metadata = {
-  title: "Cerita Sukomangun — Profil dan Potensi Dusun Sukomangun",
-  description:
-    "Mengenal Dusun Sukomangun, Desa Genito, Kecamatan Windusari, Kabupaten Magelang melalui sejarah, kehidupan masyarakat, potensi, fasilitas, dan cerita warga.",
-  keywords: [
-    "Dusun Sukomangun",
-    "Cerita Sukomangun",
-    "Desa Genito",
-    "Windusari",
-    "Magelang",
-    "Jawa Tengah",
-    "Profil Dusun",
-    "Potensi Dusun",
-    "Pertanian Sukomangun",
-    "Komoditas Ketela",
-  ],
-  authors: [{ name: "Masyarakat Dusun Sukomangun" }],
+  metadataBase: new URL(site.url),
+  title: site.title,
+  description: site.description,
+  keywords: site.keywords,
+  authors: [{ name: site.author }],
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
-    title: "Cerita Sukomangun — Profil dan Potensi Dusun Sukomangun",
-    description:
-      "Mengenal Dusun Sukomangun, Desa Genito, Kecamatan Windusari, Kabupaten Magelang melalui sejarah, kehidupan masyarakat, potensi, fasilitas, dan cerita warga.",
-    url: "https://sukomangun.desa.id",
-    siteName: "Cerita Sukomangun",
+    title: site.title,
+    description: site.description,
+    url: "/",
+    siteName: villageData.identity.shortName,
     locale: "id_ID",
     type: "website",
     images: [
       {
-        url: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1200&q=80",
+        url: site.ogImageUrl,
         width: 1200,
         height: 630,
-        alt: "Pemandangan Perbukitan Dusun Sukomangun Magelang",
+        alt: site.ogImageAlt,
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Cerita Sukomangun — Profil dan Potensi Dusun Sukomangun",
-    description:
-      "Mengenal Dusun Sukomangun, Desa Genito, Kecamatan Windusari, Kabupaten Magelang.",
-    images: [
-      "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1200&q=80",
-    ],
-  },
-  icons: {
-    icon: "/favicon.ico",
+    title: site.title,
+    description: site.description,
+    images: [site.ogImageUrl],
   },
 };
 
