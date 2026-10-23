@@ -4,11 +4,7 @@ import React, { useState, useEffect } from "react";
 import { Menu, X, ArrowUpRight, Compass } from "lucide-react";
 import { villageData } from "@/data/content";
 
-interface NavbarProps {
-  onExploreClick?: () => void;
-}
-
-export default function Navbar({ onExploreClick }: NavbarProps) {
+export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -114,14 +110,8 @@ export default function Navbar({ onExploreClick }: NavbarProps) {
           {/* CTA Button */}
           <div className="hidden sm:flex items-center gap-3">
             <a
-              href="#potensi"
-              onClick={(e) => {
-                if (onExploreClick) {
-                  onExploreClick();
-                } else {
-                  handleScrollTo(e, "#potensi");
-                }
-              }}
+              href="#tentang"
+              onClick={(e) => handleScrollTo(e, "#tentang")}
               className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs md:text-sm font-medium tracking-wide transition-all shadow-sm ${
                 isScrolled
                   ? "bg-[#2F5D50] text-white hover:bg-[#1E3D34] hover:shadow-md active:scale-95"
@@ -152,7 +142,7 @@ export default function Navbar({ onExploreClick }: NavbarProps) {
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="lg:hidden bg-[#F7F5EF] border-b border-[#E3DDD0] px-4 pt-4 pb-6 mt-3 shadow-xl animate-in slide-in-from-top-3 duration-200">
+        <div className="lg:hidden bg-[#F7F5EF] border-b border-[#E3DDD0] px-4 pt-4 pb-6 mt-3 shadow-xl animate-slide-down">
           <div className="flex flex-col space-y-2">
             {navLinks.map((link) => (
               <a
@@ -166,8 +156,8 @@ export default function Navbar({ onExploreClick }: NavbarProps) {
             ))}
             <div className="pt-3 border-t border-[#E3DDD0]">
               <a
-                href="#potensi"
-                onClick={(e) => handleScrollTo(e, "#potensi")}
+                href="#tentang"
+                onClick={(e) => handleScrollTo(e, "#tentang")}
                 className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-[#2F5D50] text-white font-medium text-sm shadow-sm"
               >
                 <Compass className="w-4 h-4" />

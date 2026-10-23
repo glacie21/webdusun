@@ -19,6 +19,30 @@
 
   --font-serif: var(--font-serif), Georgia, serif;
   --font-sans: var(--font-sans), Inter, system-ui, sans-serif;
+
+  /* Animasi muncul untuk modal, lightbox, badge Hero, dan menu mobile */
+  --animate-fade-in: fade-in 0.25s ease-out;
+  --animate-slide-down: slide-down 0.2s ease-out;
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes slide-down {
+    from {
+      opacity: 0;
+      transform: translateY(-0.75rem);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 }
 
 :root {

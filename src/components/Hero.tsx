@@ -33,8 +33,7 @@ export default function Hero() {
           fill
           priority
           sizes="100vw"
-          className="object-cover object-center scale-105 animate-pulse duration-1000"
-          style={{ animationDuration: "12s" }}
+          className="object-cover object-center scale-105"
         />
         {/* Cinematic Multi-layered Overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-[#1E3D34]/95 via-[#2F5D50]/60 to-black/40" />

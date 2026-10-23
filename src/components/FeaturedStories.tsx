@@ -92,7 +92,7 @@ export default function FeaturedStories() {
 
       {/* Modal Baca Artikel Lengkap */}
       {selectedStory && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm animate-in fade-in duration-200">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm animate-fade-in">
           <div className="bg-[#FAF8F2] max-w-2xl w-full rounded-3xl overflow-hidden shadow-2xl border border-[#E3DDD0] max-h-[90vh] flex flex-col">
             <div className="relative h-64 w-full shrink-0">
               <Image

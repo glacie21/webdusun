@@ -111,7 +111,7 @@ export default function About() {
 
       {/* Modal Detail Profil Dusun */}
       {isModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-200">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-fade-in">
           <div className="bg-[#FAF8F2] max-w-2xl w-full rounded-3xl p-6 sm:p-8 shadow-2xl border border-[#E3DDD0] max-h-[90vh] overflow-y-auto">
             <div className="flex items-start justify-between pb-4 border-b border-[#E3DDD0]">
               <div>
