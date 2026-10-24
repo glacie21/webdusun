@@ -79,7 +79,7 @@ export default function Potentials() {
                     onClick={() => setSelectedPotential(item)}
                     className="inline-flex items-center gap-2 text-sm font-semibold text-forest hover:text-forest-dark transition-colors group/btn"
                   >
-                    <span>Selengkapnya</span>
+                    <span>{villageData.sections.potentials.moreLabel}</span>
                     <ArrowRight className="w-4 h-4 text-earth group-hover/btn:translate-x-1 transition-transform" />
                   </button>
                 </div>
@@ -133,7 +133,7 @@ export default function Potentials() {
                 <CheckCircle2 className="w-5 h-5 text-forest shrink-0 mt-0.5" />
                 <div>
                   <h4 className="text-xs uppercase font-bold text-forest tracking-wider mb-0.5">
-                    Keunggulan & Karakter
+                    {villageData.sections.potentials.highlightTitle}
                   </h4>
                   <p className="text-xs sm:text-sm text-charcoal">
                     {selectedPotential.highlightText}
