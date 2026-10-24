@@ -8,9 +8,9 @@ export default function Statistics() {
           <span className="text-xs uppercase tracking-widest text-sage-dark font-semibold">
             {villageData.sections.statistics.badge}
           </span>
-          <h3 className="font-serif text-2xl sm:text-3xl font-bold text-charcoal mt-1">
+          <h2 className="font-serif text-2xl sm:text-3xl font-bold text-charcoal mt-1">
             {villageData.sections.statistics.title}
-          </h3>
+          </h2>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10">
@@ -24,13 +24,13 @@ export default function Statistics() {
                   {item.number}
                 </span>
                 <span className="text-[10px] tracking-widest uppercase font-semibold text-sage-dark px-2.5 py-0.5 rounded-full bg-sage-light">
-                  Profil
+                  {villageData.sections.statistics.cardLabel}
                 </span>
               </div>
               <div>
-                <h4 className="font-serif text-lg font-bold text-charcoal mb-1.5">
+                <h3 className="font-serif text-lg font-bold text-charcoal mb-1.5">
                   {item.label}
-                </h4>
+                </h3>
                 <p className="text-xs sm:text-sm text-charcoal-muted leading-relaxed font-light">
                   {item.description}
                 </p>

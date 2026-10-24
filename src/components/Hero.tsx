@@ -57,7 +57,7 @@ export default function Hero() {
             href="#potensi"
             className="w-full sm:w-auto px-7 py-3.5 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/30 text-white font-medium text-sm md:text-base tracking-wide transition-all hover:scale-[1.02] active:scale-98 flex items-center justify-center gap-2"
           >
-            <span>Kenali Potensinya</span>
+            <span>{hero.secondaryButtonLabel}</span>
           </a>
         </div>
 
@@ -74,7 +74,7 @@ export default function Hero() {
         className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 text-white/70 hover:text-white transition-colors flex flex-col items-center gap-1.5"
         aria-label="Gulir ke bagian Tentang"
       >
-        <span className="text-[11px] uppercase tracking-wider font-light">Gulir ke Bawah</span>
+        <span className="text-[11px] uppercase tracking-wider font-light">{hero.scrollLabel}</span>
         <ArrowDown className="w-4 h-4 animate-bounce" />
       </a>
     </section>

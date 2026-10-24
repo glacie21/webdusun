@@ -113,7 +113,7 @@ export const villageData = {
     author: "Masyarakat Dusun Sukomangun",
     ogImageUrl:
       "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&h=630&q=80",
-    ogImageAlt: "Lanskap perbukitan hijau Dusun Sukomangun Windusari Magelang",
+    ogImageAlt: "Lanskap perbukitan",
   },
 
   // Menu navigasi, dipakai bersama oleh Navbar dan Footer.
@@ -156,14 +156,16 @@ export const villageData = {
       title: "Di balik perbukitan Magelang, ada cerita yang terus hidup.",
       imageUrl:
         "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=2000&q=85",
-      imageAlt: "Lanskap perbukitan hijau Dusun Sukomangun Windusari Magelang",
+      imageAlt: "Lanskap perbukitan",
+      secondaryButtonLabel: "Kenali Potensinya",
+      scrollLabel: "Gulir ke Bawah",
     },
     about: {
       badge: "TENTANG SUKOMANGUN",
       title: "Sebuah dusun dengan cerita yang sederhana, tetapi berarti.",
       imageUrl:
         "https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=1200&q=80",
-      imageAlt: "Kehangatan masyarakat dan lanskap alam Dusun Sukomangun",
+      imageAlt: "Petani di sawah pada pagi hari",
       imageBadge: "Harmoni Alam & Warga",
       imageCaption: "Aktivitas harian masyarakat yang bersahaja di kaki perbukitan Windusari.",
       floatingLabel: "Semangat Guyub",
@@ -185,6 +187,7 @@ export const villageData = {
     statistics: {
       badge: "SEKILAS IDENTITAS",
       title: "Mengenal Sukomangun dalam Angka & Makna",
+      cardLabel: "Profil",
     },
     history: {
       badge: "SEJARAH & PERJALANAN",
@@ -206,6 +209,8 @@ export const villageData = {
       title: "Potensi yang Tumbuh dari Tanah Sukomangun",
       description:
         "Tanah, masyarakat, dan aktivitas sehari-hari menjadi bagian dari potensi yang dimiliki Sukomangun. Berbagai hasil pertanian dan usaha masyarakat menjadi sumber kehidupan sekaligus peluang yang dapat terus dikembangkan.",
+      moreLabel: "Selengkapnya",
+      highlightTitle: "Keunggulan & Karakter",
     },
     commodityFlow: {
       badge: "CERITA KOMODITAS",
@@ -241,6 +246,8 @@ export const villageData = {
       title: "Cerita dari Sukomangun",
       description:
         "Menyimak lebih dalam kisah keseharian, nilai kebersamaan, dan asa masyarakat yang menghidupkan dusun di lereng Windusari.",
+      readMoreLabel: "Baca Cerita Selengkapnya",
+      closeLabel: "Tutup Cerita",
     },
     map: {
       badge: "LOKASI WILAYAH",
@@ -248,6 +255,7 @@ export const villageData = {
       description:
         "Dusun Sukomangun terletak di kawasan asri pegunungan Windusari, Kabupaten Magelang, berdekatan dengan pesona lereng Gunung Sumbing.",
       addressNote: "Kawasan perbukitan agraris berhawa sejuk di Jawa Tengah",
+      mapsButtonLabel: "Buka di Google Maps",
     },
     cta: {
       badge: "DUSUN SUKOMANGUN",
@@ -262,6 +270,9 @@ export const villageData = {
         "Website profil komunitas & etalase digital untuk mendokumentasikan kehidupan serta mengembangkan potensi Dusun Sukomangun.",
       copyright:
         "© 2026 Cerita Sukomangun. Dibuat untuk mengenalkan dan mendokumentasikan potensi Dusun Sukomangun.",
+      navTitle: "Navigasi",
+      locationTitle: "Lokasi Wilayah",
+      backToTopLabel: "Kembali ke Atas",
     },
   },
 
@@ -695,7 +706,7 @@ export const villageData = {
     location: "Windusari, Magelang",
     imageUrl:
       "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1920&q=80",
-    imageAlt: "Lanskap perbukitan hijau Dusun Sukomangun Magelang",
+    imageAlt: "Lanskap perbukitan hijau",
   },
 
   location: {

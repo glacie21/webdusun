@@ -81,7 +81,7 @@ export default function FeaturedStories() {
                     onClick={() => setSelectedStory(story)}
                     className="inline-flex items-center gap-2 text-sm font-semibold text-forest hover:text-forest-dark group/link"
                   >
-                    <span>Baca Cerita Selengkapnya</span>
+                    <span>{villageData.sections.stories.readMoreLabel}</span>
                     <ArrowRight className="w-4 h-4 text-earth group-hover/link:translate-x-1.5 transition-transform" />
                   </button>
                 </div>
@@ -146,7 +146,7 @@ export default function FeaturedStories() {
                 onClick={() => setSelectedStory(null)}
                 className="px-6 py-2.5 rounded-xl bg-forest text-white text-sm font-medium hover:bg-forest-dark transition-colors"
               >
-                Tutup Cerita
+                {villageData.sections.stories.closeLabel}
               </button>
             </div>
           </div>

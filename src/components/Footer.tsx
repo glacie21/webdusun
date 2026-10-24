@@ -26,9 +26,9 @@ export default function Footer() {
 
           {/* Kolom 2: Navigasi */}
           <div className="lg:col-span-3 space-y-4">
-            <h4 className="font-serif text-base font-semibold uppercase tracking-wider text-earth-bright">
-              Navigasi
-            </h4>
+            <h2 className="font-serif text-base font-semibold uppercase tracking-wider text-earth-bright">
+              {villageData.sections.footer.navTitle}
+            </h2>
             <ul className="grid grid-cols-2 gap-y-2.5 gap-x-4 text-sm font-light text-white/80">
               {villageData.navLinks.map((item) => (
                 <li key={item.name}>
@@ -45,9 +45,9 @@ export default function Footer() {
 
           {/* Kolom 3: Lokasi Administratif */}
           <div className="lg:col-span-4 space-y-4">
-            <h4 className="font-serif text-base font-semibold uppercase tracking-wider text-earth-bright">
-              Lokasi Wilayah
-            </h4>
+            <h2 className="font-serif text-base font-semibold uppercase tracking-wider text-earth-bright">
+              {villageData.sections.footer.locationTitle}
+            </h2>
             <div className="space-y-1.5 text-sm font-light text-white/80">
               <div className="flex items-center gap-2 text-white font-medium">
                 <MapPin className="w-4 h-4 text-earth" />
@@ -71,7 +71,7 @@ export default function Footer() {
             href="#hero"
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors text-xs"
           >
-            <span>Kembali ke Atas</span>
+            <span>{villageData.sections.footer.backToTopLabel}</span>
             <ArrowUp className="w-3.5 h-3.5" />
           </a>
         </div>

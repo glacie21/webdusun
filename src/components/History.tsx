@@ -81,9 +81,9 @@ export default function History() {
               <BookOpen className="w-7 h-7 text-earth" />
             </div>
             <div>
-              <h4 className="font-serif text-xl sm:text-2xl font-bold">
+              <h3 className="font-serif text-xl sm:text-2xl font-bold">
                 {history.closingTitle}
-              </h4>
+              </h3>
               <p className="text-xs sm:text-sm text-white/80 font-light mt-1">
                 {history.closingText}
               </p>

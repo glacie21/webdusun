@@ -57,7 +57,7 @@ export default function MapSection() {
                 className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full bg-forest hover:bg-forest-dark text-white font-medium text-sm sm:text-base tracking-wide transition-all shadow-md hover:shadow-lg active:scale-98"
               >
                 <Compass className="w-4 h-4" />
-                <span>Buka di Google Maps</span>
+                <span>{map.mapsButtonLabel}</span>
                 <ExternalLink className="w-4 h-4 ml-1 opacity-80" />
               </a>
             </div>
