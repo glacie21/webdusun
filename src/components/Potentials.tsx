@@ -2,9 +2,12 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import { AnimatePresence, motion } from "motion/react";
 import { ArrowRight, Sparkles, X, CheckCircle2 } from "lucide-react";
 import { villageData, PotentialItem } from "@/data/content";
-import Modal from "@/components/Modal";
+import Modal, { modalPanel } from "@/components/Modal";
+import Reveal from "@/components/Reveal";
+import { staggerDelay } from "@/components/motionPresets";
 
 export default function Potentials() {
   const [selectedPotential, setSelectedPotential] = useState<PotentialItem | null>(null);
@@ -14,24 +17,25 @@ export default function Potentials() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="max-w-3xl mx-auto text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sage-light text-forest text-xs font-semibold tracking-wider uppercase mb-3">
+          <Reveal y={16} className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sage-light text-forest text-xs font-semibold tracking-wider uppercase mb-3">
             <Sparkles className="w-3.5 h-3.5 text-earth" />
             <span>{villageData.sections.potentials.badge}</span>
-          </div>
-          <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-charcoal tracking-tight mb-5">
+          </Reveal>
+          <Reveal as="h2" delay={0.08} className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-charcoal tracking-tight mb-5">
             {villageData.sections.potentials.title}
-          </h2>
-          <p className="text-base sm:text-lg text-charcoal-muted font-light leading-relaxed">
+          </Reveal>
+          <Reveal as="p" delay={0.16} className="text-base sm:text-lg text-charcoal-muted font-light leading-relaxed">
             {villageData.sections.potentials.description}
-          </p>
+          </Reveal>
         </div>
 
         {/* Potentials Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {villageData.potentials.map((item) => (
-            <div
+          {villageData.potentials.map((item, index) => (
+            <Reveal
               key={item.id}
-              className="bg-white rounded-3xl overflow-hidden border border-sand shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col group"
+              delay={staggerDelay(index)}
+              className="bg-white rounded-3xl overflow-hidden border border-sand shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-[box-shadow,translate] duration-300 flex flex-col group"
             >
               {/* Card Image */}
               <div className="relative h-56 sm:h-64 overflow-hidden">
@@ -79,81 +83,83 @@ export default function Potentials() {
                     onClick={() => setSelectedPotential(item)}
                     className="inline-flex items-center gap-2 text-sm font-semibold text-forest hover:text-forest-dark transition-colors group/btn"
                   >
-                    <span>Selengkapnya</span>
+                    <span>{villageData.sections.potentials.moreLabel}</span>
                     <ArrowRight className="w-4 h-4 text-earth group-hover/btn:translate-x-1 transition-transform" />
                   </button>
                 </div>
               </div>
-            </div>
+            </Reveal>
           ))}
         </div>
       </div>
 
       {/* Modal Detail Potensi */}
-      {selectedPotential && (
-        <Modal
-          onClose={() => setSelectedPotential(null)}
-          labelledBy="potential-modal-title"
-          className="p-4 bg-black/60 backdrop-blur-sm"
-        >
-          <div className="bg-cream-soft max-w-xl w-full rounded-3xl overflow-hidden shadow-2xl border border-sand max-h-[90vh] flex flex-col">
-            <div className="relative h-60 w-full shrink-0">
-              <Image
-                src={selectedPotential.imageUrl}
-                alt={selectedPotential.imageAlt}
-                fill
-                sizes="(max-width: 768px) 100vw, 600px"
-                className="object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
-              <button
-                type="button"
-                onClick={() => setSelectedPotential(null)}
-                className="absolute top-4 right-4 p-2 bg-black/40 hover:bg-black/70 text-white rounded-full transition-colors"
-                aria-label="Tutup jendela"
-              >
-                <X className="w-5 h-5" />
-              </button>
-              <div className="absolute bottom-4 left-6 right-6 text-white">
-                <span className="text-xs font-semibold uppercase tracking-wider text-earth-bright bg-white/20 px-2.5 py-0.5 rounded-full inline-block mb-1">
-                  {selectedPotential.category}
-                </span>
-                <h3 id="potential-modal-title" className="font-serif text-2xl sm:text-3xl font-bold">
-                  {selectedPotential.title}
-                </h3>
-              </div>
-            </div>
-
-            <div className="p-6 sm:p-7 overflow-y-auto space-y-4">
-              <p className="text-sm sm:text-base text-charcoal leading-relaxed">
-                {selectedPotential.fullDescription}
-              </p>
-
-              <div className="bg-sage-light p-4 rounded-2xl border border-sage-soft flex items-start gap-3">
-                <CheckCircle2 className="w-5 h-5 text-forest shrink-0 mt-0.5" />
-                <div>
-                  <h4 className="text-xs uppercase font-bold text-forest tracking-wider mb-0.5">
-                    Keunggulan & Karakter
-                  </h4>
-                  <p className="text-xs sm:text-sm text-charcoal">
-                    {selectedPotential.highlightText}
-                  </p>
+      <AnimatePresence>
+        {selectedPotential && (
+          <Modal
+            onClose={() => setSelectedPotential(null)}
+            labelledBy="potential-modal-title"
+            className="p-4 bg-black/60 backdrop-blur-sm"
+          >
+            <motion.div {...modalPanel} className="bg-cream-soft max-w-xl w-full rounded-3xl overflow-hidden shadow-2xl border border-sand max-h-[90vh] flex flex-col">
+              <div className="relative h-60 w-full shrink-0">
+                <Image
+                  src={selectedPotential.imageUrl}
+                  alt={selectedPotential.imageAlt}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 600px"
+                  className="object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+                <button
+                  type="button"
+                  onClick={() => setSelectedPotential(null)}
+                  className="absolute top-4 right-4 p-2 bg-black/40 hover:bg-black/70 text-white rounded-full transition-colors"
+                  aria-label="Tutup jendela"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+                <div className="absolute bottom-4 left-6 right-6 text-white">
+                  <span className="text-xs font-semibold uppercase tracking-wider text-earth-bright bg-white/20 px-2.5 py-0.5 rounded-full inline-block mb-1">
+                    {selectedPotential.category}
+                  </span>
+                  <h3 id="potential-modal-title" className="font-serif text-2xl sm:text-3xl font-bold">
+                    {selectedPotential.title}
+                  </h3>
                 </div>
               </div>
-            </div>
 
-            <div className="p-4 sm:p-5 bg-white border-t border-sand flex justify-end">
-              <button
-                type="button"
-                onClick={() => setSelectedPotential(null)}
-                className="px-6 py-2.5 rounded-xl bg-forest text-white text-sm font-medium hover:bg-forest-dark transition-colors"
-              >
-                Tutup
-              </button>
-            </div>
-          </div>
-        </Modal>
-      )}
+              <div className="p-6 sm:p-7 overflow-y-auto space-y-4">
+                <p className="text-sm sm:text-base text-charcoal leading-relaxed">
+                  {selectedPotential.fullDescription}
+                </p>
+
+                <div className="bg-sage-light p-4 rounded-2xl border border-sage-soft flex items-start gap-3">
+                  <CheckCircle2 className="w-5 h-5 text-forest shrink-0 mt-0.5" />
+                  <div>
+                    <h4 className="text-xs uppercase font-bold text-forest tracking-wider mb-0.5">
+                      {villageData.sections.potentials.highlightTitle}
+                    </h4>
+                    <p className="text-xs sm:text-sm text-charcoal">
+                      {selectedPotential.highlightText}
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="p-4 sm:p-5 bg-white border-t border-sand flex justify-end">
+                <button
+                  type="button"
+                  onClick={() => setSelectedPotential(null)}
+                  className="px-6 py-2.5 rounded-xl bg-forest text-white text-sm font-medium hover:bg-forest-dark transition-colors"
+                >
+                  Tutup
+                </button>
+              </div>
+            </motion.div>
+          </Modal>
+        )}
+      </AnimatePresence>
     </section>
   );
 }

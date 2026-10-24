@@ -1,5 +1,6 @@
 import { Sprout, Warehouse, Droplets, Truck, Building2, ArrowRight, ArrowDown } from "lucide-react";
 import { villageData } from "@/data/content";
+import Reveal from "@/components/Reveal";
 
 export default function CommodityFlow() {
   const { commodityFlow } = villageData.sections;
@@ -26,23 +27,28 @@ export default function CommodityFlow() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="max-w-3xl mx-auto text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sage-light text-forest text-xs font-semibold tracking-wider uppercase mb-3">
+          <Reveal y={16} className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sage-light text-forest text-xs font-semibold tracking-wider uppercase mb-3">
             <span>{commodityFlow.badge}</span>
-          </div>
-          <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-charcoal tracking-tight mb-5">
+          </Reveal>
+          <Reveal as="h2" delay={0.08} className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-charcoal tracking-tight mb-5">
             {commodityFlow.title}
-          </h2>
-          <p className="text-base sm:text-lg text-charcoal-muted font-light leading-relaxed">
+          </Reveal>
+          <Reveal as="p" delay={0.16} className="text-base sm:text-lg text-charcoal-muted font-light leading-relaxed">
             {commodityFlow.description}
-          </p>
+          </Reveal>
         </div>
 
         {/* Commodity Flow Steps: Horizontal on Desktop, Vertical on Mobile */}
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-4 lg:gap-3 relative items-stretch">
           {villageData.commodityFlow.map((step, idx) => (
-            <div key={step.step} className="flex flex-col lg:flex-row items-center">
+            <Reveal
+              key={step.step}
+              delay={idx * 0.12}
+              y={36}
+              className="flex flex-col lg:flex-row items-center"
+            >
               {/* Card Container */}
-              <div className="w-full bg-white rounded-3xl p-6 border border-sand shadow-sm hover:shadow-lg transition-all duration-300 flex-1 flex flex-col justify-between group">
+              <div className="w-full bg-white rounded-3xl p-6 border border-sand shadow-sm hover:shadow-lg hover:-translate-y-1.5 transition-[box-shadow,translate] duration-300 flex-1 flex flex-col justify-between group">
                 <div>
                   {/* Step Badge & Icon */}
                   <div className="flex items-center justify-between mb-5">
@@ -81,19 +87,19 @@ export default function CommodityFlow() {
                   </div>
                 </div>
               )}
-            </div>
+            </Reveal>
           ))}
         </div>
 
         {/* Storytelling Narrative Footer */}
-        <div className="mt-14 max-w-4xl mx-auto bg-white p-6 sm:p-8 rounded-3xl border border-sand text-center shadow-xs">
+        <Reveal className="mt-14 max-w-4xl mx-auto bg-white p-6 sm:p-8 rounded-3xl border border-sand text-center shadow-xs">
           <p className="font-serif italic text-base sm:text-lg text-charcoal leading-relaxed">
             &ldquo;{commodityFlow.closingQuote}&rdquo;
           </p>
           <div className="mt-3 text-xs uppercase tracking-widest text-sage-dark font-semibold">
             {commodityFlow.closingCaption}
           </div>
-        </div>
+        </Reveal>
       </div>
     </section>
   );

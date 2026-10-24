@@ -1,30 +1,67 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "motion/react";
 import { Menu, X, ArrowUpRight, Compass } from "lucide-react";
 import { villageData } from "@/data/content";
+import { easeOut } from "@/components/motionPresets";
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isHidden, setIsHidden] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [activeHref, setActiveHref] = useState(villageData.navLinks[0].href);
+  const { scrollY } = useScroll();
+
+  // Navbar bersembunyi saat menggulir ke bawah dan muncul lagi saat ke atas.
+  useMotionValueEvent(scrollY, "change", (current) => {
+    const previous = scrollY.getPrevious() ?? 0;
+    setIsScrolled(current > 40);
+    setIsHidden(current > previous && current > 400);
+  });
 
   useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 40) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    // Cek sekali saat dimuat, karena browser bisa memulihkan posisi scroll
+    // setelah reload tanpa memicu event scroll.
+    const frame = requestAnimationFrame(() => setIsScrolled(window.scrollY > 40));
+    return () => cancelAnimationFrame(frame);
   }, []);
+
+  // Tandai menu sesuai bagian yang sedang berada di tengah layar.
+  useEffect(() => {
+    const sections = villageData.navLinks
+      .map((link) => document.querySelector<HTMLElement>(link.href))
+      .filter((el): el is HTMLElement => el !== null);
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) setActiveHref(`#${entry.target.id}`);
+        });
+      },
+      { rootMargin: "-45% 0px -50% 0px" }
+    );
+    sections.forEach((section) => observer.observe(section));
+    return () => observer.disconnect();
+  }, []);
+
+  // Tutup menu mobile dengan tombol Esc.
+  useEffect(() => {
+    if (!mobileMenuOpen) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setMobileMenuOpen(false);
+    };
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [mobileMenuOpen]);
 
   const closeMenu = () => setMobileMenuOpen(false);
 
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+    <motion.header
+      initial={{ y: "-100%" }}
+      animate={{ y: isHidden && !mobileMenuOpen ? "-100%" : 0 }}
+      transition={{ duration: 0.45, ease: easeOut }}
+      className={`fixed top-0 left-0 right-0 z-50 transition-[background-color,box-shadow,padding] duration-300 ${
         isScrolled
           ? "bg-cream/95 backdrop-blur-md shadow-sm border-b border-sand py-3.5"
           : "bg-gradient-to-b from-black/60 via-black/25 to-transparent py-5"
@@ -67,20 +104,38 @@ export default function Navbar() {
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center gap-1 xl:gap-2">
-            {villageData.navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                onClick={closeMenu}
-                className={`px-3 py-1.5 rounded-full text-sm font-medium transition-all duration-200 ${
-                  isScrolled
-                    ? "text-charcoal-muted hover:text-forest hover:bg-sage-light"
-                    : "text-white/90 hover:text-white hover:bg-white/15"
-                }`}
-              >
-                {link.name}
-              </a>
-            ))}
+            {villageData.navLinks.map((link) => {
+              const isActive = activeHref === link.href;
+              return (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  onClick={closeMenu}
+                  aria-current={isActive ? "location" : undefined}
+                  className={`relative px-3 py-1.5 rounded-full text-sm font-medium transition-colors duration-200 ${
+                    isScrolled
+                      ? isActive
+                        ? "text-forest"
+                        : "text-charcoal-muted hover:text-forest"
+                      : isActive
+                        ? "text-white"
+                        : "text-white/80 hover:text-white"
+                  }`}
+                >
+                  {/* Latar penanda yang meluncur ke menu aktif */}
+                  {isActive && (
+                    <motion.span
+                      layoutId="nav-active"
+                      transition={{ type: "spring", stiffness: 380, damping: 32 }}
+                      className={`absolute inset-0 rounded-full ${
+                        isScrolled ? "bg-sage-light" : "bg-white/15"
+                      }`}
+                    />
+                  )}
+                  <span className="relative">{link.name}</span>
+                </a>
+              );
+            })}
           </nav>
 
           {/* CTA Button */}
@@ -117,20 +172,34 @@ export default function Navbar() {
       </div>
 
       {/* Mobile Drawer */}
-      {mobileMenuOpen && (
-        <div className="lg:hidden bg-cream border-b border-sand px-4 pt-4 pb-6 mt-3 shadow-xl animate-slide-down">
-          <div className="flex flex-col space-y-2">
-            {villageData.navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                onClick={closeMenu}
-                className="px-4 py-2.5 rounded-xl text-base font-medium text-charcoal hover:bg-sage-light hover:text-forest transition-colors"
-              >
-                {link.name}
-              </a>
-            ))}
-            <div className="pt-3 border-t border-sand">
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.35, ease: easeOut }}
+            data-lenis-prevent
+            className="lg:hidden bg-cream border-b border-sand mt-3 shadow-xl max-h-[calc(100vh-5rem)] overflow-y-auto"
+          >
+            <div className="flex flex-col space-y-2 px-4 pt-4 pb-6">
+              {villageData.navLinks.map((link, i) => (
+                <motion.a
+                  key={link.name}
+                  href={link.href}
+                  onClick={closeMenu}
+                  initial={{ opacity: 0, x: -16 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.4, delay: 0.05 + i * 0.04, ease: easeOut }}
+                  aria-current={activeHref === link.href ? "location" : undefined}
+                  className={`px-4 py-2.5 rounded-xl text-base font-medium hover:bg-sage-light hover:text-forest transition-colors ${
+                    activeHref === link.href ? "bg-sage-light text-forest" : "text-charcoal"
+                  }`}
+                >
+                  {link.name}
+                </motion.a>
+              ))}
+              <div className="pt-3 border-t border-sand">
               <a
                 href="#tentang"
                 onClick={closeMenu}
@@ -139,11 +208,12 @@ export default function Navbar() {
                 <Compass className="w-4 h-4" />
                 <span>{villageData.identity.exploreLabel}</span>
                 <ArrowUpRight className="w-4 h-4 ml-1" />
-              </a>
+                </a>
+              </div>
             </div>
-          </div>
-        </div>
-      )}
-    </header>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.header>
   );
 }

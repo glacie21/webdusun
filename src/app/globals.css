@@ -18,9 +18,9 @@
   --color-charcoal-muted: #595959;
   --color-sand: #E3DDD0;
 
-  /* Animasi muncul untuk modal, lightbox, badge Hero, dan menu mobile */
+  /* Animasi CSS untuk halaman 404. Animasi halaman utama memakai library
+     motion (lihat src/components/Reveal.tsx dan MotionProvider.tsx). */
   --animate-fade-in: fade-in 0.25s ease-out;
-  --animate-slide-down: slide-down 0.2s ease-out;
 
   @keyframes fade-in {
     from {
@@ -28,17 +28,6 @@
     }
     to {
       opacity: 1;
-    }
-  }
-
-  @keyframes slide-down {
-    from {
-      opacity: 0;
-      transform: translateY(-0.75rem);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
     }
   }
 }
@@ -62,6 +51,11 @@
 html {
   scroll-behavior: smooth;
   color-scheme: light;
+}
+
+/* Saat Lenis aktif, Lenis yang mengatur kehalusan scroll. */
+html.lenis {
+  scroll-behavior: auto;
 }
 
 /* Jarak agar judul bagian tidak tertutup navbar saat melompat ke #id */
