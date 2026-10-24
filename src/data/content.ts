@@ -274,6 +274,16 @@ export const villageData = {
       locationTitle: "Lokasi Wilayah",
       backToTopLabel: "Kembali ke Atas",
     },
+    // Halaman 404, muncul saat pengunjung membuka alamat yang tidak ada.
+    notFound: {
+      pageTitle: "Halaman Tidak Ditemukan — Cerita Sukomangun",
+      badge: "HALAMAN TIDAK DITEMUKAN",
+      title: "Sepertinya Anda salah belok di jalan setapak.",
+      description:
+        "Halaman yang Anda cari tidak ada atau sudah dipindahkan. Mari kembali ke beranda dan lanjutkan mengenal cerita Dusun Sukomangun.",
+      homeButtonLabel: "Kembali ke Beranda",
+      shortcutsLabel: "Atau langsung menuju:",
+    },
   },
 
   quickStats: [
