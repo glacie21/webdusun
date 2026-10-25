@@ -1,7 +1,9 @@
 import { ArrowUp, MapPin } from "lucide-react";
 import { villageData } from "@/data/content";
 
-export default function Footer() {
+// basePath diisi "/" saat Footer dipakai di luar beranda (misalnya halaman
+// cerita), supaya menu "#tentang" dan lainnya mengarah ke "/#tentang".
+export default function Footer({ basePath = "" }: { basePath?: string }) {
   return (
     <footer className="bg-forest-dark text-white pt-16 pb-12 border-t border-white/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -33,7 +35,7 @@ export default function Footer() {
               {villageData.navLinks.map((item) => (
                 <li key={item.name}>
                   <a
-                    href={item.href}
+                    href={`${basePath}${item.href}`}
                     className="hover:text-cream-soft hover:underline underline-offset-4 transition-colors"
                   >
                     {item.name}

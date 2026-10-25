@@ -1,10 +1,14 @@
-import { ArrowUpRight, Compass, Sparkles } from "lucide-react";
+import { ArrowUpRight, Compass, MessageCircle, Navigation, Sparkles } from "lucide-react";
 import * as motion from "motion/react-client";
 import { villageData } from "@/data/content";
 import Reveal from "@/components/Reveal";
 
+const secondaryButton =
+  "w-full sm:w-auto px-9 py-4 rounded-full border border-white/30 bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white font-medium text-base tracking-wide transition-all hover:scale-[1.02] active:scale-98 flex items-center justify-center gap-2.5";
+
 export default function CtaSection() {
   const { cta } = villageData.sections;
+  const { contact } = villageData;
 
   return (
     <section className="py-20 md:py-24 bg-forest text-white relative overflow-hidden">
@@ -37,13 +41,33 @@ export default function CtaSection() {
 
         <Reveal delay={0.24} className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <a
-            href="#potensi"
+            href={villageData.location.mapsDirectionsUrl}
+            target="_blank"
+            rel="noopener noreferrer"
             className="w-full sm:w-auto px-9 py-4 rounded-full bg-cream-soft text-forest hover:bg-white font-medium text-base tracking-wide transition-all shadow-xl hover:shadow-2xl hover:scale-[1.02] active:scale-98 flex items-center justify-center gap-2.5"
           >
-            <Compass className="w-5 h-5 text-earth" />
-            <span>{cta.buttonLabel}</span>
+            <Navigation className="w-5 h-5 text-earth" />
+            <span>{cta.visitButtonLabel}</span>
             <ArrowUpRight className="w-4 h-4 ml-1" />
           </a>
+
+          {/* Tombol kontak hanya muncul jika nomor WhatsApp sudah diisi di content.ts */}
+          {contact.whatsapp ? (
+            <a
+              href={`https://wa.me/${contact.whatsapp}?text=${encodeURIComponent(contact.whatsappMessage)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={secondaryButton}
+            >
+              <MessageCircle className="w-5 h-5 text-earth-bright" />
+              <span>{cta.contactButtonLabel}</span>
+            </a>
+          ) : (
+            <a href="#potensi" className={secondaryButton}>
+              <Compass className="w-5 h-5 text-earth-bright" />
+              <span>{cta.exploreButtonLabel}</span>
+            </a>
+          )}
         </Reveal>
       </div>
     </section>

@@ -1,19 +1,15 @@
-"use client";
-
-import { useState } from "react";
 import Image from "next/image";
-import { AnimatePresence, motion } from "motion/react";
-import { BookOpen, Clock, ArrowRight, X } from "lucide-react";
-import { villageData, EditorialStory } from "@/data/content";
-import Modal, { modalPanel } from "@/components/Modal";
+import Link from "next/link";
+import { BookOpen, Clock, ArrowRight } from "lucide-react";
+import { villageData } from "@/data/content";
 import Reveal from "@/components/Reveal";
 import { staggerDelay } from "@/components/motionPresets";
 
+// Kartu cerita di beranda. Setiap kartu membuka halaman ceritanya sendiri
+// (src/app/cerita/[slug]/page.tsx) supaya bisa dibagikan dan dicari di Google.
 export default function FeaturedStories() {
-  const [selectedStory, setSelectedStory] = useState<EditorialStory | null>(null);
-
   return (
-    <section className="py-20 md:py-28 bg-cream-soft relative border-t border-sand/80">
+    <section id="cerita" className="py-20 md:py-28 bg-cream-soft relative border-t border-sand/80 scroll-mt-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="max-w-3xl mx-auto text-center mb-16">
@@ -36,7 +32,7 @@ export default function FeaturedStories() {
               as="article"
               key={story.id}
               delay={staggerDelay(index, 0.12)}
-              className="bg-white rounded-3xl overflow-hidden border border-sand shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-[box-shadow,translate] duration-300 flex flex-col group"
+              className="relative bg-white rounded-3xl overflow-hidden border border-sand shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-[box-shadow,translate] duration-300 flex flex-col group focus-within:ring-2 focus-within:ring-forest"
             >
               {/* Image Frame */}
               <div className="relative h-60 w-full overflow-hidden">
@@ -68,7 +64,13 @@ export default function FeaturedStories() {
                   </div>
 
                   <h3 className="font-serif text-2xl font-bold text-charcoal mb-2 leading-snug group-hover:text-forest transition-colors">
-                    {story.title}
+                    {/* Lapisan ::after membuat seluruh kartu bisa diklik */}
+                    <Link
+                      href={`/cerita/${story.slug}`}
+                      className="focus:outline-none after:absolute after:inset-0 after:content-['']"
+                    >
+                      {story.title}
+                    </Link>
                   </h3>
 
                   <p className="text-xs uppercase tracking-wider font-semibold text-earth-dark mb-3">
@@ -81,84 +83,19 @@ export default function FeaturedStories() {
                 </div>
 
                 <div className="pt-4 border-t border-sand/70">
-                  <button
-                    type="button"
-                    onClick={() => setSelectedStory(story)}
-                    className="inline-flex items-center gap-2 text-sm font-semibold text-forest hover:text-forest-dark group/link"
+                  <span
+                    aria-hidden="true"
+                    className="inline-flex items-center gap-2 text-sm font-semibold text-forest group-hover:text-forest-dark"
                   >
                     <span>{villageData.sections.stories.readMoreLabel}</span>
-                    <ArrowRight className="w-4 h-4 text-earth group-hover/link:translate-x-1.5 transition-transform" />
-                  </button>
+                    <ArrowRight className="w-4 h-4 text-earth group-hover:translate-x-1.5 transition-transform" />
+                  </span>
                 </div>
               </div>
             </Reveal>
           ))}
         </div>
       </div>
-
-      {/* Modal Baca Artikel Lengkap */}
-      <AnimatePresence>
-        {selectedStory && (
-          <Modal
-            onClose={() => setSelectedStory(null)}
-            labelledBy="story-modal-title"
-            className="p-4 bg-black/70 backdrop-blur-sm"
-          >
-            <motion.div {...modalPanel} className="bg-cream-soft max-w-2xl w-full rounded-3xl overflow-hidden shadow-2xl border border-sand max-h-[90vh] flex flex-col">
-              <div className="relative h-64 w-full shrink-0">
-                <Image
-                  src={selectedStory.imageUrl}
-                  alt={selectedStory.imageAlt}
-                  fill
-                  sizes="(max-width: 768px) 100vw, 700px"
-                  className="object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent" />
-                <button
-                  type="button"
-                  onClick={() => setSelectedStory(null)}
-                  className="absolute top-4 right-4 p-2 bg-black/40 hover:bg-black/70 text-white rounded-full transition-colors"
-                  aria-label="Tutup jendela cerita"
-                >
-                  <X className="w-5 h-5" />
-                </button>
-
-                <div className="absolute bottom-5 left-6 right-6 text-white">
-                  <span className="text-xs font-semibold uppercase tracking-wider text-earth-bright bg-white/20 px-2.5 py-0.5 rounded-full inline-block mb-1">
-                    {selectedStory.subtitle}
-                  </span>
-                  <h3 id="story-modal-title" className="font-serif text-2xl sm:text-3xl font-bold">
-                    {selectedStory.title}
-                  </h3>
-                  <div className="flex items-center gap-3 text-xs text-white/80 mt-1">
-                    <span>{selectedStory.author}</span>
-                    <span>·</span>
-                    <span>{selectedStory.readTime}</span>
-                  </div>
-                </div>
-              </div>
-
-              <div className="p-6 sm:p-8 overflow-y-auto space-y-4">
-                {selectedStory.content.map((p, idx) => (
-                  <p key={idx} className="text-sm sm:text-base text-charcoal font-light leading-relaxed">
-                    {p}
-                  </p>
-                ))}
-              </div>
-
-              <div className="p-4 sm:p-5 bg-white border-t border-sand flex justify-end">
-                <button
-                  type="button"
-                  onClick={() => setSelectedStory(null)}
-                  className="px-6 py-2.5 rounded-xl bg-forest text-white text-sm font-medium hover:bg-forest-dark transition-colors"
-                >
-                  {villageData.sections.stories.closeLabel}
-                </button>
-              </div>
-            </motion.div>
-          </Modal>
-        )}
-      </AnimatePresence>
     </section>
   );
 }

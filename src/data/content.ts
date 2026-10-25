@@ -79,6 +79,9 @@ export interface GalleryPhoto {
 
 export interface EditorialStory {
   id: string;
+  // Bagian akhir alamat halaman cerita, misalnya /cerita/dari-tanah-untuk-kehidupan.
+  // Pakai huruf kecil dan tanda hubung, tanpa spasi.
+  slug: string;
   title: string;
   subtitle: string;
   author: string;
@@ -114,6 +117,14 @@ export const villageData = {
     ogImageUrl:
       "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&h=630&q=80",
     ogImageAlt: "Lanskap perbukitan",
+  },
+
+  // Kontak pengurus dusun. Isi nomor WhatsApp dengan format 62 di depan,
+  // tanpa spasi, tanda +, atau angka 0 di awal. Contoh: "6281234567890".
+  // Selama masih kosong, tombol "Hubungi Kami" tidak ditampilkan.
+  contact: {
+    whatsapp: "",
+    whatsappMessage: "Halo, saya ingin bertanya tentang Dusun Sukomangun.",
   },
 
   // Menu navigasi, dipakai bersama oleh Navbar dan Footer.
@@ -247,7 +258,11 @@ export const villageData = {
       description:
         "Menyimak lebih dalam kisah keseharian, nilai kebersamaan, dan asa masyarakat yang menghidupkan dusun di lereng Windusari.",
       readMoreLabel: "Baca Cerita Selengkapnya",
-      closeLabel: "Tutup Cerita",
+      // Teks di halaman cerita (/cerita/...).
+      backLabel: "Kembali ke Semua Cerita",
+      shareTitle: "Bagikan cerita ini",
+      shareButtonLabel: "Kirim lewat WhatsApp",
+      otherStoriesTitle: "Cerita Lainnya",
     },
     map: {
       badge: "LOKASI WILAYAH",
@@ -262,7 +277,12 @@ export const villageData = {
       title: "Mari mengenal lebih dekat Sukomangun.",
       description:
         "Setiap sudut memiliki cerita, setiap warga memiliki kisah, dan setiap potensi memiliki kesempatan untuk berkembang.",
-      buttonLabel: "Jelajahi Potensi Sukomangun",
+      // Tombol utama membuka petunjuk arah Google Maps ke Sukomangun.
+      visitButtonLabel: "Rencanakan Kunjungan",
+      // Tombol kedua: "Hubungi Kami" jika contact.whatsapp sudah diisi,
+      // jika belum, tombol ini mengarah ke bagian Potensi.
+      contactButtonLabel: "Hubungi Kami",
+      exploreButtonLabel: "Jelajahi Potensi",
     },
     footer: {
       tagline: "Mengenal Sukomangun melalui cerita, masyarakat, dan potensinya.",
@@ -655,6 +675,7 @@ export const villageData = {
   editorialStories: [
     {
       id: "cerita-1",
+      slug: "dari-tanah-untuk-kehidupan",
       title: "Dari Tanah, Untuk Kehidupan",
       subtitle: "Ketekunan Petani Sukomangun Menjaga Denyut Pangan",
       author: "Dokumentasi Cerita Sukomangun",
@@ -674,6 +695,7 @@ export const villageData = {
     },
     {
       id: "cerita-2",
+      slug: "gotong-royong-yang-tetap-hidup",
       title: "Gotong Royong yang Tetap Hidup",
       subtitle: "Merawat Nilai Sambatan di Tengah Laju Zaman",
       author: "Dokumentasi Cerita Sukomangun",
@@ -692,6 +714,7 @@ export const villageData = {
     },
     {
       id: "cerita-3",
+      slug: "menyimpan-cerita-untuk-generasi-berikutnya",
       title: "Menyimpan Cerita untuk Generasi Berikutnya",
       subtitle: "Pentingnya Jejak Digital dan Kearsipan Warga Dusun",
       author: "Dokumentasi Cerita Sukomangun",
@@ -727,6 +750,9 @@ export const villageData = {
     provinsi: "Jawa Tengah",
     mapsSearchUrl:
       "https://www.google.com/maps/search/?api=1&query=Dusun+Sukomangun+Genito+Windusari+Magelang",
+    // Membuka petunjuk arah dari lokasi pengunjung ke Sukomangun.
+    mapsDirectionsUrl:
+      "https://www.google.com/maps/dir/?api=1&destination=Dusun+Sukomangun+Genito+Windusari+Magelang",
     mapsEmbedUrl:
       "https://maps.google.com/maps?q=Genito,+Windusari,+Magelang,+Central+Java&t=&z=14&ie=UTF8&iwloc=&output=embed",
     embedPlaceholderNote:
