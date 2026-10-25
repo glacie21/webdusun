@@ -66,7 +66,8 @@ export default function Footer({ basePath = "" }: { basePath?: string }) {
         {/* Bottom Bar */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/60 font-light">
           <p className="text-center sm:text-left">
-            {villageData.sections.footer.copyright}
+            {/* Tahun diambil saat website di-build, jadi ikut berganti setiap kali website diperbarui. */}
+            &copy; {new Date().getFullYear()} {villageData.sections.footer.copyright}
           </p>
 
           <a

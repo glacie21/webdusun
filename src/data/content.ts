@@ -137,6 +137,7 @@ export const villageData = {
     { name: "Kehidupan", href: "#kehidupan" },
     { name: "Fasilitas", href: "#fasilitas" },
     { name: "Galeri", href: "#galeri" },
+    { name: "Cerita", href: "#cerita" },
     { name: "Lokasi", href: "#lokasi" },
   ],
 
@@ -288,8 +289,9 @@ export const villageData = {
       tagline: "Mengenal Sukomangun melalui cerita, masyarakat, dan potensinya.",
       description:
         "Website profil komunitas & etalase digital untuk mendokumentasikan kehidupan serta mengembangkan potensi Dusun Sukomangun.",
+      // Tanda © dan tahun ditambahkan otomatis oleh Footer.
       copyright:
-        "© 2026 Cerita Sukomangun. Dibuat untuk mengenalkan dan mendokumentasikan potensi Dusun Sukomangun.",
+        "Cerita Sukomangun. Dibuat untuk mengenalkan dan mendokumentasikan potensi Dusun Sukomangun.",
       navTitle: "Navigasi",
       locationTitle: "Lokasi Wilayah",
       backToTopLabel: "Kembali ke Atas",
@@ -400,7 +402,7 @@ export const villageData = {
         "Ketela menjadi salah satu tulang punggung ekonomi dusun. Mulai dari penanaman, pemanenan serentak, penampungan di tingkat lokal dusun, hingga proses pencucian bersih sebelum didistribusikan ke industri pangan dan pasar luar kota.",
       highlightText: "Memiliki rantai pasok terhubung langsung ke industri olahan kota besar.",
       imageUrl:
-        "https://images.unsplash.com/photo-1592417817098-8f3d69109853?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1757283961570-682154747d9c?auto=format&fit=crop&w=800&q=80",
       imageAlt: "Hasil panen ketela segar berkualitas dari kebun warga",
     },
     {
@@ -667,7 +669,7 @@ export const villageData = {
       category: "Pertanian",
       caption: "Ketela pilihan yang telah dibersihkan siap dimuat menuju sentra pengolahan di Yogyakarta dan Semarang.",
       imageUrl:
-        "https://images.unsplash.com/photo-1592417817098-8f3d69109853?auto=format&fit=crop&w=1000&q=80",
+        "https://images.unsplash.com/photo-1757281096972-10fd02b0f5ea?auto=format&fit=crop&w=1000&q=80",
       imageAlt: "Ketela singkong bersih berjejer rapi di penampungan",
     },
   ] as GalleryPhoto[],
