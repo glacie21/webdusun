@@ -1,6 +1,8 @@
 import Image from "next/image";
 import { Landmark, MapPin, CheckCircle } from "lucide-react";
 import { villageData } from "@/data/content";
+import Reveal from "@/components/Reveal";
+import { staggerDelay } from "@/components/motionPresets";
 
 export default function Facilities() {
   return (
@@ -8,24 +10,25 @@ export default function Facilities() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="max-w-3xl mx-auto text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sage-light text-forest text-xs font-semibold tracking-wider uppercase mb-3">
+          <Reveal y={16} className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sage-light text-forest text-xs font-semibold tracking-wider uppercase mb-3">
             <Landmark className="w-3.5 h-3.5 text-sage" />
             <span>{villageData.sections.facilities.badge}</span>
-          </div>
-          <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-charcoal tracking-tight mb-5">
+          </Reveal>
+          <Reveal as="h2" delay={0.08} className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-charcoal tracking-tight mb-5">
             {villageData.sections.facilities.title}
-          </h2>
-          <p className="text-base sm:text-lg text-charcoal-muted font-light leading-relaxed">
+          </Reveal>
+          <Reveal as="p" delay={0.16} className="text-base sm:text-lg text-charcoal-muted font-light leading-relaxed">
             {villageData.sections.facilities.description}
-          </p>
+          </Reveal>
         </div>
 
         {/* Facilities Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {villageData.facilities.map((fac) => (
-            <div
+          {villageData.facilities.map((fac, index) => (
+            <Reveal
               key={fac.id}
-              className="bg-white rounded-3xl overflow-hidden border border-sand shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group"
+              delay={staggerDelay(index)}
+              className="bg-white rounded-3xl overflow-hidden border border-sand shadow-sm hover:shadow-lg hover:-translate-y-1.5 transition-[box-shadow,translate] duration-300 flex flex-col group"
             >
               {/* Image Container */}
               <div className="relative h-52 w-full overflow-hidden">
@@ -68,7 +71,7 @@ export default function Facilities() {
                   )}
                 </div>
               </div>
-            </div>
+            </Reveal>
           ))}
         </div>
       </div>

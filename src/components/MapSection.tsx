@@ -1,5 +1,6 @@
 import { MapPin, Navigation, ExternalLink, Info, Compass } from "lucide-react";
 import { villageData } from "@/data/content";
+import Reveal from "@/components/Reveal";
 
 export default function MapSection() {
   const { map } = villageData.sections;
@@ -11,21 +12,21 @@ export default function MapSection() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
           {/* Left Column: Administrative Information */}
           <div className="lg:col-span-5 space-y-6">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sage-light text-forest text-xs font-semibold tracking-wider uppercase">
+            <Reveal y={16} className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sage-light text-forest text-xs font-semibold tracking-wider uppercase">
               <Navigation className="w-3.5 h-3.5 text-sage" />
               <span>{map.badge}</span>
-            </div>
+            </Reveal>
 
-            <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-charcoal tracking-tight">
+            <Reveal as="h2" delay={0.08} className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-charcoal tracking-tight">
               {map.title}
-            </h2>
+            </Reveal>
 
-            <p className="text-base sm:text-lg text-charcoal-muted font-light leading-relaxed">
+            <Reveal as="p" delay={0.16} className="text-base sm:text-lg text-charcoal-muted font-light leading-relaxed">
               {map.description}
-            </p>
+            </Reveal>
 
             {/* Address Card */}
-            <div className="bg-white p-6 sm:p-7 rounded-3xl border border-sand shadow-sm space-y-3">
+            <Reveal delay={0.24} className="bg-white p-6 sm:p-7 rounded-3xl border border-sand shadow-sm space-y-3">
               <div className="flex items-start gap-3.5">
                 <div className="w-10 h-10 rounded-2xl bg-sage-light text-forest flex items-center justify-center shrink-0">
                   <MapPin className="w-5 h-5" />
@@ -46,10 +47,10 @@ export default function MapSection() {
                 <Info className="w-4 h-4 shrink-0" />
                 <span>{map.addressNote}</span>
               </div>
-            </div>
+            </Reveal>
 
             {/* Direct Google Maps Button */}
-            <div>
+            <Reveal delay={0.32}>
               <a
                 href={location.mapsSearchUrl}
                 target="_blank"
@@ -60,11 +61,11 @@ export default function MapSection() {
                 <span>{map.mapsButtonLabel}</span>
                 <ExternalLink className="w-4 h-4 ml-1 opacity-80" />
               </a>
-            </div>
+            </Reveal>
           </div>
 
           {/* Right Column: Map Embed / Interactive Placeholder Map */}
-          <div className="lg:col-span-7">
+          <Reveal delay={0.15} y={40} className="lg:col-span-7">
             <div className="relative rounded-3xl overflow-hidden shadow-xl border-4 border-white bg-white min-h-[380px] sm:min-h-[440px] flex flex-col">
               {/* Stylized Map View / Embed */}
               <div className="relative flex-1 w-full bg-sage-light overflow-hidden">
@@ -94,7 +95,7 @@ export default function MapSection() {
                 <span>{location.embedPlaceholderNote}</span>
               </div>
             </div>
-          </div>
+          </Reveal>
         </div>
       </div>
     </section>
