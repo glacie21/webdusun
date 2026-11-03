@@ -88,6 +88,8 @@ Pengurus dusun atau pengembang dapat dengan mudah memperbarui konten hanya denga
 - `site`: judul, deskripsi, domain, dan gambar pratinjau untuk Google serta WhatsApp/media sosial.
 - `navLinks`: menu navigasi yang dipakai Navbar dan Footer.
 - `identity` dan `sections`: teks serta foto untuk setiap bagian halaman.
+- `sections.hero.greetings`: sapaan bahasa Jawa di Hero (*Sugeng enjang*, *Sugeng siang*, dan seterusnya) yang berganti sesuai jam di Sukomangun (WIB). Warna suasana foto Hero ikut berganti.
+- `sections.marquee`: kata-kata pada pita berjalan di antara bagian Sejarah dan Potensi.
 - `location`: alamat dan tautan Google Maps.
 
 ---

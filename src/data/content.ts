@@ -14,6 +14,13 @@ export interface VillageIdentity {
   subLocationText: string;
 }
 
+export interface HeroGreeting {
+  fromHour: number;
+  text: string;
+  meaning: string;
+  mood: "pagi" | "siang" | "sore" | "malam";
+}
+
 export interface QuickStat {
   number: string;
   label: string;
@@ -171,6 +178,15 @@ export const villageData = {
       imageAlt: "Lanskap perbukitan",
       secondaryButtonLabel: "Kenali Potensinya",
       scrollLabel: "Gulir ke Bawah",
+      // Sapaan bahasa Jawa di atas judul. Berganti sesuai jam di Sukomangun (WIB),
+      // dan warna suasana foto Hero ikut menyesuaikan (mood).
+      // fromHour: jam mulai sapaan berlaku, 0 sampai 23. Urutkan dari pagi ke malam.
+      greetings: [
+        { fromHour: 4, text: "Sugeng enjang", meaning: "Selamat pagi dari Sukomangun", mood: "pagi" },
+        { fromHour: 10, text: "Sugeng siang", meaning: "Selamat siang dari Sukomangun", mood: "siang" },
+        { fromHour: 15, text: "Sugeng sonten", meaning: "Selamat sore dari Sukomangun", mood: "sore" },
+        { fromHour: 18, text: "Sugeng dalu", meaning: "Selamat malam dari Sukomangun", mood: "malam" },
+      ] as HeroGreeting[],
     },
     about: {
       badge: "TENTANG SUKOMANGUN",
@@ -215,6 +231,21 @@ export const villageData = {
       closingTitle: "Merekam Warisan Lisan Dusun",
       closingText:
         "Proses pengumpulan naskah dan memori para sesepuh Dusun Sukomangun terus berjalan sebagai arsip berharga bagi generasi mendatang.",
+    },
+    // Pita kata yang berjalan pelan di antara bagian Sejarah dan Potensi.
+    marquee: {
+      items: [
+        "Ketela",
+        "Cabai",
+        "Peternakan",
+        "UMKM Warga",
+        "Sambatan",
+        "Gotong Royong",
+        "TPQ Darul Huda",
+        "Karang Taruna",
+        "PKK",
+        "Perbukitan Windusari",
+      ],
     },
     potentials: {
       badge: "KEMAKMURAN DESA",
@@ -295,6 +326,8 @@ export const villageData = {
       navTitle: "Navigasi",
       locationTitle: "Lokasi Wilayah",
       backToTopLabel: "Kembali ke Atas",
+      // Tulisan besar samar di bagian paling bawah footer.
+      wordmark: "Sukomangun",
     },
     // Halaman 404, muncul saat pengunjung membuka alamat yang tidak ada.
     notFound: {

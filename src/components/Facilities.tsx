@@ -3,8 +3,11 @@ import { Landmark, MapPin, CheckCircle } from "lucide-react";
 import { villageData } from "@/data/content";
 import Reveal from "@/components/Reveal";
 import { staggerDelay } from "@/components/motionPresets";
+import { cardImageSizes, firstCardSpan } from "@/components/gridLayout";
 
 export default function Facilities() {
+  const firstSpan = firstCardSpan(villageData.facilities.length);
+
   return (
     <section id="fasilitas" className="py-20 md:py-28 bg-cream-soft relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -28,7 +31,9 @@ export default function Facilities() {
             <Reveal
               key={fac.id}
               delay={staggerDelay(index)}
-              className="bg-white rounded-3xl overflow-hidden border border-sand shadow-sm hover:shadow-lg hover:-translate-y-1.5 transition-[box-shadow,translate] duration-300 flex flex-col group"
+              className={`bg-white rounded-3xl overflow-hidden border border-sand shadow-sm hover:shadow-lg hover:-translate-y-1.5 transition-[box-shadow,translate] duration-300 flex flex-col group ${
+                index === 0 ? firstSpan : ""
+              }`}
             >
               {/* Image Container */}
               <div className="relative h-52 w-full overflow-hidden">
@@ -37,7 +42,7 @@ export default function Facilities() {
                   src={fac.imageUrl}
                   alt={fac.imageAlt}
                   fill
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  sizes={cardImageSizes(index === 0 && firstSpan !== "")}
                   className="object-cover group-hover:scale-105 transition-transform duration-500"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />

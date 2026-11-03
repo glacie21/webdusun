@@ -18,9 +18,18 @@
   --color-charcoal-muted: #595959;
   --color-sand: #E3DDD0;
 
-  /* Animasi CSS untuk halaman 404. Animasi halaman utama memakai library
-     motion (lihat src/components/Reveal.tsx dan MotionProvider.tsx). */
+  /* Animasi CSS untuk halaman 404. Animasi muncul saat digulir memakai
+     library motion (lihat src/components/Reveal.tsx dan MotionProvider.tsx). */
   --animate-fade-in: fade-in 0.25s ease-out;
+
+  /* Animasi suasana yang berulang terus (kabut, cahaya, pita kata, alur ketela).
+     Semuanya berhenti di posisi diam bagi pengunjung yang memilih "kurangi gerakan". */
+  --animate-ken-burns: ken-burns 26s ease-in-out infinite alternate;
+  --animate-mist: mist 22s ease-in-out infinite alternate;
+  --animate-float-up: float-up 10s linear infinite;
+  --animate-marquee: marquee 45s linear infinite;
+  --animate-flow-pulse: flow-pulse 1.5s ease-in-out infinite;
+  --animate-step-glow: step-glow 6s ease-in-out infinite;
 
   @keyframes fade-in {
     from {
@@ -28,6 +37,81 @@
     }
     to {
       opacity: 1;
+    }
+  }
+
+  /* Foto Hero membesar sangat pelan, seperti kamera yang mendekat. */
+  @keyframes ken-burns {
+    from {
+      transform: scale(1);
+    }
+    to {
+      transform: scale(1.08);
+    }
+  }
+
+  /* Kabut yang bergeser ke kiri dan kanan. */
+  @keyframes mist {
+    from {
+      transform: translateX(-6%);
+    }
+    to {
+      transform: translateX(6%);
+    }
+  }
+
+  /* Butir cahaya yang naik lalu menghilang. Sebelum dan sesudah animasi
+     butir tidak terlihat, jadi butir hilang bila animasi dimatikan. */
+  @keyframes float-up {
+    0% {
+      transform: translateY(0);
+      opacity: 0;
+    }
+    20%,
+    70% {
+      opacity: 0.7;
+    }
+    100% {
+      transform: translateY(-38vh);
+      opacity: 0;
+    }
+  }
+
+  /* Pita kata: daftar kata ditulis dua kali, lalu digeser setengahnya
+     supaya terlihat berjalan tanpa putus. */
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  /* Panah kecil di Alur Ketela yang menyala bergantian. */
+  @keyframes flow-pulse {
+    0%,
+    100% {
+      opacity: 0.25;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+
+  /* Ikon tahap Alur Ketela menyala hijau secara bergiliran. */
+  @keyframes step-glow {
+    0%,
+    4%,
+    26%,
+    100% {
+      background-color: var(--color-cream);
+      color: var(--color-forest);
+    }
+    8%,
+    20% {
+      background-color: var(--color-forest);
+      color: #fff;
     }
   }
 }

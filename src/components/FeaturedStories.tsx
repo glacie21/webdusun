@@ -9,7 +9,7 @@ import { staggerDelay } from "@/components/motionPresets";
 // (src/app/cerita/[slug]/page.tsx) supaya bisa dibagikan dan dicari di Google.
 export default function FeaturedStories() {
   return (
-    <section id="cerita" className="py-20 md:py-28 bg-cream-soft relative border-t border-sand/80 scroll-mt-20">
+    <section id="cerita" className="py-20 md:py-28 bg-cream-soft relative scroll-mt-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="max-w-3xl mx-auto text-center mb-16">

@@ -14,6 +14,8 @@ import MapSection from "@/components/MapSection";
 import CtaSection from "@/components/CtaSection";
 import Footer from "@/components/Footer";
 import JsonLd from "@/components/JsonLd";
+import HillDivider from "@/components/HillDivider";
+import Marquee from "@/components/Marquee";
 import { villageData } from "@/data/content";
 
 const { site, identity, location } = villageData;
@@ -77,11 +79,17 @@ export default function Home() {
         {/* 2. Introduction / Tentang Sukomangun */}
         <About />
 
-        {/* 3. Quick Information / Minimalist Statistics */}
+        {/* 3. Quick Information / Minimalist Statistics.
+            Siluet bukit menjadi peralihan ke dan dari bagian berwarna gelap. */}
+        <HillDivider className="bg-cream text-forest" />
         <Statistics />
+        <HillDivider className="bg-forest text-cream-soft" variant="rolling" flip />
 
         {/* 4. Sejarah / Perjalanan Dusun */}
         <History />
+
+        {/* Pita kata berjalan */}
+        <Marquee />
 
         {/* 5. Potensi Dusun */}
         <Potentials />
@@ -96,7 +104,9 @@ export default function Home() {
         <Facilities />
 
         {/* 9. Galeri Foto & Lightbox */}
+        <HillDivider className="bg-cream-soft text-forest-dark" flip />
         <Gallery />
+        <HillDivider className="bg-forest-dark text-cream-soft" variant="rolling" />
 
         {/* 10. Featured Editorial Stories */}
         <FeaturedStories />
@@ -109,6 +119,7 @@ export default function Home() {
 
         {/* 13. Call To Action Section */}
         <CtaSection />
+        <HillDivider className="bg-forest text-forest-dark" variant="rolling" flip />
       </main>
 
       {/* Footer */}

@@ -24,11 +24,11 @@ export default function Community() {
       : villageData.communityLife.filter((item) => item.category === activeCategory);
 
   return (
-    <section id="kehidupan" className="py-20 md:py-28 bg-cream relative">
+    <section id="kehidupan" className="py-20 md:py-28 bg-sage-light relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="max-w-3xl mx-auto text-center mb-12">
-          <Reveal y={16} className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sage-light text-forest text-xs font-semibold tracking-wider uppercase mb-3">
+          <Reveal y={16} className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white text-forest text-xs font-semibold tracking-wider uppercase mb-3">
             <Users className="w-3.5 h-3.5 text-sage" />
             <span>{community.badge}</span>
           </Reveal>
@@ -53,7 +53,7 @@ export default function Community() {
                 className={`relative px-4 py-2 rounded-full text-xs sm:text-sm font-medium transition-colors duration-200 border ${
                   isActive
                     ? "text-white border-transparent"
-                    : "bg-white text-charcoal-muted hover:text-charcoal hover:bg-sage-light border-sand"
+                    : "bg-white text-charcoal-muted hover:text-charcoal hover:bg-cream border-sage-soft"
                 }`}
               >
                 {/* Latar hijau yang meluncur ke filter yang dipilih */}
