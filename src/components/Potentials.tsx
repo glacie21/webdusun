@@ -8,9 +8,11 @@ import { villageData, PotentialItem } from "@/data/content";
 import Modal, { modalPanel } from "@/components/Modal";
 import Reveal from "@/components/Reveal";
 import { staggerDelay } from "@/components/motionPresets";
+import { cardImageSizes, firstCardSpan } from "@/components/gridLayout";
 
 export default function Potentials() {
   const [selectedPotential, setSelectedPotential] = useState<PotentialItem | null>(null);
+  const firstSpan = firstCardSpan(villageData.potentials.length);
 
   return (
     <section id="potensi" className="py-20 md:py-28 bg-cream relative">
@@ -35,7 +37,9 @@ export default function Potentials() {
             <Reveal
               key={item.id}
               delay={staggerDelay(index)}
-              className="bg-white rounded-3xl overflow-hidden border border-sand shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-[box-shadow,translate] duration-300 flex flex-col group"
+              className={`bg-white rounded-3xl overflow-hidden border border-sand shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-[box-shadow,translate] duration-300 flex flex-col group ${
+                index === 0 ? firstSpan : ""
+              }`}
             >
               {/* Card Image */}
               <div className="relative h-56 sm:h-64 overflow-hidden">
@@ -43,7 +47,7 @@ export default function Potentials() {
                   src={item.imageUrl}
                   alt={item.imageAlt}
                   fill
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  sizes={cardImageSizes(index === 0 && firstSpan !== "")}
                   className="object-cover group-hover:scale-105 transition-transform duration-500"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-80" />

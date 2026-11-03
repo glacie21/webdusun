@@ -14,6 +14,13 @@ export interface VillageIdentity {
   subLocationText: string;
 }
 
+export interface HeroGreeting {
+  fromHour: number;
+  text: string;
+  meaning: string;
+  mood: "pagi" | "siang" | "sore" | "malam";
+}
+
 export interface QuickStat {
   number: string;
   label: string;
@@ -79,6 +86,9 @@ export interface GalleryPhoto {
 
 export interface EditorialStory {
   id: string;
+  // Bagian akhir alamat halaman cerita, misalnya /cerita/dari-tanah-untuk-kehidupan.
+  // Pakai huruf kecil dan tanda hubung, tanpa spasi.
+  slug: string;
   title: string;
   subtitle: string;
   author: string;
@@ -116,6 +126,14 @@ export const villageData = {
     ogImageAlt: "Lanskap perbukitan",
   },
 
+  // Kontak pengurus dusun. Isi nomor WhatsApp dengan format 62 di depan,
+  // tanpa spasi, tanda +, atau angka 0 di awal. Contoh: "6281234567890".
+  // Selama masih kosong, tombol "Hubungi Kami" tidak ditampilkan.
+  contact: {
+    whatsapp: "",
+    whatsappMessage: "Halo, saya ingin bertanya tentang Dusun Sukomangun.",
+  },
+
   // Menu navigasi, dipakai bersama oleh Navbar dan Footer.
   navLinks: [
     { name: "Beranda", href: "#hero" },
@@ -126,6 +144,7 @@ export const villageData = {
     { name: "Kehidupan", href: "#kehidupan" },
     { name: "Fasilitas", href: "#fasilitas" },
     { name: "Galeri", href: "#galeri" },
+    { name: "Cerita", href: "#cerita" },
     { name: "Lokasi", href: "#lokasi" },
   ],
 
@@ -159,6 +178,15 @@ export const villageData = {
       imageAlt: "Lanskap perbukitan",
       secondaryButtonLabel: "Kenali Potensinya",
       scrollLabel: "Gulir ke Bawah",
+      // Sapaan bahasa Jawa di atas judul. Berganti sesuai jam di Sukomangun (WIB),
+      // dan warna suasana foto Hero ikut menyesuaikan (mood).
+      // fromHour: jam mulai sapaan berlaku, 0 sampai 23. Urutkan dari pagi ke malam.
+      greetings: [
+        { fromHour: 4, text: "Sugeng enjang", meaning: "Selamat pagi dari Sukomangun", mood: "pagi" },
+        { fromHour: 10, text: "Sugeng siang", meaning: "Selamat siang dari Sukomangun", mood: "siang" },
+        { fromHour: 15, text: "Sugeng sonten", meaning: "Selamat sore dari Sukomangun", mood: "sore" },
+        { fromHour: 18, text: "Sugeng dalu", meaning: "Selamat malam dari Sukomangun", mood: "malam" },
+      ] as HeroGreeting[],
     },
     about: {
       badge: "TENTANG SUKOMANGUN",
@@ -204,6 +232,21 @@ export const villageData = {
       closingText:
         "Proses pengumpulan naskah dan memori para sesepuh Dusun Sukomangun terus berjalan sebagai arsip berharga bagi generasi mendatang.",
     },
+    // Pita kata yang berjalan pelan di antara bagian Sejarah dan Potensi.
+    marquee: {
+      items: [
+        "Ketela",
+        "Cabai",
+        "Peternakan",
+        "UMKM Warga",
+        "Sambatan",
+        "Gotong Royong",
+        "TPQ Darul Huda",
+        "Karang Taruna",
+        "PKK",
+        "Perbukitan Windusari",
+      ],
+    },
     potentials: {
       badge: "KEMAKMURAN DESA",
       title: "Potensi yang Tumbuh dari Tanah Sukomangun",
@@ -247,7 +290,11 @@ export const villageData = {
       description:
         "Menyimak lebih dalam kisah keseharian, nilai kebersamaan, dan asa masyarakat yang menghidupkan dusun di lereng Windusari.",
       readMoreLabel: "Baca Cerita Selengkapnya",
-      closeLabel: "Tutup Cerita",
+      // Teks di halaman cerita (/cerita/...).
+      backLabel: "Kembali ke Semua Cerita",
+      shareTitle: "Bagikan cerita ini",
+      shareButtonLabel: "Kirim lewat WhatsApp",
+      otherStoriesTitle: "Cerita Lainnya",
     },
     map: {
       badge: "LOKASI WILAYAH",
@@ -262,17 +309,25 @@ export const villageData = {
       title: "Mari mengenal lebih dekat Sukomangun.",
       description:
         "Setiap sudut memiliki cerita, setiap warga memiliki kisah, dan setiap potensi memiliki kesempatan untuk berkembang.",
-      buttonLabel: "Jelajahi Potensi Sukomangun",
+      // Tombol utama membuka petunjuk arah Google Maps ke Sukomangun.
+      visitButtonLabel: "Rencanakan Kunjungan",
+      // Tombol kedua: "Hubungi Kami" jika contact.whatsapp sudah diisi,
+      // jika belum, tombol ini mengarah ke bagian Potensi.
+      contactButtonLabel: "Hubungi Kami",
+      exploreButtonLabel: "Jelajahi Potensi",
     },
     footer: {
       tagline: "Mengenal Sukomangun melalui cerita, masyarakat, dan potensinya.",
       description:
         "Website profil komunitas & etalase digital untuk mendokumentasikan kehidupan serta mengembangkan potensi Dusun Sukomangun.",
+      // Tanda © dan tahun ditambahkan otomatis oleh Footer.
       copyright:
-        "© 2026 Cerita Sukomangun. Dibuat untuk mengenalkan dan mendokumentasikan potensi Dusun Sukomangun.",
+        "Cerita Sukomangun. Dibuat untuk mengenalkan dan mendokumentasikan potensi Dusun Sukomangun.",
       navTitle: "Navigasi",
       locationTitle: "Lokasi Wilayah",
       backToTopLabel: "Kembali ke Atas",
+      // Tulisan besar samar di bagian paling bawah footer.
+      wordmark: "Sukomangun",
     },
     // Halaman 404, muncul saat pengunjung membuka alamat yang tidak ada.
     notFound: {
@@ -380,7 +435,7 @@ export const villageData = {
         "Ketela menjadi salah satu tulang punggung ekonomi dusun. Mulai dari penanaman, pemanenan serentak, penampungan di tingkat lokal dusun, hingga proses pencucian bersih sebelum didistribusikan ke industri pangan dan pasar luar kota.",
       highlightText: "Memiliki rantai pasok terhubung langsung ke industri olahan kota besar.",
       imageUrl:
-        "https://images.unsplash.com/photo-1592417817098-8f3d69109853?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1757283961570-682154747d9c?auto=format&fit=crop&w=800&q=80",
       imageAlt: "Hasil panen ketela segar berkualitas dari kebun warga",
     },
     {
@@ -647,7 +702,7 @@ export const villageData = {
       category: "Pertanian",
       caption: "Ketela pilihan yang telah dibersihkan siap dimuat menuju sentra pengolahan di Yogyakarta dan Semarang.",
       imageUrl:
-        "https://images.unsplash.com/photo-1592417817098-8f3d69109853?auto=format&fit=crop&w=1000&q=80",
+        "https://images.unsplash.com/photo-1757281096972-10fd02b0f5ea?auto=format&fit=crop&w=1000&q=80",
       imageAlt: "Ketela singkong bersih berjejer rapi di penampungan",
     },
   ] as GalleryPhoto[],
@@ -655,6 +710,7 @@ export const villageData = {
   editorialStories: [
     {
       id: "cerita-1",
+      slug: "dari-tanah-untuk-kehidupan",
       title: "Dari Tanah, Untuk Kehidupan",
       subtitle: "Ketekunan Petani Sukomangun Menjaga Denyut Pangan",
       author: "Dokumentasi Cerita Sukomangun",
@@ -674,6 +730,7 @@ export const villageData = {
     },
     {
       id: "cerita-2",
+      slug: "gotong-royong-yang-tetap-hidup",
       title: "Gotong Royong yang Tetap Hidup",
       subtitle: "Merawat Nilai Sambatan di Tengah Laju Zaman",
       author: "Dokumentasi Cerita Sukomangun",
@@ -692,6 +749,7 @@ export const villageData = {
     },
     {
       id: "cerita-3",
+      slug: "menyimpan-cerita-untuk-generasi-berikutnya",
       title: "Menyimpan Cerita untuk Generasi Berikutnya",
       subtitle: "Pentingnya Jejak Digital dan Kearsipan Warga Dusun",
       author: "Dokumentasi Cerita Sukomangun",
@@ -727,6 +785,9 @@ export const villageData = {
     provinsi: "Jawa Tengah",
     mapsSearchUrl:
       "https://www.google.com/maps/search/?api=1&query=Dusun+Sukomangun+Genito+Windusari+Magelang",
+    // Membuka petunjuk arah dari lokasi pengunjung ke Sukomangun.
+    mapsDirectionsUrl:
+      "https://www.google.com/maps/dir/?api=1&destination=Dusun+Sukomangun+Genito+Windusari+Magelang",
     mapsEmbedUrl:
       "https://maps.google.com/maps?q=Genito,+Windusari,+Magelang,+Central+Java&t=&z=14&ie=UTF8&iwloc=&output=embed",
     embedPlaceholderNote:

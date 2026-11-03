@@ -86,7 +86,7 @@ export default function Navbar() {
             </div>
             <div className="flex flex-col">
               <span
-                className={`font-serif text-lg md:text-xl font-bold tracking-tight transition-colors ${
+                className={`font-serif text-lg md:text-xl font-bold tracking-tight whitespace-nowrap transition-colors ${
                   isScrolled ? "text-charcoal" : "text-white"
                 }`}
               >
@@ -103,7 +103,7 @@ export default function Navbar() {
           </a>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-1 xl:gap-2">
+          <nav className="hidden xl:flex items-center gap-1">
             {villageData.navLinks.map((link) => {
               const isActive = activeHref === link.href;
               return (
@@ -112,7 +112,7 @@ export default function Navbar() {
                   href={link.href}
                   onClick={closeMenu}
                   aria-current={isActive ? "location" : undefined}
-                  className={`relative px-3 py-1.5 rounded-full text-sm font-medium transition-colors duration-200 ${
+                  className={`relative px-3 py-1.5 rounded-full text-sm font-medium whitespace-nowrap transition-colors duration-200 ${
                     isScrolled
                       ? isActive
                         ? "text-forest"
@@ -138,12 +138,12 @@ export default function Navbar() {
             })}
           </nav>
 
-          {/* CTA Button */}
-          <div className="hidden sm:flex items-center gap-3">
+          {/* CTA Button: hanya di layar kecil-menengah; di layar lebar tempatnya dipakai menu lengkap */}
+          <div className="hidden sm:flex xl:hidden items-center gap-3">
             <a
               href="#tentang"
               onClick={closeMenu}
-              className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs md:text-sm font-medium tracking-wide transition-all shadow-sm ${
+              className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs md:text-sm font-medium tracking-wide whitespace-nowrap transition-all shadow-sm ${
                 isScrolled
                   ? "bg-forest text-white hover:bg-forest-dark hover:shadow-md active:scale-95"
                   : "bg-white text-forest hover:bg-cream hover:shadow-md active:scale-95"
@@ -158,7 +158,7 @@ export default function Navbar() {
           <button
             type="button"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className={`lg:hidden p-2 rounded-xl transition-colors ${
+            className={`xl:hidden p-2 rounded-xl transition-colors ${
               isScrolled
                 ? "text-charcoal hover:bg-sage-light"
                 : "text-white hover:bg-white/20"
@@ -180,7 +180,7 @@ export default function Navbar() {
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.35, ease: easeOut }}
             data-lenis-prevent
-            className="lg:hidden bg-cream border-b border-sand mt-3 shadow-xl max-h-[calc(100vh-5rem)] overflow-y-auto"
+            className="xl:hidden bg-cream border-b border-sand mt-3 shadow-xl max-h-[calc(100vh-5rem)] overflow-y-auto"
           >
             <div className="flex flex-col space-y-2 px-4 pt-4 pb-6">
               {villageData.navLinks.map((link, i) => (

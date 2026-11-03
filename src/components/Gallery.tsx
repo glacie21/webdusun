@@ -7,6 +7,7 @@ import { Camera, ChevronLeft, ChevronRight, X, Maximize2, Info } from "lucide-re
 import { villageData } from "@/data/content";
 import Modal from "@/components/Modal";
 import Reveal from "@/components/Reveal";
+import ContourLines from "@/components/ContourLines";
 import { easeOut } from "@/components/motionPresets";
 
 const TALL = "h-96 sm:h-auto sm:row-span-2";
@@ -95,22 +96,24 @@ export default function Gallery() {
   const activePhoto = lightboxIndex !== null ? filteredPhotos[lightboxIndex] : null;
 
   return (
-    <section id="galeri" className="py-20 md:py-28 bg-cream relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="galeri" className="py-20 md:py-28 bg-forest-dark relative">
+      {/* Latar hijau tua supaya warna foto lebih menonjol, seperti ruang pamer */}
+      <ContourLines className="text-white/[0.04]" />
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="max-w-3xl mx-auto text-center mb-12">
-          <Reveal y={16} className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sage-light text-forest text-xs font-semibold tracking-wider uppercase mb-3">
-            <Camera className="w-3.5 h-3.5 text-sage" />
+          <Reveal y={16} className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-earth-bright text-xs font-semibold tracking-wider uppercase mb-3">
+            <Camera className="w-3.5 h-3.5 text-earth-bright" />
             <span>{gallery.badge}</span>
           </Reveal>
-          <Reveal as="h2" delay={0.08} className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-charcoal tracking-tight mb-3">
+          <Reveal as="h2" delay={0.08} className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-white tracking-tight mb-3">
             {gallery.title}
           </Reveal>
-          <Reveal as="p" delay={0.16} className="font-serif italic text-lg sm:text-xl text-earth-dark">
+          <Reveal as="p" delay={0.16} className="font-serif italic text-lg sm:text-xl text-earth-bright">
             {gallery.subtitle}
           </Reveal>
-          <Reveal as="p" delay={0.24} className="mt-5 inline-flex items-center gap-2 text-xs sm:text-sm text-charcoal-muted bg-white px-4 py-2 rounded-full border border-sand">
-            <Info className="w-4 h-4 text-earth shrink-0" />
+          <Reveal as="p" delay={0.24} className="mt-5 inline-flex items-center gap-2 text-xs sm:text-sm text-white/75 bg-white/5 px-4 py-2 rounded-full border border-white/15">
+            <Info className="w-4 h-4 text-earth-bright shrink-0" />
             <span>{gallery.photoNote}</span>
           </Reveal>
         </div>
@@ -127,16 +130,16 @@ export default function Gallery() {
                 aria-pressed={isActive}
                 className={`relative px-4 py-2 rounded-full text-xs sm:text-sm font-medium transition-colors duration-200 border ${
                   isActive
-                    ? "text-white border-transparent"
-                    : "bg-white text-charcoal-muted hover:text-charcoal hover:bg-sage-light border-sand"
+                    ? "text-forest-dark border-transparent"
+                    : "bg-white/5 text-white/80 hover:text-white hover:bg-white/10 border-white/15"
                 }`}
               >
-                {/* Latar hijau yang meluncur ke filter yang dipilih */}
+                {/* Latar terang yang meluncur ke filter yang dipilih */}
                 {isActive && (
                   <motion.span
                     layoutId="gallery-filter"
                     transition={{ type: "spring", stiffness: 380, damping: 32 }}
-                    className="absolute inset-0 rounded-full bg-forest shadow-sm"
+                    className="absolute inset-0 rounded-full bg-cream-soft shadow-sm"
                   />
                 )}
                 <span className="relative">{cat}</span>
@@ -161,7 +164,7 @@ export default function Gallery() {
                 whileInView={{ opacity: 1, y: 0, scale: 1 }}
                 viewport={{ once: true, margin: "0px 0px -10% 0px" }}
                 transition={{ duration: 0.7, delay: (index % 4) * 0.08, ease: easeOut }}
-                className={`group relative block w-full text-left rounded-3xl overflow-hidden cursor-pointer shadow-sm hover:shadow-xl transition-shadow duration-300 border border-sand bg-white ${tileClass(
+                className={`group relative block w-full text-left rounded-3xl overflow-hidden cursor-pointer shadow-sm hover:shadow-2xl hover:shadow-black/40 transition-shadow duration-300 border border-white/10 bg-forest ${tileClass(
                   index,
                   filteredPhotos.length
                 )}`}

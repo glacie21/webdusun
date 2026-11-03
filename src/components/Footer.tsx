@@ -1,9 +1,13 @@
 import { ArrowUp, MapPin } from "lucide-react";
+import * as motion from "motion/react-client";
 import { villageData } from "@/data/content";
+import { easeOut } from "@/components/motionPresets";
 
-export default function Footer() {
+// basePath diisi "/" saat Footer dipakai di luar beranda (misalnya halaman
+// cerita), supaya menu "#tentang" dan lainnya mengarah ke "/#tentang".
+export default function Footer({ basePath = "" }: { basePath?: string }) {
   return (
-    <footer className="bg-forest-dark text-white pt-16 pb-12 border-t border-white/10">
+    <footer className="bg-forest-dark text-white pt-16 pb-12 border-t border-white/10 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-12 pb-14 border-b border-white/10">
           {/* Kolom 1: Identitas Dusun */}
@@ -33,7 +37,7 @@ export default function Footer() {
               {villageData.navLinks.map((item) => (
                 <li key={item.name}>
                   <a
-                    href={item.href}
+                    href={`${basePath}${item.href}`}
                     className="hover:text-cream-soft hover:underline underline-offset-4 transition-colors"
                   >
                     {item.name}
@@ -64,7 +68,8 @@ export default function Footer() {
         {/* Bottom Bar */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/60 font-light">
           <p className="text-center sm:text-left">
-            {villageData.sections.footer.copyright}
+            {/* Tahun diambil saat website di-build, jadi ikut berganti setiap kali website diperbarui. */}
+            &copy; {new Date().getFullYear()} {villageData.sections.footer.copyright}
           </p>
 
           <a
@@ -76,6 +81,20 @@ export default function Footer() {
           </a>
         </div>
       </div>
+
+      {/* Tulisan besar samar sebagai penutup halaman. Hanya hiasan.
+          Tanpa jarak viewport tambahan (seperti di Reveal), karena letaknya
+          di ujung halaman sehingga tidak bisa digulir lebih jauh lagi. */}
+      <motion.p
+        aria-hidden="true"
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 1, ease: easeOut }}
+        className="mt-10 px-4 text-center font-serif font-bold leading-none tracking-tight whitespace-nowrap select-none text-white/[0.06] text-[clamp(3.5rem,15vw,13rem)]"
+      >
+        {villageData.sections.footer.wordmark}
+      </motion.p>
     </footer>
   );
 }

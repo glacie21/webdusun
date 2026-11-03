@@ -1,9 +1,14 @@
-import { Sprout, Warehouse, Droplets, Truck, Building2, ArrowRight, ArrowDown } from "lucide-react";
+import { Sprout, Warehouse, Droplets, Truck, Building2, ChevronRight } from "lucide-react";
 import { villageData } from "@/data/content";
 import Reveal from "@/components/Reveal";
 
+// Lama satu putaran nyala ikon (detik), dibagi rata ke setiap tahap.
+// Harus sama dengan durasi animate-step-glow di globals.css.
+const GLOW_CYCLE = 6;
+
 export default function CommodityFlow() {
   const { commodityFlow } = villageData.sections;
+  const stepCount = villageData.commodityFlow.length;
 
   const getIcon = (name: string) => {
     switch (name) {
@@ -45,17 +50,21 @@ export default function CommodityFlow() {
               key={step.step}
               delay={idx * 0.12}
               y={36}
-              className="flex flex-col lg:flex-row items-center"
+              className="flex flex-col lg:flex-row items-center lg:items-stretch"
             >
               {/* Card Container */}
-              <div className="w-full bg-white rounded-3xl p-6 border border-sand shadow-sm hover:shadow-lg hover:-translate-y-1.5 transition-[box-shadow,translate] duration-300 flex-1 flex flex-col justify-between group">
+              <div className="w-full bg-white rounded-3xl p-6 border border-sand shadow-sm hover:shadow-lg hover:-translate-y-1.5 transition-[box-shadow,translate] duration-300 flex-1 flex flex-col justify-between">
                 <div>
-                  {/* Step Badge & Icon */}
+                  {/* Step Badge & Icon. Ikon menyala bergiliran dari tahap pertama
+                      sampai terakhir, seperti ketela yang berpindah tangan. */}
                   <div className="flex items-center justify-between mb-5">
                     <span className="w-8 h-8 rounded-full bg-sage-light text-forest font-serif font-bold text-sm flex items-center justify-center">
                       0{step.step}
                     </span>
-                    <div className="w-11 h-11 rounded-2xl bg-cream text-forest group-hover:bg-forest group-hover:text-white transition-colors flex items-center justify-center">
+                    <div
+                      className="w-11 h-11 rounded-2xl bg-cream text-forest animate-step-glow flex items-center justify-center"
+                      style={{ animationDelay: `${(idx * GLOW_CYCLE) / stepCount}s` }}
+                    >
                       {getIcon(step.iconName)}
                     </div>
                   </div>
@@ -76,15 +85,19 @@ export default function CommodityFlow() {
                 </div>
               </div>
 
-              {/* Arrow Connector */}
-              {idx < villageData.commodityFlow.length - 1 && (
-                <div className="my-3 lg:my-0 lg:mx-2 text-sage-dark flex items-center justify-center">
-                  <div className="lg:hidden">
-                    <ArrowDown className="w-5 h-5 animate-pulse text-earth" />
-                  </div>
-                  <div className="hidden lg:block">
-                    <ArrowRight className="w-5 h-5 text-earth" />
-                  </div>
+              {/* Penghubung: tiga panah kecil yang menyala bergantian, menunjukkan arah alur */}
+              {idx < stepCount - 1 && (
+                <div
+                  aria-hidden="true"
+                  className="my-2 lg:my-0 lg:mx-1 self-center flex flex-col lg:flex-row items-center text-earth"
+                >
+                  {[0, 1, 2].map((i) => (
+                    <ChevronRight
+                      key={i}
+                      className="w-4 h-4 -my-1 lg:my-0 lg:-mx-1 rotate-90 lg:rotate-0 animate-flow-pulse"
+                      style={{ animationDelay: `${i * 0.2}s` }}
+                    />
+                  ))}
                 </div>
               )}
             </Reveal>
