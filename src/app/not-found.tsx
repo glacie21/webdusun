@@ -18,7 +18,7 @@ export default function NotFound() {
   const shortcuts = villageData.navLinks.filter((link) => link.href !== "#hero");
 
   return (
-    <main className="relative flex-grow min-h-screen flex flex-col overflow-hidden text-white">
+    <main id="konten" tabIndex={-1} className="relative flex-grow min-h-screen focus:outline-none flex flex-col overflow-hidden text-white">
       {/* Foto latar dan lapisan gelap, sama seperti Hero */}
       <div className="absolute inset-0 z-0">
         <Image

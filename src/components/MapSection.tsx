@@ -1,6 +1,7 @@
 import { MapPin, Navigation, ExternalLink, Info, Compass } from "lucide-react";
 import { villageData } from "@/data/content";
 import Reveal from "@/components/Reveal";
+import MapViewer from "@/components/MapViewer";
 
 export default function MapSection() {
   const { map } = villageData.sections;
@@ -64,37 +65,9 @@ export default function MapSection() {
             </Reveal>
           </div>
 
-          {/* Right Column: Map Embed / Interactive Placeholder Map */}
+          {/* Kolom kanan: peta dan pilihan titik penting */}
           <Reveal delay={0.15} y={40} className="lg:col-span-7">
-            <div className="relative rounded-3xl overflow-hidden shadow-xl border-4 border-white bg-white min-h-[380px] sm:min-h-[440px] flex flex-col">
-              {/* Stylized Map View / Embed */}
-              <div className="relative flex-1 w-full bg-sage-light overflow-hidden">
-                {/* Embed iframe query for Windusari, Magelang */}
-                <iframe
-                  title={`Peta ${location.dusun}, ${location.desa}, ${location.kecamatan}`}
-                  src={location.mapsEmbedUrl}
-                  className="w-full h-full min-h-[360px] border-0 filter saturate-95"
-                  loading="lazy"
-                  allowFullScreen
-                />
-
-                {/* Floating GPS card */}
-                <div className="absolute top-4 left-4 right-4 sm:right-auto sm:max-w-xs bg-white/95 backdrop-blur-md p-4 rounded-2xl shadow-lg border border-sand">
-                  <div className="flex items-center gap-2 text-xs font-semibold text-forest mb-1">
-                    <MapPin className="w-3.5 h-3.5 text-earth" />
-                    <span>{location.dusun}, {location.desa}</span>
-                  </div>
-                  <p className="text-[11px] text-charcoal-muted leading-tight font-light">
-                    {location.kecamatan}, {location.kabupaten}, {location.provinsi}
-                  </p>
-                </div>
-              </div>
-
-              {/* Note bar */}
-              <div className="p-4 bg-white border-t border-sand text-xs text-charcoal-muted flex items-center justify-between">
-                <span>{location.embedPlaceholderNote}</span>
-              </div>
-            </div>
+            <MapViewer />
           </Reveal>
         </div>
       </div>

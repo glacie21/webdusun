@@ -2,6 +2,8 @@ import type { Metadata, Viewport } from "next";
 import { Playfair_Display, Inter } from "next/font/google";
 import { villageData } from "@/data/content";
 import MotionProvider from "@/components/MotionProvider";
+import SkipLink from "@/components/SkipLink";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
 const playfair = Playfair_Display({
@@ -59,7 +61,11 @@ export default function RootLayout({
   return (
     <html lang="id" className={`${playfair.variable} ${inter.variable}`}>
       <body className="min-h-screen flex flex-col bg-cream text-charcoal font-sans antialiased selection:bg-sage-light selection:text-forest-dark">
+        <SkipLink label={site.skipLinkLabel} />
         <MotionProvider>{children}</MotionProvider>
+        {/* Statistik pengunjung (Vercel Web Analytics). Tidak memakai cookie dan
+            baru aktif setelah website dipasang di Vercel dan fitur Analytics dinyalakan. */}
+        <Analytics />
       </body>
     </html>
   );

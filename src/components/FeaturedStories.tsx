@@ -4,6 +4,7 @@ import { BookOpen, Clock, ArrowRight } from "lucide-react";
 import { villageData } from "@/data/content";
 import Reveal from "@/components/Reveal";
 import { staggerDelay } from "@/components/motionPresets";
+import StoryInvite from "@/components/StoryInvite";
 
 // Kartu cerita di beranda. Setiap kartu membuka halaman ceritanya sendiri
 // (src/app/cerita/[slug]/page.tsx) supaya bisa dibagikan dan dicari di Google.
@@ -95,6 +96,9 @@ export default function FeaturedStories() {
             </Reveal>
           ))}
         </div>
+
+        {/* Ajakan mengirim cerita */}
+        <StoryInvite />
       </div>
     </section>
   );

@@ -2,10 +2,11 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, ArrowRight, Clock, MessageCircle } from "lucide-react";
+import { ArrowLeft, ArrowRight, Clock } from "lucide-react";
 import { villageData } from "@/data/content";
 import Footer from "@/components/Footer";
 import JsonLd from "@/components/JsonLd";
+import ShareButtons from "@/components/ShareButtons";
 
 // Halaman untuk setiap cerita, misalnya /cerita/dari-tanah-untuk-kehidupan.
 // Isinya diambil dari villageData.editorialStories di src/data/content.ts.
@@ -56,7 +57,6 @@ export default async function StoryPage({ params }: Props) {
   if (!story) notFound();
 
   const url = `${site.url}/cerita/${story.slug}`;
-  const shareUrl = `https://wa.me/?text=${encodeURIComponent(`${story.title}\n${url}`)}`;
   const otherStories = editorialStories.filter((item) => item.slug !== story.slug);
 
   return (
@@ -138,7 +138,7 @@ export default async function StoryPage({ params }: Props) {
         </div>
       </header>
 
-      <main className="flex-grow">
+      <main id="konten" tabIndex={-1} className="flex-grow focus:outline-none">
         {/* Isi cerita */}
         <article className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-14 md:py-20">
           <p className="font-serif text-xl sm:text-2xl text-forest leading-relaxed mb-10">
@@ -153,17 +153,9 @@ export default async function StoryPage({ params }: Props) {
           </div>
 
           {/* Bagikan */}
-          <div className="mt-14 pt-8 border-t border-sand flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div className="mt-14 pt-8 border-t border-sand flex flex-col gap-4">
             <p className="font-serif text-lg font-semibold text-charcoal">{stories.shareTitle}</p>
-            <a
-              href={shareUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-forest hover:bg-forest-dark text-white text-sm font-medium transition-colors shadow-sm"
-            >
-              <MessageCircle className="w-4 h-4" />
-              <span>{stories.shareButtonLabel}</span>
-            </a>
+            <ShareButtons title={story.title} url={url} whatsappLabel={stories.shareButtonLabel} />
           </div>
         </article>
 
