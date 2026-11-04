@@ -6,7 +6,7 @@ import { dateParts, formatLongDate } from "@/lib/dates";
 // Kartu kabar dan baris agenda, dipakai di beranda (NewsAgenda.tsx)
 // dan di halaman /kabar.
 
-export function NewsCard({ item }: { item: NewsItem }) {
+export function NewsCard({ item }: Readonly<{ item: NewsItem }>) {
   return (
     <article className="bg-white rounded-3xl border border-sand p-6 shadow-sm hover:shadow-md transition-shadow">
       <div className="flex flex-wrap items-center gap-x-3 gap-y-1 mb-3">
@@ -34,7 +34,7 @@ export function NewsCard({ item }: { item: NewsItem }) {
   );
 }
 
-export function AgendaRow({ item, muted = false }: { item: AgendaItem; muted?: boolean }) {
+export function AgendaRow({ item, muted = false }: Readonly<{ item: AgendaItem; muted?: boolean }>) {
   const { day, month, weekday } = dateParts(item.date);
   return (
     <li className={`flex gap-4 items-start ${muted ? "opacity-70" : ""}`}>

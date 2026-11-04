@@ -14,7 +14,7 @@ interface ShareButtonsProps {
 
 // Tombol bagikan: WhatsApp, salin tautan, dan menu bagikan bawaan HP
 // (hanya muncul di perangkat yang mendukungnya).
-export default function ShareButtons({ title, url, whatsappLabel }: ShareButtonsProps) {
+export default function ShareButtons({ title, url, whatsappLabel }: Readonly<ShareButtonsProps>) {
   const [copied, setCopied] = useState(false);
   const [canNativeShare, setCanNativeShare] = useState(false);
 
@@ -45,13 +45,15 @@ export default function ShareButtons({ title, url, whatsappLabel }: ShareButtons
     });
   };
 
+  const whatsappText = encodeURIComponent(`${title}\n${url}`);
+
   const secondary =
     "inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full border border-sand bg-white hover:border-sage hover:text-forest text-charcoal text-sm font-medium transition-colors";
 
   return (
     <div className="flex flex-wrap gap-3">
       <a
-        href={`https://wa.me/?text=${encodeURIComponent(`${title}\n${url}`)}`}
+        href={`https://wa.me/?text=${whatsappText}`}
         target="_blank"
         rel="noopener noreferrer"
         className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-forest hover:bg-forest-dark text-white text-sm font-medium transition-colors shadow-sm"

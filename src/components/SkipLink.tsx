@@ -4,7 +4,7 @@
 // Setiap halaman menandai area isinya dengan <main id="konten" tabIndex={-1}>.
 // Fokus dipindah secara manual karena klik anchor ditangani Lenis (smooth scroll),
 // sehingga browser tidak otomatis memindahkan fokus keyboard ke tujuan.
-export default function SkipLink({ label }: { label: string }) {
+export default function SkipLink({ label }: Readonly<{ label: string }>) {
   return (
     <a
       href="#konten"

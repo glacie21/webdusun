@@ -10,7 +10,8 @@ const { error: errorText } = villageData.sections;
 // Halaman kesalahan: tampil jika ada bagian halaman yang gagal dimuat,
 // supaya pengunjung tidak melihat layar kosong. Teksnya diatur dari
 // villageData.sections.error di src/data/content.ts.
-export default function Error({ reset }: { error: Error & { digest?: string }; reset: () => void }) {
+// retry() memuat ulang data bagian yang gagal lalu menampilkannya kembali.
+export default function ErrorPage({ retry }: Readonly<{ retry: () => void }>) {
   return (
     <main
       id="konten"
@@ -34,7 +35,7 @@ export default function Error({ reset }: { error: Error & { digest?: string }; r
         <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
           <button
             type="button"
-            onClick={reset}
+            onClick={retry}
             className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full bg-cream-soft text-forest hover:bg-white font-medium text-sm md:text-base tracking-wide transition-all shadow-lg hover:shadow-xl"
           >
             <RotateCcw className="w-4 h-4 text-earth" />

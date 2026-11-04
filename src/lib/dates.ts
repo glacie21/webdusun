@@ -6,10 +6,10 @@ const TIME_ZONE = "Asia/Jakarta";
 // Mengubah "2026-11-08" atau "08/11/2026" (format Google Sheets Indonesia)
 // menjadi "2026-11-08". Mengembalikan "" jika tidak dikenali.
 export function normalizeDate(value: string): string {
-  const iso = value.match(/^(\d{4})-(\d{1,2})-(\d{1,2})/);
+  const iso = /^(\d{4})-(\d{1,2})-(\d{1,2})/.exec(value);
   if (iso) return `${iso[1]}-${iso[2].padStart(2, "0")}-${iso[3].padStart(2, "0")}`;
 
-  const dmy = value.match(/^(\d{1,2})[/.-](\d{1,2})[/.-](\d{4})/);
+  const dmy = /^(\d{1,2})[/.-](\d{1,2})[/.-](\d{4})/.exec(value);
   if (dmy) return `${dmy[3]}-${dmy[2].padStart(2, "0")}-${dmy[1].padStart(2, "0")}`;
 
   return "";

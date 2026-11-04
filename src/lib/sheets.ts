@@ -6,38 +6,53 @@
 // Google Sheets muncul di website dalam beberapa menit.
 const REVALIDATE_SECONDS = 600;
 
+// Membaca isian bertanda kutip yang dimulai di text[start] (tanda kutip pembuka).
+// Di dalamnya, "" berarti satu tanda kutip. Mengembalikan isinya dan posisi
+// karakter setelah tanda kutip penutup.
+function readQuoted(text: string, start: number): { value: string; end: number } {
+  let value = "";
+  let i = start + 1;
+  while (i < text.length) {
+    if (text[i] !== '"') {
+      value += text[i];
+      i++;
+    } else if (text[i + 1] === '"') {
+      value += '"';
+      i += 2;
+    } else {
+      return { value, end: i + 1 };
+    }
+  }
+  return { value, end: i };
+}
+
 // Mengurai teks CSV, termasuk isian bertanda kutip yang memuat koma atau baris baru.
+// Akhir baris boleh "\n" atau "\r\n" (format Google Sheets).
 export function parseCsv(text: string): string[][] {
   const rows: string[][] = [];
   let row: string[] = [];
   let field = "";
-  let inQuotes = false;
+  let i = 0;
 
-  for (let i = 0; i < text.length; i++) {
+  while (i < text.length) {
     const char = text[i];
-    if (inQuotes) {
-      if (char === '"' && text[i + 1] === '"') {
-        field += '"';
-        i++;
-      } else if (char === '"') {
-        inQuotes = false;
-      } else {
-        field += char;
+    if (char === '"') {
+      const quoted = readQuoted(text, i);
+      field += quoted.value;
+      i = quoted.end;
+      continue;
+    }
+    if (char === "," || char === "\n") {
+      row.push(field);
+      field = "";
+      if (char === "\n") {
+        rows.push(row);
+        row = [];
       }
-    } else if (char === '"') {
-      inQuotes = true;
-    } else if (char === ",") {
-      row.push(field);
-      field = "";
-    } else if (char === "\n" || char === "\r") {
-      if (char === "\r" && text[i + 1] === "\n") i++;
-      row.push(field);
-      rows.push(row);
-      row = [];
-      field = "";
-    } else {
+    } else if (char !== "\r") {
       field += char;
     }
+    i++;
   }
   if (field !== "" || row.length > 0) {
     row.push(field);

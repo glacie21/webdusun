@@ -17,6 +17,8 @@ export default function MapViewer() {
   const embedUrl = coordinates
     ? `https://maps.google.com/maps?q=${encodeURIComponent(coordinates)}&z=17&output=embed`
     : location.mapsEmbedUrl;
+  const placeName =
+    selected && coordinates ? selected.name : `${location.dusun}, ${location.desa}, ${location.kecamatan}`;
 
   const chipClass = (active: boolean) =>
     `inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-medium border transition-colors ${
@@ -30,7 +32,7 @@ export default function MapViewer() {
       <div className="relative w-full bg-sage-light overflow-hidden">
         <iframe
           key={embedUrl}
-          title={`Peta ${selected && coordinates ? selected.name : `${location.dusun}, ${location.desa}, ${location.kecamatan}`}`}
+          title={`Peta ${placeName}`}
           src={embedUrl}
           className="w-full h-[360px] sm:h-[420px] border-0 filter saturate-95"
           loading="lazy"

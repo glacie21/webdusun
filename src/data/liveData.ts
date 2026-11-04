@@ -17,10 +17,10 @@ export interface LiveList<T> {
   isSample: boolean;
 }
 
-async function fromSheet<T>(url: string, fallback: T[], map: (row: SheetRow, index: number) => T | null) {
+async function fromSheet<T>(url: string, fallback: T[], toItem: (row: SheetRow, index: number) => T | null) {
   const rows = await loadSheetRows(url);
   if (!rows) return { items: fallback, isSample: true };
-  return { items: rows.map(map).filter((item): item is T => item !== null), isSample: false };
+  return { items: rows.map((row, index) => toItem(row, index)).filter((item): item is T => item !== null), isSample: false };
 }
 
 const byDateDesc = (a: { date: string }, b: { date: string }) => b.date.localeCompare(a.date);
