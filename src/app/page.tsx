@@ -16,7 +16,14 @@ import Footer from "@/components/Footer";
 import JsonLd from "@/components/JsonLd";
 import HillDivider from "@/components/HillDivider";
 import Marquee from "@/components/Marquee";
+import Products from "@/components/Products";
+import NewsAgenda from "@/components/NewsAgenda";
+import VisitPackages from "@/components/VisitPackages";
 import { villageData } from "@/data/content";
+
+// Kabar, agenda, dan produk dari Google Sheets disegarkan paling lama setiap jam,
+// dan agenda yang sudah lewat otomatis berpindah dari daftar "Agenda Mendatang".
+export const revalidate = 3600;
 
 const { site, identity, location } = villageData;
 
@@ -72,7 +79,7 @@ export default function Home() {
       {/* Sticky Navigation */}
       <Navbar />
 
-      <main className="flex-grow">
+      <main id="konten" tabIndex={-1} className="flex-grow focus:outline-none">
         {/* 1. Hero Section */}
         <Hero />
 
@@ -97,8 +104,14 @@ export default function Home() {
         {/* 6. Alur Komoditas Ketela */}
         <CommodityFlow />
 
+        {/* Etalase Produk Warga */}
+        <Products />
+
         {/* 7. Kehidupan Masyarakat & Kebudayaan */}
         <Community />
+
+        {/* Kabar & Agenda Dusun */}
+        <NewsAgenda />
 
         {/* 8. Fasilitas Dusun */}
         <Facilities />
@@ -113,6 +126,9 @@ export default function Home() {
 
         {/* 11. Quote Section */}
         <QuoteSection />
+
+        {/* Paket Kunjungan */}
+        <VisitPackages />
 
         {/* 12. Peta Wilayah & Lokasi */}
         <MapSection />

@@ -100,6 +100,56 @@ export interface EditorialStory {
   date: string;
 }
 
+// Tanggal ditulis TAHUN-BULAN-HARI, misalnya "2026-11-08".
+// (Dari Google Sheets, format HARI/BULAN/TAHUN seperti 08/11/2026 juga diterima.)
+export interface NewsItem {
+  date: string;
+  title: string;
+  summary: string;
+  category: string;
+  // Opsional: tautan ke info lengkap (Google Drive, Instagram, dan sebagainya).
+  link?: string;
+}
+
+export interface AgendaItem {
+  date: string;
+  time: string;
+  title: string;
+  place: string;
+}
+
+export interface ProductItem {
+  id: string;
+  name: string;
+  category: string;
+  seller: string;
+  price: string;
+  description: string;
+  imageUrl: string;
+  imageAlt: string;
+  // Nomor WhatsApp penjual (format 62...). Kosong = memakai contact.whatsapp.
+  whatsapp?: string;
+}
+
+export interface VisitPackage {
+  id: string;
+  title: string;
+  duration: string;
+  description: string;
+  includes: string[];
+  priceNote: string;
+}
+
+export interface MapPoint {
+  id: string;
+  name: string;
+  category: string;
+  description: string;
+  // Koordinat dari Google Maps, format "LINTANG,BUJUR", misalnya "-7.4321,110.1234".
+  // Kosong = titik belum dipasang di peta.
+  coordinates: string;
+}
+
 export const villageData = {
   // Data untuk Google, pratinjau tautan WhatsApp/media sosial, robots.txt, dan sitemap.xml.
   site: {
@@ -121,6 +171,9 @@ export const villageData = {
       "Komoditas Ketela",
     ],
     author: "Masyarakat Dusun Sukomangun",
+    // Tautan tersembunyi yang muncul saat menekan Tab pertama kali,
+    // supaya pengguna keyboard bisa melompati menu navigasi.
+    skipLinkLabel: "Lewati ke konten utama",
     ogImageUrl:
       "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&h=630&q=80",
     ogImageAlt: "Lanskap perbukitan",
@@ -132,16 +185,31 @@ export const villageData = {
   contact: {
     whatsapp: "",
     whatsappMessage: "Halo, saya ingin bertanya tentang Dusun Sukomangun.",
+    // Tautan Google Form untuk warga/perantau yang ingin mengirim cerita atau foto lama.
+    // Kosong = tombol "Kirim Cerita" memakai WhatsApp di atas (jika ada).
+    storyFormUrl: "",
+  },
+
+  // Sumber data dari Google Sheets, supaya pengurus bisa memperbarui kabar,
+  // agenda, dan produk dari HP tanpa mengubah kode. Cara membuat tautannya
+  // ada di README bagian "Mengisi Kabar, Agenda, dan Produk dari Google Sheets".
+  // Selama kosong, website menampilkan data contoh di bagian bawah file ini.
+  sheets: {
+    newsCsvUrl: "",
+    agendaCsvUrl: "",
+    productsCsvUrl: "",
   },
 
   // Menu navigasi, dipakai bersama oleh Navbar dan Footer.
+  // "Beranda" tidak dicantumkan karena logo di kiri atas sudah kembali ke atas halaman.
   navLinks: [
-    { name: "Beranda", href: "#hero" },
     { name: "Tentang", href: "#tentang" },
     { name: "Sejarah", href: "#sejarah" },
     { name: "Potensi", href: "#potensi" },
     { name: "Alur Ketela", href: "#komoditas" },
+    { name: "Produk", href: "#produk" },
     { name: "Kehidupan", href: "#kehidupan" },
+    { name: "Kabar", href: "#kabar" },
     { name: "Fasilitas", href: "#fasilitas" },
     { name: "Galeri", href: "#galeri" },
     { name: "Cerita", href: "#cerita" },
@@ -303,6 +371,62 @@ export const villageData = {
         "Dusun Sukomangun terletak di kawasan asri pegunungan Windusari, Kabupaten Magelang, berdekatan dengan pesona lereng Gunung Sumbing.",
       addressNote: "Kawasan perbukitan agraris berhawa sejuk di Jawa Tengah",
       mapsButtonLabel: "Buka di Google Maps",
+      pointsTitle: "Titik penting di dusun",
+      allAreaLabel: "Seluruh wilayah",
+      pointNotSetNote: "Titik ini belum dipasang di peta. Menampilkan seluruh wilayah.",
+    },
+    news: {
+      badge: "KABAR DUSUN",
+      title: "Kabar & Agenda Warga",
+      description:
+        "Pengumuman terbaru dan jadwal kegiatan di Sukomangun, dari posyandu dan pengajian sampai kerja bakti.",
+      newsTitle: "Kabar Terbaru",
+      agendaTitle: "Agenda Mendatang",
+      emptyNews: "Belum ada kabar terbaru.",
+      emptyAgenda: "Belum ada agenda dalam waktu dekat.",
+      readMoreLabel: "Selengkapnya",
+      seeAllLabel: "Lihat Semua Kabar & Agenda",
+      backLabel: "Kembali ke Beranda",
+      pageTitle: "Kabar & Agenda — Cerita Sukomangun",
+      allNewsTitle: "Semua Kabar",
+      pastAgendaTitle: "Agenda yang Sudah Lewat",
+      sampleNote: "Contoh tampilan. Kabar dan agenda asli akan diisi pengurus dusun.",
+    },
+    products: {
+      badge: "PRODUK WARGA",
+      title: "Etalase Hasil Bumi & Usaha Warga",
+      description:
+        "Beli langsung dari petani dan pelaku usaha Sukomangun. Tekan tombol pesan untuk mengobrol dengan penjual lewat WhatsApp.",
+      orderButtonLabel: "Pesan via WhatsApp",
+      orderUnavailableLabel: "Nomor penjual menyusul",
+      // {produk} diganti otomatis dengan nama produk.
+      orderMessage: "Halo, saya tertarik dengan {produk} dari Dusun Sukomangun. Apakah masih tersedia?",
+      sellerLabel: "Penjual",
+      sampleNote: "Contoh tampilan. Produk, harga, dan nomor penjual asli akan diisi pengurus dusun.",
+    },
+    visit: {
+      badge: "BERKUNJUNG KE SUKOMANGUN",
+      title: "Rasakan Sehari Menjadi Warga Dusun",
+      description:
+        "Belajar langsung dari petani, ikut memanen, dan menikmati suasana lereng Windusari. Cocok untuk sekolah, komunitas, maupun keluarga.",
+      includesLabel: "Yang didapat",
+      askButtonLabel: "Tanyakan Jadwal",
+      askUnavailableLabel: "Kontak menyusul",
+      // {paket} diganti otomatis dengan nama paket.
+      askMessage: "Halo, saya ingin bertanya tentang paket kunjungan \"{paket}\" di Dusun Sukomangun.",
+      sampleNote: "Contoh paket. Isi, durasi, dan biaya perlu disepakati bersama warga terlebih dahulu.",
+    },
+    storyInvite: {
+      title: "Punya cerita atau foto lama tentang Sukomangun?",
+      description:
+        "Kenangan masa kecil, foto lama keluarga, atau kisah perantau sangat berarti untuk melengkapi sejarah dusun. Kirimkan kepada kami.",
+      buttonLabel: "Kirim Cerita",
+      unavailableLabel: "Formulir segera dibuka",
+    },
+    share: {
+      copyLinkLabel: "Salin Tautan",
+      copiedLabel: "Tautan Disalin",
+      moreLabel: "Bagikan Lainnya",
     },
     cta: {
       badge: "DUSUN SUKOMANGUN",
@@ -338,6 +462,16 @@ export const villageData = {
         "Halaman yang Anda cari tidak ada atau sudah dipindahkan. Mari kembali ke beranda dan lanjutkan mengenal cerita Dusun Sukomangun.",
       homeButtonLabel: "Kembali ke Beranda",
       shortcutsLabel: "Atau langsung menuju:",
+    },
+
+    // Halaman yang tampil jika terjadi kesalahan tak terduga saat memuat halaman.
+    error: {
+      badge: "TERJADI KENDALA",
+      title: "Maaf, halaman ini gagal dimuat.",
+      description:
+        "Ada kendala sesaat saat menampilkan halaman. Silakan coba lagi, atau kembali ke beranda untuk melanjutkan mengenal Dusun Sukomangun.",
+      retryButtonLabel: "Coba Lagi",
+      homeButtonLabel: "Kembali ke Beranda",
     },
   },
 
@@ -793,4 +927,156 @@ export const villageData = {
     embedPlaceholderNote:
       "Area peta Dusun Sukomangun, Desa Genito, Kec. Windusari, Kab. Magelang, Jawa Tengah. Koordinat presisi dapat disematkan sesuai titik GPS resmi pemerintahan desa.",
   },
+
+  // Titik penting yang bisa dipilih di peta. Isi coordinates dari Google Maps:
+  // tekan lama titiknya di aplikasi Google Maps, lalu salin angka "LINTANG, BUJUR".
+  mapPoints: [
+    {
+      id: "tpq",
+      name: "TPQ Darul Huda",
+      category: "Pendidikan",
+      description: "Tempat anak-anak belajar mengaji setiap sore.",
+      coordinates: "",
+    },
+    {
+      id: "posyandu",
+      name: "Posyandu",
+      category: "Kesehatan",
+      description: "Layanan kesehatan ibu dan anak setiap bulan.",
+      coordinates: "",
+    },
+    {
+      id: "masjid",
+      name: "Masjid Dusun",
+      category: "Ibadah",
+      description: "Pusat kegiatan keagamaan dan pengajian warga.",
+      coordinates: "",
+    },
+    {
+      id: "penampungan",
+      name: "Penampungan Ketela",
+      category: "Ekonomi",
+      description: "Tempat ketela hasil panen dikumpulkan sebelum dicuci dan dikirim.",
+      coordinates: "",
+    },
+  ] as MapPoint[],
+
+  // ---------------------------------------------------------------------------
+  // DATA CONTOH. Dipakai selama tautan Google Sheets di `sheets` masih kosong.
+  // Ganti atau hapus setelah data asli tersedia.
+  // ---------------------------------------------------------------------------
+
+  news: [
+    {
+      date: "2026-10-30",
+      title: "Panen raya ketela musim ini dimulai",
+      summary:
+        "Petani mulai memanen ketela secara bergiliran. Warga yang ingin membantu di penampungan dapat menghubungi ketua kelompok tani.",
+      category: "Pertanian",
+    },
+    {
+      date: "2026-10-20",
+      title: "Jalan dusun ruas utara selesai diperbaiki",
+      summary:
+        "Hasil kerja bakti tiga pekan, jalan menuju kebun di sisi utara kini lebih aman dilalui kendaraan pengangkut hasil panen.",
+      category: "Pembangunan",
+    },
+    {
+      date: "2026-10-05",
+      title: "Santri TPQ Darul Huda ikut lomba tingkat kecamatan",
+      summary:
+        "Lima santri mewakili dusun dalam lomba hafalan surat pendek di Windusari. Terima kasih atas dukungan para orang tua.",
+      category: "Pendidikan",
+    },
+    {
+      date: "2026-09-21",
+      title: "Karang Taruna membuka kelas foto dengan HP",
+      summary:
+        "Pemuda belajar memotret kegiatan dan hasil bumi dusun, untuk mengisi galeri dan etalase produk di website ini.",
+      category: "Pemuda",
+    },
+  ] as NewsItem[],
+
+  agenda: [
+    { date: "2026-10-25", time: "07.00 WIB", title: "Kerja bakti saluran air", place: "Sepanjang jalan dusun" },
+    { date: "2026-11-08", time: "07.00 WIB", title: "Kerja bakti bersih lingkungan", place: "Titik kumpul balai warga" },
+    { date: "2026-11-12", time: "09.00 WIB", title: "Posyandu balita dan lansia", place: "Posyandu dusun" },
+    { date: "2026-11-14", time: "19.30 WIB", title: "Pengajian rutin malam Jumat", place: "Masjid dusun" },
+    { date: "2026-11-22", time: "20.00 WIB", title: "Rapat warga persiapan akhir tahun", place: "Rumah Ketua RT" },
+    { date: "2026-12-10", time: "09.00 WIB", title: "Posyandu balita dan lansia", place: "Posyandu dusun" },
+  ] as AgendaItem[],
+
+  products: [
+    {
+      id: "ketela-segar",
+      name: "Ketela Segar",
+      category: "Hasil Bumi",
+      seller: "Kelompok Tani Sukomangun",
+      price: "Harga menyesuaikan musim",
+      description: "Ketela hasil panen kebun warga, bisa dipesan per karung atau dalam jumlah besar.",
+      imageUrl:
+        "https://images.unsplash.com/photo-1757283961570-682154747d9c?auto=format&fit=crop&w=800&q=80",
+      imageAlt: "Tumpukan ketela segar hasil panen",
+    },
+    {
+      id: "cabai-merah",
+      name: "Cabai Merah & Rawit",
+      category: "Hasil Bumi",
+      seller: "Petani Cabai Sukomangun",
+      price: "Mengikuti harga pasar",
+      description: "Cabai segar dari kebun lereng perbukitan, dipetik saat dipesan.",
+      imageUrl:
+        "https://images.unsplash.com/photo-1588252303782-cb80119abd6d?auto=format&fit=crop&w=800&q=80",
+      imageAlt: "Cabai merah segar di kebun",
+    },
+    {
+      id: "olahan-ketela",
+      name: "Olahan Ketela Rumahan",
+      category: "Makanan Olahan",
+      seller: "Kelompok PKK Sukomangun",
+      price: "Mulai Rp10.000 per bungkus",
+      description: "Keripik dan camilan dari ketela pilihan, dibuat ibu-ibu PKK tanpa pengawet.",
+      imageUrl:
+        "https://images.unsplash.com/photo-1757281096972-10fd02b0f5ea?auto=format&fit=crop&w=800&q=80",
+      imageAlt: "Ketela bersih siap diolah",
+    },
+    {
+      id: "warung-sembako",
+      name: "Warung Sembako Warga",
+      category: "Usaha Warga",
+      seller: "Warung warga Sukomangun",
+      price: "Harga warung",
+      description: "Kebutuhan sehari-hari dan jajanan tradisional. Bisa pesan antar untuk sekitar dusun.",
+      imageUrl:
+        "https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=800&q=80",
+      imageAlt: "Rak warung berisi kebutuhan sehari-hari",
+    },
+  ] as ProductItem[],
+
+  visitPackages: [
+    {
+      id: "sehari-tani",
+      title: "Sehari Jadi Petani",
+      duration: "± 4 jam",
+      description: "Ikut ke kebun bersama petani, belajar menanam, dan memanen ketela atau cabai sesuai musim.",
+      includes: ["Pendamping petani", "Praktik tanam dan panen", "Bawa pulang hasil panen kecil"],
+      priceNote: "Biaya menyusul",
+    },
+    {
+      id: "jejak-ketela",
+      title: "Jejak Ketela: Dari Kebun ke Kota",
+      duration: "± 3 jam",
+      description: "Menelusuri alur ketela dari kebun, penampungan, hingga pencucian sebelum dikirim ke luar kota.",
+      includes: ["Kunjungan penampungan", "Cerita dari pengepul", "Cicip olahan ketela"],
+      priceNote: "Biaya menyusul",
+    },
+    {
+      id: "kunjungan-sekolah",
+      title: "Kunjungan Sekolah & Komunitas",
+      duration: "Setengah hari",
+      description: "Program belajar luar kelas untuk rombongan: pertanian, gotong royong, dan kehidupan dusun.",
+      includes: ["Materi disesuaikan usia", "Kegiatan bersama warga", "Makan siang masakan dusun"],
+      priceNote: "Biaya per rombongan",
+    },
+  ] as VisitPackage[],
 };

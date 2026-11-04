@@ -10,7 +10,8 @@ export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isHidden, setIsHidden] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [activeHref, setActiveHref] = useState(villageData.navLinks[0].href);
+  // "#hero" tidak ada di menu, jadi saat di bagian paling atas tidak ada menu yang disorot.
+  const [activeHref, setActiveHref] = useState("#hero");
   const { scrollY } = useScroll();
 
   // Navbar bersembunyi saat menggulir ke bawah dan muncul lagi saat ke atas.
@@ -29,8 +30,8 @@ export default function Navbar() {
 
   // Tandai menu sesuai bagian yang sedang berada di tengah layar.
   useEffect(() => {
-    const sections = villageData.navLinks
-      .map((link) => document.querySelector<HTMLElement>(link.href))
+    const sections = ["#hero", ...villageData.navLinks.map((link) => link.href)]
+      .map((href) => document.querySelector<HTMLElement>(href))
       .filter((el): el is HTMLElement => el !== null);
     const observer = new IntersectionObserver(
       (entries) => {
