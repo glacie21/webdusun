@@ -1,154 +1,23 @@
-export interface VillageIdentity {
-  name: string;
-  shortName: string;
-  subdistrict: string;
-  district: string;
-  regency: string;
-  province: string;
-  logoInitial: string;
-  areaLabel: string;
-  exploreLabel: string;
-  tagline: string;
-  shortDescription: string;
-  longDescription: string[];
-  subLocationText: string;
-}
+import type {
+  VillageIdentity,
+  HeroGreeting,
+  QuickStat,
+  HistoryMilestone,
+  PotentialItem,
+  CommodityStep,
+  CommunityLifeItem,
+  FacilityItem,
+  GalleryPhoto,
+  EditorialStory,
+  NewsItem,
+  AgendaItem,
+  ProductItem,
+  VisitPackage,
+  MapPoint,
+} from "@/data/types";
 
-export interface HeroGreeting {
-  fromHour: number;
-  text: string;
-  meaning: string;
-  mood: "pagi" | "siang" | "sore" | "malam";
-}
-
-export interface QuickStat {
-  number: string;
-  label: string;
-  description: string;
-}
-
-export interface HistoryMilestone {
-  period: string;
-  title: string;
-  description: string;
-  status: "verified" | "compiling";
-}
-
-export interface PotentialItem {
-  id: string;
-  title: string;
-  category: string;
-  tag: string;
-  shortDescription: string;
-  fullDescription: string;
-  highlightText: string;
-  imageUrl: string;
-  imageAlt: string;
-}
-
-export interface CommodityStep {
-  step: number;
-  title: string;
-  actor: string;
-  description: string;
-  iconName: string;
-  detail: string;
-}
-
-export interface CommunityLifeItem {
-  id: string;
-  title: string;
-  category: "Pertanian" | "Gotong Royong" | "Kegiatan Pemuda" | "Pendidikan" | "Keagamaan" | "Kegiatan Sosial";
-  description: string;
-  imageUrl: string;
-  imageAlt: string;
-}
-
-export interface FacilityItem {
-  id: string;
-  name: string;
-  category: string;
-  description: string;
-  statusText: string;
-  locationNote?: string;
-  imageUrl: string;
-  imageAlt: string;
-}
-
-export interface GalleryPhoto {
-  id: string;
-  title: string;
-  category: "Masyarakat" | "Alam" | "Pertanian" | "Kegiatan" | "Fasilitas";
-  caption: string;
-  imageUrl: string;
-  imageAlt: string;
-}
-
-export interface EditorialStory {
-  id: string;
-  // Bagian akhir alamat halaman cerita, misalnya /cerita/dari-tanah-untuk-kehidupan.
-  // Pakai huruf kecil dan tanda hubung, tanpa spasi.
-  slug: string;
-  title: string;
-  subtitle: string;
-  author: string;
-  readTime: string;
-  excerpt: string;
-  content: string[];
-  imageUrl: string;
-  imageAlt: string;
-  date: string;
-}
-
-// Tanggal ditulis TAHUN-BULAN-HARI, misalnya "2026-11-08".
-// (Dari Google Sheets, format HARI/BULAN/TAHUN seperti 08/11/2026 juga diterima.)
-export interface NewsItem {
-  date: string;
-  title: string;
-  summary: string;
-  category: string;
-  // Opsional: tautan ke info lengkap (Google Drive, Instagram, dan sebagainya).
-  link?: string;
-}
-
-export interface AgendaItem {
-  date: string;
-  time: string;
-  title: string;
-  place: string;
-}
-
-export interface ProductItem {
-  id: string;
-  name: string;
-  category: string;
-  seller: string;
-  price: string;
-  description: string;
-  imageUrl: string;
-  imageAlt: string;
-  // Nomor WhatsApp penjual (format 62...). Kosong = memakai contact.whatsapp.
-  whatsapp?: string;
-}
-
-export interface VisitPackage {
-  id: string;
-  title: string;
-  duration: string;
-  description: string;
-  includes: string[];
-  priceNote: string;
-}
-
-export interface MapPoint {
-  id: string;
-  name: string;
-  category: string;
-  description: string;
-  // Koordinat dari Google Maps, format "LINTANG,BUJUR", misalnya "-7.4321,110.1234".
-  // Kosong = titik belum dipasang di peta.
-  coordinates: string;
-}
+// Semua teks, foto, dan angka di website diatur dari file ini.
+// Bentuk datanya (tipe) ada di src/data/types.ts.
 
 export const villageData = {
   // Data untuk Google, pratinjau tautan WhatsApp/media sosial, robots.txt, dan sitemap.xml.
@@ -234,7 +103,7 @@ export const villageData = {
       "Di balik aktivitas sehari-hari tersebut, Sukomangun memiliki potensi yang layak dikenal lebih luas, mulai dari hasil pertanian, kehidupan masyarakat, fasilitas pendidikan dan sosial, hingga cerita para warga yang menjadi bagian dari perjalanan dusun.",
     ],
     subLocationText: "Desa Genito · Kecamatan Windusari · Kabupaten Magelang",
-  },
+  } satisfies VillageIdentity,
 
   // Judul, narasi, dan foto latar untuk setiap bagian halaman.
   sections: {
@@ -473,6 +342,22 @@ export const villageData = {
       retryButtonLabel: "Coba Lagi",
       homeButtonLabel: "Kembali ke Beranda",
     },
+
+    // Label tombol umum yang dipakai di banyak tempat. Sebagian hanya
+    // dibacakan pembaca layar (untuk tombol yang berupa ikon saja).
+    ui: {
+      closeLabel: "Tutup",
+      closeDialogLabel: "Tutup jendela",
+      openMenuLabel: "Buka menu navigasi",
+      closeMenuLabel: "Tutup menu navigasi",
+      scrollDownLabel: "Gulir ke bagian Tentang",
+      allFilterLabel: "Semua",
+      closePhotoLabel: "Tutup foto",
+      previousPhotoLabel: "Foto sebelumnya",
+      nextPhotoLabel: "Foto selanjutnya",
+      // {nomor} dan {jumlah} diganti otomatis, misalnya "Foto 2 dari 12".
+      photoCounter: "Foto {nomor} dari {jumlah}",
+    },
   },
 
   quickStats: [
@@ -496,7 +381,7 @@ export const villageData = {
       label: "Cerita Masyarakat",
       description: "Kearifan lokal dan nilai gotong royong yang terus berkembang",
     },
-  ],
+  ] satisfies QuickStat[],
 
   historyMilestones: [
     {
@@ -527,7 +412,7 @@ export const villageData = {
         "Kini Sukomangun bergerak maju membuka jendela informasi digital agar potensi komoditas dan keramahan warganya dikenal luas tanpa meninggalkan akar budaya pedesaan.",
       status: "verified",
     },
-  ] as HistoryMilestone[],
+  ] satisfies HistoryMilestone[],
 
   potentials: [
     {
@@ -600,7 +485,7 @@ export const villageData = {
         "https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=800&q=80",
       imageAlt: "Aktivitas warung lokal dan usaha rumahan masyarakat",
     },
-  ],
+  ] satisfies PotentialItem[],
 
   commodityFlow: [
     {
@@ -643,7 +528,7 @@ export const villageData = {
       iconName: "Building2",
       detail: "Menyuplai kebutuhan pangan kota besar dan industri kuliner khas daerah.",
     },
-  ],
+  ] satisfies CommodityStep[],
 
   communityLife: [
     {
@@ -700,7 +585,7 @@ export const villageData = {
         "https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=800&q=80",
       imageAlt: "Ibu-ibu warga berkumpul dalam kegiatan sosial kemasyarakatan",
     },
-  ] as CommunityLifeItem[],
+  ] satisfies CommunityLifeItem[],
 
   // Untuk mengganti foto fasilitas, ubah nilai imageUrl dan sesuaikan imageAlt pada setiap item.
   facilities: [
@@ -764,7 +649,7 @@ export const villageData = {
         "https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&w=800&q=80",
       imageAlt: "Sarana sosial dan perlengkapan kebersamaan warga",
     },
-  ],
+  ] satisfies FacilityItem[],
 
   gallery: [
     {
@@ -839,7 +724,7 @@ export const villageData = {
         "https://images.unsplash.com/photo-1757281096972-10fd02b0f5ea?auto=format&fit=crop&w=1000&q=80",
       imageAlt: "Ketela singkong bersih berjejer rapi di penampungan",
     },
-  ] as GalleryPhoto[],
+  ] satisfies GalleryPhoto[],
 
   editorialStories: [
     {
@@ -900,7 +785,7 @@ export const villageData = {
         "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=1000&q=80",
       imageAlt: "Pendidikan anak-anak dan generasi penerus dusun",
     },
-  ] as EditorialStory[],
+  ] satisfies EditorialStory[],
 
   quote: {
     text: "Sebuah dusun bukan hanya tentang tempat tinggal, tetapi tentang orang-orang dan cerita yang membuatnya terasa seperti rumah.",
@@ -959,7 +844,7 @@ export const villageData = {
       description: "Tempat ketela hasil panen dikumpulkan sebelum dicuci dan dikirim.",
       coordinates: "",
     },
-  ] as MapPoint[],
+  ] satisfies MapPoint[],
 
   // ---------------------------------------------------------------------------
   // DATA CONTOH. Dipakai selama tautan Google Sheets di `sheets` masih kosong.
@@ -995,7 +880,7 @@ export const villageData = {
         "Pemuda belajar memotret kegiatan dan hasil bumi dusun, untuk mengisi galeri dan etalase produk di website ini.",
       category: "Pemuda",
     },
-  ] as NewsItem[],
+  ] satisfies NewsItem[],
 
   agenda: [
     { date: "2026-10-25", time: "07.00 WIB", title: "Kerja bakti saluran air", place: "Sepanjang jalan dusun" },
@@ -1004,7 +889,7 @@ export const villageData = {
     { date: "2026-11-14", time: "19.30 WIB", title: "Pengajian rutin malam Jumat", place: "Masjid dusun" },
     { date: "2026-11-22", time: "20.00 WIB", title: "Rapat warga persiapan akhir tahun", place: "Rumah Ketua RT" },
     { date: "2026-12-10", time: "09.00 WIB", title: "Posyandu balita dan lansia", place: "Posyandu dusun" },
-  ] as AgendaItem[],
+  ] satisfies AgendaItem[],
 
   products: [
     {
@@ -1051,7 +936,7 @@ export const villageData = {
         "https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=800&q=80",
       imageAlt: "Rak warung berisi kebutuhan sehari-hari",
     },
-  ] as ProductItem[],
+  ] satisfies ProductItem[],
 
   visitPackages: [
     {
@@ -1078,5 +963,5 @@ export const villageData = {
       includes: ["Materi disesuaikan usia", "Kegiatan bersama warga", "Makan siang masakan dusun"],
       priceNote: "Biaya per rombongan",
     },
-  ] as VisitPackage[],
+  ] satisfies VisitPackage[],
 };

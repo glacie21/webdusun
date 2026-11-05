@@ -4,9 +4,12 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowRight, Clock } from "lucide-react";
 import { villageData } from "@/data/content";
-import Footer from "@/components/Footer";
-import JsonLd from "@/components/JsonLd";
-import ShareButtons from "@/components/ShareButtons";
+import Footer from "@/components/layout/Footer";
+import PageTopBar from "@/components/layout/PageTopBar";
+import JsonLd from "@/components/ui/JsonLd";
+import ShareButtons from "@/components/ui/ShareButtons";
+import { pageMetadata } from "@/lib/seo";
+import { findStory, storyPath } from "@/lib/stories";
 
 // Halaman untuk setiap cerita, misalnya /cerita/dari-tanah-untuk-kehidupan.
 // Isinya diambil dari villageData.editorialStories di src/data/content.ts.
@@ -16,8 +19,6 @@ const { site, identity, editorialStories } = villageData;
 const { stories } = villageData.sections;
 
 type Props = { params: Promise<{ slug: string }> };
-
-const findStory = (slug: string) => editorialStories.find((story) => story.slug === slug);
 
 // Semua halaman cerita dibuat saat build. Alamat cerita lain akan menampilkan 404.
 export const dynamicParams = false;
@@ -30,33 +31,19 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const story = findStory((await params).slug);
   if (!story) return {};
 
-  const title = `${story.title} — ${identity.shortName}`;
-  const path = `/cerita/${story.slug}`;
-  return {
-    title,
+  return pageMetadata({
+    title: `${story.title} — ${identity.shortName}`,
     description: story.excerpt,
-    alternates: { canonical: path },
-    openGraph: {
-      title,
-      description: story.excerpt,
-      url: path,
-      siteName: identity.shortName,
-      locale: "id_ID",
-      type: "article",
-    },
-    twitter: {
-      card: "summary_large_image",
-      title,
-      description: story.excerpt,
-    },
-  };
+    path: storyPath(story.slug),
+    type: "article",
+  });
 }
 
 export default async function StoryPage({ params }: Props) {
   const story = findStory((await params).slug);
   if (!story) notFound();
 
-  const url = `${site.url}/cerita/${story.slug}`;
+  const url = `${site.url}${storyPath(story.slug)}`;
   const otherStories = editorialStories.filter((item) => item.slug !== story.slug);
 
   return (
@@ -92,29 +79,7 @@ export default async function StoryPage({ params }: Props) {
           <div className="absolute inset-0 bg-gradient-to-t from-forest-dark/95 via-black/45 to-black/50" />
         </div>
 
-        <div className="relative z-10 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-5 flex items-center justify-between gap-4">
-          <Link href="/" className="group inline-flex items-center gap-2.5">
-            <span className="w-9 h-9 rounded-xl bg-white/20 backdrop-blur-md border border-white/30 flex items-center justify-center font-serif text-lg font-bold group-hover:bg-white/30 transition-colors">
-              {identity.logoInitial}
-            </span>
-            <span className="flex flex-col">
-              <span className="font-serif text-lg md:text-xl font-bold tracking-tight">
-                {identity.shortName}
-              </span>
-              <span className="text-[10px] tracking-widest uppercase font-medium text-white/80">
-                {identity.areaLabel}
-              </span>
-            </span>
-          </Link>
-
-          <Link
-            href="/#cerita"
-            className="hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/20 text-sm text-white/90 hover:text-white transition-colors"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            <span>{stories.backLabel}</span>
-          </Link>
-        </div>
+        <PageTopBar backHref="/#cerita" backLabel={stories.backLabel} />
 
         <div className="relative z-10 flex-1 flex items-end">
           <div className="max-w-3xl w-full mx-auto px-4 sm:px-6 lg:px-8 pb-12 md:pb-16">
@@ -170,7 +135,7 @@ export default async function StoryPage({ params }: Props) {
                 {otherStories.map((item) => (
                   <Link
                     key={item.id}
-                    href={`/cerita/${item.slug}`}
+                    href={storyPath(item.slug)}
                     className="group flex gap-4 bg-white rounded-3xl overflow-hidden border border-sand shadow-sm hover:shadow-lg transition-shadow"
                   >
                     <div className="relative w-32 sm:w-40 shrink-0">

@@ -1,10 +1,10 @@
 import { villageData } from "@/data/content";
-import { ogContentType, ogSize, renderOgImage } from "@/components/ogImage";
+import { ogContentType, ogSize, renderOgImage } from "@/lib/ogImage";
 
 // Gambar pratinjau beranda yang muncul saat tautan website dibagikan di
 // WhatsApp, Facebook, atau X. Dibuat otomatis saat build dari data di
 // content.ts: foto latar dari site.ogImageUrl, judul dan lokasi dari identity.
-// Tampilannya diatur di src/components/ogImage.tsx.
+// Tampilannya diatur di src/lib/ogImage.tsx.
 
 const { site, identity } = villageData;
 

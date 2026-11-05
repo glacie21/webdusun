@@ -3,8 +3,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { Compass, Home, MapPin } from "lucide-react";
 import { villageData } from "@/data/content";
+import SiteLogo from "@/components/ui/SiteLogo";
 
-const { identity } = villageData;
+const { identity, navLinks } = villageData;
 const { hero, notFound } = villageData.sections;
 
 export const metadata: Metadata = {
@@ -14,9 +15,6 @@ export const metadata: Metadata = {
 // Halaman 404: tampil untuk setiap alamat yang tidak ada di website ini.
 // Teksnya diatur dari villageData.sections.notFound di src/data/content.ts.
 export default function NotFound() {
-  // Pintasan ke bagian halaman utama, kecuali Beranda yang sudah jadi tombol utama.
-  const shortcuts = villageData.navLinks.filter((link) => link.href !== "#hero");
-
   return (
     <main id="konten" tabIndex={-1} className="relative flex-grow min-h-screen focus:outline-none flex flex-col overflow-hidden text-white">
       {/* Foto latar dan lapisan gelap, sama seperti Hero */}
@@ -34,18 +32,8 @@ export default function NotFound() {
 
       {/* Logo */}
       <header className="relative z-10 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-5">
-        <Link href="/" className="group inline-flex items-center gap-2.5">
-          <span className="w-9 h-9 rounded-xl bg-white/20 backdrop-blur-md border border-white/30 flex items-center justify-center font-serif text-lg font-bold group-hover:bg-white/30 transition-colors">
-            {identity.logoInitial}
-          </span>
-          <span className="flex flex-col">
-            <span className="font-serif text-lg md:text-xl font-bold tracking-tight">
-              {identity.shortName}
-            </span>
-            <span className="text-[10px] tracking-widest uppercase font-medium text-white/80">
-              {identity.areaLabel}
-            </span>
-          </span>
+        <Link href="/" className="group inline-flex">
+          <SiteLogo />
         </Link>
       </header>
 
@@ -86,7 +74,7 @@ export default function NotFound() {
               {notFound.shortcutsLabel}
             </p>
             <ul className="flex flex-wrap items-center justify-center gap-2">
-              {shortcuts.map((link) => (
+              {navLinks.map((link) => (
                 <li key={link.name}>
                   <Link
                     href={`/${link.href}`}

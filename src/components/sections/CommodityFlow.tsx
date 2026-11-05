@@ -1,0 +1,108 @@
+import { Sprout, Warehouse, Droplets, Truck, Building2, ChevronRight, type LucideIcon } from "lucide-react";
+import { villageData } from "@/data/content";
+import type { CommodityStep } from "@/data/types";
+import Reveal from "@/components/motion/Reveal";
+import SectionHeader from "@/components/ui/SectionHeader";
+import { twoDigits } from "@/lib/text";
+
+// Lama satu putaran nyala ikon (detik), dibagi rata ke setiap tahap.
+// Harus sama dengan durasi animate-step-glow di globals.css.
+const GLOW_CYCLE = 6;
+
+// Ikon untuk setiap nilai iconName di content.ts.
+const icons: Record<CommodityStep["iconName"], LucideIcon> = {
+  Sprout,
+  Warehouse,
+  Droplets,
+  Truck,
+  Building2,
+};
+
+const { commodityFlow: steps } = villageData;
+const { commodityFlow: text } = villageData.sections;
+
+export default function CommodityFlow() {
+  const stepCount = steps.length;
+
+  return (
+    <section id="komoditas" className="py-20 md:py-28 bg-cream-soft relative border-t border-sand/80">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <SectionHeader badge={text.badge} title={text.title} description={text.description} />
+
+        {/* Tahapan alur: mendatar di layar lebar, menurun di HP */}
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-4 lg:gap-3 relative items-stretch">
+          {steps.map((step, idx) => {
+            const Icon = icons[step.iconName];
+            return (
+              <Reveal
+                key={step.step}
+                delay={idx * 0.12}
+                y={36}
+                className="flex flex-col lg:flex-row items-center lg:items-stretch"
+              >
+                {/* Kartu tahap */}
+                <div className="w-full bg-white rounded-3xl p-6 border border-sand shadow-sm hover:shadow-lg hover:-translate-y-1.5 transition-[box-shadow,translate] duration-300 flex-1 flex flex-col justify-between">
+                  <div>
+                    {/* Nomor tahap dan ikon. Ikon menyala bergiliran dari tahap pertama
+                        sampai terakhir, seperti ketela yang berpindah tangan. */}
+                    <div className="flex items-center justify-between mb-5">
+                      <span className="w-8 h-8 rounded-full bg-sage-light text-forest font-serif font-bold text-sm flex items-center justify-center">
+                        {twoDigits(step.step)}
+                      </span>
+                      <div
+                        className="w-11 h-11 rounded-2xl bg-cream text-forest animate-step-glow flex items-center justify-center"
+                        style={{ animationDelay: `${(idx * GLOW_CYCLE) / stepCount}s` }}
+                      >
+                        <Icon className="w-6 h-6" />
+                      </div>
+                    </div>
+
+                    <span className="text-[11px] font-semibold uppercase tracking-wider text-earth-dark block mb-1">
+                      {step.actor}
+                    </span>
+                    <h3 className="font-serif text-lg sm:text-xl font-bold text-charcoal mb-2 leading-snug">
+                      {step.title}
+                    </h3>
+                    <p className="text-xs sm:text-sm text-charcoal-muted font-light leading-relaxed mb-4">
+                      {step.description}
+                    </p>
+                  </div>
+
+                  <div className="pt-3 border-t border-sand/70 text-[11px] text-sage-dark font-medium leading-normal">
+                    {step.detail}
+                  </div>
+                </div>
+
+                {/* Penghubung: tiga panah kecil yang menyala bergantian, menunjukkan arah alur */}
+                {idx < stepCount - 1 && (
+                  <div
+                    aria-hidden="true"
+                    className="my-2 lg:my-0 lg:mx-1 self-center flex flex-col lg:flex-row items-center text-earth"
+                  >
+                    {[0, 1, 2].map((i) => (
+                      <ChevronRight
+                        key={i}
+                        className="w-4 h-4 -my-1 lg:my-0 lg:-mx-1 rotate-90 lg:rotate-0 animate-flow-pulse"
+                        style={{ animationDelay: `${i * 0.2}s` }}
+                      />
+                    ))}
+                  </div>
+                )}
+              </Reveal>
+            );
+          })}
+        </div>
+
+        {/* Kutipan penutup */}
+        <Reveal className="mt-14 max-w-4xl mx-auto bg-white p-6 sm:p-8 rounded-3xl border border-sand text-center shadow-xs">
+          <p className="font-serif italic text-base sm:text-lg text-charcoal leading-relaxed">
+            &ldquo;{text.closingQuote}&rdquo;
+          </p>
+          <div className="mt-3 text-xs uppercase tracking-widest text-sage-dark font-semibold">
+            {text.closingCaption}
+          </div>
+        </Reveal>
+      </div>
+    </section>
+  );
+}

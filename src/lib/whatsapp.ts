@@ -11,3 +11,8 @@ export function whatsappLink(number: string | undefined, message: string): strin
   if (!clean) return null;
   return `https://wa.me/${clean}?text=${encodeURIComponent(message)}`;
 }
+
+// Tautan untuk membagikan pesan lewat WhatsApp; pengunjung memilih sendiri penerimanya.
+export function whatsappShareLink(message: string): string {
+  return `https://wa.me/?text=${encodeURIComponent(message)}`;
+}

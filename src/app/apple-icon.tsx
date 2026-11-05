@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
-import { readFile } from "node:fs/promises";
-import { join } from "node:path";
 import { villageData } from "@/data/content";
+import { loadFont } from "@/lib/ogImage";
+import { colors } from "@/lib/theme";
 
 // Ikon saat website disimpan ke layar utama iPhone/iPad. iOS tidak memakai
 // icon.svg, jadi dibuatkan versi PNG dengan tampilan yang sama: huruf awal
@@ -11,7 +11,7 @@ export const size = { width: 180, height: 180 };
 export const contentType = "image/png";
 
 export default async function AppleIcon() {
-  const playfair = await readFile(join(process.cwd(), "src/assets/fonts/PlayfairDisplay-Bold.woff"));
+  const playfair = await loadFont("PlayfairDisplay-Bold.woff");
 
   return new ImageResponse(
     (
@@ -22,8 +22,8 @@ export default async function AppleIcon() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          background: "#2F5D50",
-          color: "#F7F5EF",
+          background: colors.forest,
+          color: colors.cream,
           fontFamily: "Playfair",
           fontSize: 112,
           fontWeight: 700,
