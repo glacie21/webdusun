@@ -1,9 +1,11 @@
 import type { Metadata, Viewport } from "next";
 import { Playfair_Display, Inter } from "next/font/google";
-import { villageData } from "@/data/content";
-import MotionProvider from "@/components/MotionProvider";
-import SkipLink from "@/components/SkipLink";
 import { Analytics } from "@vercel/analytics/next";
+import { villageData } from "@/data/content";
+import MotionProvider from "@/components/motion/MotionProvider";
+import SkipLink from "@/components/layout/SkipLink";
+import { pageMetadata } from "@/lib/seo";
+import { colors } from "@/lib/theme";
 import "./globals.css";
 
 const playfair = Playfair_Display({
@@ -21,7 +23,7 @@ const inter = Inter({
 const { site } = villageData;
 
 export const viewport: Viewport = {
-  themeColor: "#2F5D50",
+  themeColor: colors.forest,
   width: "device-width",
   initialScale: 1,
 };
@@ -31,26 +33,9 @@ export const viewport: Viewport = {
 // pratinjau tautan dibuat otomatis oleh src/app/opengraph-image.tsx.
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
-  title: site.title,
-  description: site.description,
   keywords: site.keywords,
   authors: [{ name: site.author }],
-  alternates: {
-    canonical: "/",
-  },
-  openGraph: {
-    title: site.title,
-    description: site.description,
-    url: "/",
-    siteName: villageData.identity.shortName,
-    locale: "id_ID",
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: site.title,
-    description: site.description,
-  },
+  ...pageMetadata({ title: site.title, description: site.description, path: "/" }),
 };
 
 export default function RootLayout({

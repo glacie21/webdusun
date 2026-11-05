@@ -1,25 +1,28 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { ArrowLeft, CalendarDays, History, Megaphone, Newspaper } from "lucide-react";
+import { CalendarDays, History, Megaphone, Newspaper } from "lucide-react";
 import { villageData } from "@/data/content";
 import { getAgenda, getNews } from "@/data/liveData";
-import Footer from "@/components/Footer";
-import SampleNote from "@/components/SampleNote";
-import { AgendaRow, NewsCard } from "@/components/NewsItems";
+import Footer from "@/components/layout/Footer";
+import PageTopBar from "@/components/layout/PageTopBar";
+import SampleNote from "@/components/ui/SampleNote";
+import { AgendaRow, NewsCard } from "@/components/ui/NewsItems";
+import { pageMetadata } from "@/lib/seo";
 
 // Halaman /kabar: semua kabar dan agenda dusun.
 // Datanya dari Google Sheets (lihat src/data/liveData.ts).
 
-const { identity } = villageData;
 const text = villageData.sections.news;
 
 export const revalidate = 3600;
 
-export const metadata: Metadata = {
+// Jumlah agenda lama yang masih ditampilkan.
+const PAST_AGENDA_LIMIT = 6;
+
+export const metadata: Metadata = pageMetadata({
   title: text.pageTitle,
   description: text.description,
-  alternates: { canonical: "/kabar" },
-};
+  path: "/kabar",
+});
 
 export default async function NewsPage() {
   const [news, agenda] = await Promise.all([getNews(), getAgenda()]);
@@ -29,26 +32,7 @@ export default async function NewsPage() {
     <div className="min-h-screen flex flex-col bg-cream text-charcoal">
       {/* id="hero" dipakai tombol "Kembali ke Atas" di Footer. */}
       <header id="hero" className="bg-forest-dark text-white">
-        <div className="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-5 flex items-center justify-between gap-4">
-          <Link href="/" className="group inline-flex items-center gap-2.5">
-            <span className="w-9 h-9 rounded-xl bg-white/15 border border-white/25 flex items-center justify-center font-serif text-lg font-bold group-hover:bg-white/25 transition-colors">
-              {identity.logoInitial}
-            </span>
-            <span className="flex flex-col">
-              <span className="font-serif text-lg md:text-xl font-bold tracking-tight">{identity.shortName}</span>
-              <span className="text-[10px] tracking-widest uppercase font-medium text-white/80">
-                {identity.areaLabel}
-              </span>
-            </span>
-          </Link>
-          <Link
-            href="/#kabar"
-            className="hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-sm text-white/90 hover:text-white transition-colors"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            <span>{text.backLabel}</span>
-          </Link>
-        </div>
+        <PageTopBar backHref="/#kabar" backLabel={text.backLabel} />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-16 md:pt-14 md:pb-20">
           <p className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/15 text-xs font-semibold tracking-wider uppercase text-earth-bright mb-4">
@@ -109,7 +93,7 @@ export default async function NewsPage() {
                     {text.pastAgendaTitle}
                   </h2>
                   <ul className="space-y-5">
-                    {agenda.past.slice(0, 6).map((item) => (
+                    {agenda.past.slice(0, PAST_AGENDA_LIMIT).map((item) => (
                       <AgendaRow key={`${item.date}-${item.title}`} item={item} muted />
                     ))}
                   </ul>

@@ -95,6 +95,30 @@ Warna didefinisikan sekali sebagai token tema di `src/app/globals.css`, lalu dip
 
 `sage` dan `earth` terlalu terang untuk dipakai sebagai teks (kontrasnya di bawah standar WCAG 4,5:1). Untuk teks, pakai varian `-dark` atau `-bright`.
 
+Beberapa warna juga ditulis dalam kode hex di `src/lib/theme.ts`, untuk bagian yang tidak bisa memakai class Tailwind (gambar pratinjau tautan, ikon HP, manifest). Jika mengganti warna di `globals.css`, samakan juga di sana.
+
+---
+
+## Struktur Folder
+
+```
+src/
+├── app/                 Halaman dan alamatnya (/, /kabar, /cerita/..., 404, error)
+├── components/
+│   ├── layout/          Navbar, Footer, baris atas halaman, tautan lewati
+│   ├── sections/        Bagian-bagian beranda (Hero, Tentang, Potensi, Galeri, ...)
+│   ├── ui/              Komponen kecil yang dipakai ulang (judul bagian, modal,
+│   │                    tombol filter, tombol WhatsApp, logo, kartu kabar, ...)
+│   ├── motion/          Animasi (Reveal, hitung naik, parallax, smooth scroll)
+│   └── decor/           Hiasan (siluet bukit, garis kontur, pita kata berjalan)
+├── data/
+│   ├── content.ts       SEMUA teks, foto, dan angka website, ubah di sini
+│   ├── types.ts         Bentuk data untuk content.ts
+│   └── liveData.ts      Kabar, agenda, dan produk dari Google Sheets
+├── lib/                 Fungsi bantu (tanggal, CSV, WhatsApp, SEO, warna, gambar pratinjau)
+└── assets/fonts/        Huruf untuk gambar pratinjau tautan
+```
+
 ---
 
 ## Struktur Data Terpisah

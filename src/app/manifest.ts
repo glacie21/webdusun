@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { villageData } from "@/data/content";
+import { colors } from "@/lib/theme";
 
 const { site, identity } = villageData;
 
@@ -13,8 +14,8 @@ export default function manifest(): MetadataRoute.Manifest {
     lang: "id",
     start_url: "/",
     display: "standalone",
-    background_color: "#F7F5EF",
-    theme_color: "#2F5D50",
+    background_color: colors.cream,
+    theme_color: colors.forest,
     icons: [
       { src: "/icon.svg", sizes: "any", type: "image/svg+xml" },
       { src: "/apple-icon", sizes: "180x180", type: "image/png" },
