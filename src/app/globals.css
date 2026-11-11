@@ -19,7 +19,7 @@
   --color-sand: #E3DDD0;
 
   /* Animasi CSS untuk halaman 404. Animasi muncul saat digulir memakai
-     library motion (lihat src/components/Reveal.tsx dan MotionProvider.tsx). */
+     library motion (lihat src/components/motion/Reveal.tsx dan MotionProvider.tsx). */
   --animate-fade-in: fade-in 0.25s ease-out;
 
   /* Animasi suasana yang berulang terus (kabut, cahaya, pita kata, alur ketela).

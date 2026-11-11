@@ -1,4 +1,5 @@
-import { villageData, type AgendaItem, type NewsItem, type ProductItem } from "@/data/content";
+import { villageData } from "@/data/content";
+import type { AgendaItem, NewsItem, ProductItem } from "@/data/types";
 import { loadSheetRows, type SheetRow } from "@/lib/sheets";
 import { normalizeDate, todayInWib } from "@/lib/dates";
 import { normalizeWhatsapp } from "@/lib/whatsapp";

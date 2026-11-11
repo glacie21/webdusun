@@ -1,8 +1,9 @@
 import { villageData } from "@/data/content";
-import { ogContentType, ogSize, renderOgImage } from "@/components/ogImage";
+import { ogContentType, ogSize, renderOgImage } from "@/lib/ogImage";
+import { findStory } from "@/lib/stories";
 
 // Gambar pratinjau untuk setiap halaman cerita, berisi judul dan foto cerita.
-// Tampilannya sama dengan gambar pratinjau beranda (src/components/ogImage.tsx).
+// Tampilannya sama dengan gambar pratinjau beranda (src/lib/ogImage.tsx).
 
 export const alt = `Cerita dari ${villageData.identity.name}`;
 export const size = ogSize;
@@ -15,7 +16,7 @@ export function generateStaticParams() {
 
 export default async function Image({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const story = villageData.editorialStories.find((item) => item.slug === slug);
+  const story = findStory(slug);
 
   return renderOgImage({
     photoUrl: story?.imageUrl ?? villageData.site.ogImageUrl,
